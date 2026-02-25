@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatty AI Chatbot — Turn Every Conversation Into a Sale | Shopify</title>
+  <meta name="description" content="Chatty is the #1 AI chatbot for Shopify. Automate 95% of support, boost sales 24/7, and set up in under 10 minutes. Free to start.">
+
+  <!-- Fonts -->
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&f[]=clash-grotesk@200,300,400,500,600,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==================== RESET & BASE ==================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #06038D;
+      --yellow: #FBC80B;
+      --purple: #5750FE;
+      --white: #FFFFFF;
+      --gray-50: #F8F9FC;
+      --gray-100: #F0F1F7;
+      --gray-200: #E2E4EF;
+      --gray-500: #6B7094;
+      --gray-700: #3A3D5C;
+      --gray-900: #1A1B2E;
+      --font-display: 'Clash Display', sans-serif;
+      --font-body: 'Inter', 'Clash Grotesk', sans-serif;
+      --max-width: 1200px;
+      --section-padding: 100px 24px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--gray-900);
+      line-height: 1.6;
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+    /* ==================== BUTTONS ==================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 32px;
+      border-radius: 12px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--yellow);
+      color: var(--navy);
+    }
+
+    .btn-primary:hover {
+      background: #e6b600;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(251, 200, 11, 0.4);
+    }
+
+    .btn-secondary {
+      background: var(--white);
+      color: var(--navy);
+      border: 2px solid var(--gray-200);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--navy);
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      background: rgba(255,255,255,0.15);
+      color: var(--white);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.25);
+      transform: translateY(-2px);
+    }
+
+    .btn-large {
+      padding: 20px 40px;
+      font-size: 18px;
+      border-radius: 16px;
+    }
+
+    /* ==================== NAVIGATION ==================== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--gray-100);
+      padding: 16px 0;
+    }
+
+    .nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 24px;
+      color: var(--navy);
+    }
+
+    .nav-logo img { width: 36px; height: 36px; border-radius: 8px; }
+
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+
+    .nav-links a {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--gray-700);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--navy); }
+
+    .nav-cta .btn { padding: 10px 24px; font-size: 14px; }
+
+    /* ==================== HERO (Attention) ==================== */
+    .hero {
+      padding: 160px 24px 100px;
+      background: linear-gradient(135deg, var(--navy) 0%, #1a0fb3 40%, var(--purple) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -100px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--yellow) 0%, transparent 70%);
+      opacity: 0.15;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -150px;
+      left: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, var(--purple) 0%, transparent 70%);
+      opacity: 0.3;
+    }
+
+    .hero .container { position: relative; z-index: 2; text-align: center; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 8px 20px;
+      border-radius: 100px;
+      color: var(--yellow);
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 32px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 24px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero h1 span { color: var(--yellow); }
+
+    .hero p {
+      font-size: clamp(18px, 2.5vw, 22px);
+      color: rgba(255,255,255,0.8);
+      max-width: 600px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stats {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 64px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat {
+      text-align: center;
+      color: var(--white);
+    }
+
+    .hero-stat-value {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--yellow);
+    }
+
+    .hero-stat-label {
+      font-size: 14px;
+      opacity: 0.7;
+      margin-top: 4px;
+    }
+
+    /* ==================== SOCIAL PROOF BAR ==================== */
+    .social-proof {
+      padding: 48px 24px;
+      background: var(--gray-50);
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .social-proof .container { text-align: center; }
+
+    .social-proof p {
+      font-size: 14px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      margin-bottom: 32px;
+    }
+
+    .trust-badges {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--gray-700);
+    }
+
+    .trust-badge svg { width: 20px; height: 20px; }
+
+    /* ==================== PROBLEM (Attention cont.) ==================== */
+    .problem {
+      padding: var(--section-padding);
+    }
+
+    .problem .container { max-width: 900px; text-align: center; }
+
+    .section-label {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--purple);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 700;
+      color: var(--gray-900);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .section-subtitle {
+      font-size: 18px;
+      color: var(--gray-500);
+      max-width: 640px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .pain-points {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin-top: 60px;
+      text-align: left;
+    }
+
+    .pain-point {
+      padding: 32px;
+      border-radius: 16px;
+      background: var(--gray-50);
+      border: 1px solid var(--gray-100);
+    }
+
+    .pain-point-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: #FEF3CD;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    .pain-point h3 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .pain-point p {
+      font-size: 15px;
+      color: var(--gray-500);
+      line-height: 1.6;
+    }
+
+    /* ==================== FEATURES (Desire) ==================== */
+    .features { padding: var(--section-padding); background: var(--gray-50); }
+    .features .container { text-align: center; }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 32px;
+      margin-top: 60px;
+      text-align: left;
+    }
+
+    .feature-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 40px;
+      border: 1px solid var(--gray-100);
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(6, 3, 141, 0.08);
+    }
+
+    .feature-card-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .feature-card-icon.blue { background: rgba(6, 3, 141, 0.08); }
+    .feature-card-icon.yellow { background: rgba(251, 200, 11, 0.15); }
+    .feature-card-icon.purple { background: rgba(87, 80, 254, 0.08); }
+
+    .feature-card h3 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .feature-card p {
+      font-size: 15px;
+      color: var(--gray-500);
+      line-height: 1.7;
+    }
+
+    .feature-card .stat {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 6px 14px;
+      background: rgba(6, 3, 141, 0.05);
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    /* ==================== HOW IT WORKS (Desire) ==================== */
+    .how-it-works { padding: var(--section-padding); }
+    .how-it-works .container { text-align: center; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin-top: 60px;
+    }
+
+    .step { text-align: center; position: relative; }
+
+    .step-number {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy), var(--purple));
+      color: var(--white);
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .step h3 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      font-size: 15px;
+      color: var(--gray-500);
+      line-height: 1.6;
+    }
+
+    .step-connector {
+      position: absolute;
+      top: 32px;
+      left: calc(50% + 40px);
+      width: calc(100% - 80px);
+      height: 2px;
+      background: var(--gray-200);
+    }
+
+    .step:last-child .step-connector { display: none; }
+
+    /* ==================== SOCIAL PROOF / RESULTS (Desire) ==================== */
+    .results {
+      padding: var(--section-padding);
+      background: linear-gradient(135deg, var(--navy) 0%, #1a0fb3 50%, var(--purple) 100%);
+      color: var(--white);
+    }
+
+    .results .container { text-align: center; }
+    .results .section-label { color: var(--yellow); }
+    .results .section-title { color: var(--white); }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 60px;
+    }
+
+    .result-card {
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 40px 32px;
+    }
+
+    .result-card-value {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--yellow);
+      margin-bottom: 8px;
+    }
+
+    .result-card-label {
+      font-size: 16px;
+      opacity: 0.8;
+    }
+
+    .testimonial {
+      margin-top: 64px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .testimonial blockquote {
+      font-size: 22px;
+      font-style: italic;
+      line-height: 1.6;
+      opacity: 0.9;
+      margin-bottom: 20px;
+    }
+
+    .testimonial cite {
+      font-style: normal;
+      font-size: 15px;
+      opacity: 0.6;
+    }
+
+    /* ==================== USE CASES (Desire) ==================== */
+    .use-cases { padding: var(--section-padding); }
+    .use-cases .container { text-align: center; }
+
+    .use-cases-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 60px;
+      text-align: left;
+    }
+
+    .use-case {
+      padding: 32px;
+      border-radius: 16px;
+      border: 1px solid var(--gray-100);
+      transition: all 0.3s ease;
+    }
+
+    .use-case:hover {
+      border-color: var(--purple);
+      background: var(--gray-50);
+    }
+
+    .use-case-icon { font-size: 32px; margin-bottom: 16px; }
+
+    .use-case h3 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .use-case p {
+      font-size: 14px;
+      color: var(--gray-500);
+      line-height: 1.6;
+    }
+
+    /* ==================== PRICING (Desire) ==================== */
+    .pricing { padding: var(--section-padding); background: var(--gray-50); }
+    .pricing .container { text-align: center; }
+
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 60px;
+      max-width: 960px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .pricing-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 40px 32px;
+      border: 2px solid var(--gray-100);
+      text-align: left;
+      position: relative;
+    }
+
+    .pricing-card.featured {
+      border-color: var(--navy);
+      box-shadow: 0 12px 40px rgba(6, 3, 141, 0.12);
+    }
+
+    .pricing-card.featured::before {
+      content: 'Most Popular';
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--navy);
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 16px;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .pricing-card-name {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .pricing-card-desc {
+      font-size: 14px;
+      color: var(--gray-500);
+      margin-bottom: 24px;
+    }
+
+    .pricing-card-price {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .pricing-card-price span { font-size: 16px; font-weight: 400; color: var(--gray-500); }
+
+    .pricing-card-period {
+      font-size: 14px;
+      color: var(--gray-500);
+      margin-bottom: 32px;
+    }
+
+    .pricing-card ul {
+      list-style: none;
+      margin-bottom: 32px;
+    }
+
+    .pricing-card li {
+      padding: 8px 0;
+      font-size: 14px;
+      color: var(--gray-700);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .pricing-card li::before {
+      content: '✓';
+      color: var(--purple);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .pricing-card .btn { width: 100%; justify-content: center; }
+
+    /* ==================== FAQ (Desire) ==================== */
+    .faq { padding: var(--section-padding); }
+    .faq .container { max-width: 760px; text-align: center; }
+
+    .faq-list {
+      margin-top: 48px;
+      text-align: left;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 24px 0;
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--gray-900);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      text-align: left;
+    }
+
+    .faq-question::after {
+      content: '+';
+      font-size: 24px;
+      font-weight: 300;
+      color: var(--gray-500);
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+
+    .faq-item.active .faq-question::after {
+      content: '−';
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 200px;
+    }
+
+    .faq-answer p {
+      padding-bottom: 24px;
+      font-size: 15px;
+      color: var(--gray-500);
+      line-height: 1.7;
+    }
+
+    /* ==================== CTA (Action) ==================== */
+    .cta {
+      padding: 100px 24px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--purple) 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -50px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, var(--yellow) 0%, transparent 70%);
+      opacity: 0.1;
+    }
+
+    .cta .container { position: relative; z-index: 2; }
+
+    .cta h2 {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .cta h2 span { color: var(--yellow); }
+
+    .cta p {
+      font-size: 18px;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 40px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .cta-note {
+      margin-top: 24px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ==================== FOOTER ==================== */
+    .footer {
+      padding: 48px 24px;
+      background: var(--gray-900);
+      text-align: center;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .footer-logo img { width: 28px; height: 28px; border-radius: 6px; }
+
+    .footer p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 16px;
+    }
+
+    .footer-links a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--white); }
+
+    /* ==================== RESPONSIVE ==================== */
+    @media (max-width: 768px) {
+      :root { --section-padding: 64px 20px; }
+
+      .nav-links { display: none; }
+
+      .hero { padding: 120px 20px 64px; }
+
+      .hero-stats { gap: 24px; }
+      .hero-stat-value { font-size: 28px; }
+
+      .steps { grid-template-columns: 1fr; gap: 32px; }
+      .step-connector { display: none; }
+
+      .results-grid { grid-template-columns: 1fr; }
+
+      .pricing-cards { grid-template-columns: 1fr; max-width: 400px; }
+
+      .features-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== NAVIGATION ==================== -->
+  <nav class="nav">
+    <div class="container">
+      <a href="https://chatty.net" class="nav-logo">
+        <img src="../brand/logo/icon-white-blue-bg.png" alt="Chatty">
+        chatty
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="nav-cta">
+        <a href="https://apps.shopify.com/chatty" class="btn btn-primary">Install Free</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ==================== HERO — ATTENTION ==================== -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1l2.12 4.3 4.74.69-3.43 3.34.81 4.72L8 11.77l-4.24 2.23.81-4.72L1.14 5.94l4.74-.69L8 1z" fill="#FBC80B"/></svg>
+        Rated 4.9/5 on Shopify — 1,735+ reviews
+      </div>
+
+      <h1>Your AI That <span>Sells</span>, Not Just Supports</h1>
+
+      <p>Chatty learns your entire product catalog overnight and turns every customer conversation into a sales opportunity. 24/7. On autopilot.</p>
+
+      <div class="hero-ctas">
+        <a href="https://apps.shopify.com/chatty" class="btn btn-primary btn-large">
+          Install Free on Shopify
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12m0 0l-4-4m4 4l-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="https://chatty.net" class="btn btn-ghost btn-large">View Live Demo</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-value">95%</div>
+          <div class="hero-stat-label">AI Resolution Rate</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">20%</div>
+          <div class="hero-stat-label">Chat-to-Sale Rate</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">$1M+</div>
+          <div class="hero-stat-label">Assisted Revenue</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">50K+</div>
+          <div class="hero-stat-label">Stores Trust Chatty</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== TRUST BAR ==================== -->
+  <section class="social-proof">
+    <div class="container">
+      <p>Trusted by brands like</p>
+      <div class="trust-badges">
+        <div class="trust-badge"><strong>Decathlon</strong></div>
+        <div class="trust-badge"><strong>Yoeleo Bike</strong></div>
+        <div class="trust-badge"><strong>Stonehenge Health</strong></div>
+        <div class="trust-badge"><strong>Gallery Furniture</strong></div>
+        <div class="trust-badge"><strong>Montana West</strong></div>
+        <div class="trust-badge"><strong>Happy Hair Brush</strong></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== PROBLEM — ATTENTION ==================== -->
+  <section class="problem">
+    <div class="container">
+      <span class="section-label">Sound Familiar?</span>
+      <h2 class="section-title">You're Losing Sales While You Sleep</h2>
+      <p class="section-subtitle">Most eCommerce stores lose 60%+ of potential sales because no one is there to answer questions when customers are ready to buy.</p>
+
+      <div class="pain-points">
+        <div class="pain-point">
+          <div class="pain-point-icon">&#128564;</div>
+          <h3>Customers leave at 2 AM</h3>
+          <p>Your best buyers shop outside business hours. Without instant answers, they bounce to competitors.</p>
+        </div>
+        <div class="pain-point">
+          <div class="pain-point-icon">&#128257;</div>
+          <h3>Repetitive questions drain your time</h3>
+          <p>"Where's my order?" "What size should I get?" The same 20 questions eat up 80% of your support time.</p>
+        </div>
+        <div class="pain-point">
+          <div class="pain-point-icon">&#128176;</div>
+          <h3>Hiring support is expensive</h3>
+          <p>A single support agent costs $3,000+/month. For small stores, that's not an option.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== FEATURES — DESIRE ==================== -->
+  <section class="features" id="features">
+    <div class="container">
+      <span class="section-label">Meet Chatty</span>
+      <h2 class="section-title">An AI Sales Assistant That Never Sleeps</h2>
+      <p class="section-subtitle">Chatty learns your products overnight and starts selling on day one. No coding. No complex setup.</p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-card-icon blue">&#129302;</div>
+          <h3>AI That Knows Your Catalog</h3>
+          <p>Chatty ingests your entire product catalog, FAQs, policies, and URLs overnight. It answers like your best employee — with perfect product knowledge.</p>
+          <span class="stat">Learns 20,000+ products</span>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card-icon yellow">&#128176;</div>
+          <h3>Smart Product Recommendations</h3>
+          <p>Chatty doesn't just answer — it sells. It spots upsell opportunities, suggests complementary products, and nudges customers to complete their purchase.</p>
+          <span class="stat">20% chat-to-sale rate</span>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card-icon purple">&#128172;</div>
+          <h3>All Channels, One Inbox</h3>
+          <p>Website chat, WhatsApp, Messenger, Instagram, Email — every conversation flows into a single unified inbox. Zero switching between tabs.</p>
+          <span class="stat">5 channels unified</span>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card-icon blue">&#9889;</div>
+          <h3>Proactive Sales Automation</h3>
+          <p>Welcome messages, cart reminders, collection boosters — Chatty reaches out at the right moment to convert browsers into buyers.</p>
+          <span class="stat">Automated triggers</span>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card-icon yellow">&#128218;</div>
+          <h3>Built-in FAQ Help Center</h3>
+          <p>Create a beautiful, searchable help center in minutes. Multi-language support, SEO-optimized, and AI-generated content to reduce repetitive tickets.</p>
+          <span class="stat">Unlimited FAQs</span>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card-icon purple">&#128200;</div>
+          <h3>Revenue Attribution</h3>
+          <p>See exactly how much revenue Chatty generates. Track assisted sales, chat-to-sale conversion, and ROI — so you know your AI is paying for itself.</p>
+          <span class="stat">Real-time analytics</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== HOW IT WORKS — DESIRE ==================== -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="container">
+      <span class="section-label">Get Started</span>
+      <h2 class="section-title">Up and Running in Under 10 Minutes</h2>
+      <p class="section-subtitle">No developers needed. No complex setup. Just install, train, and sell.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-connector"></div>
+          <div class="step-number">1</div>
+          <h3>Install from Shopify</h3>
+          <p>One-click install from the Shopify App Store. Chatty connects to your store instantly — products, orders, and all.</p>
+        </div>
+        <div class="step">
+          <div class="step-connector"></div>
+          <div class="step-number">2</div>
+          <h3>AI Learns Overnight</h3>
+          <p>Chatty automatically ingests your product catalog, FAQs, and policies. Wake up to a fully trained AI sales assistant.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Watch Sales Roll In</h3>
+          <p>Your AI handles conversations, recommends products, and closes sales 24/7. Track everything in real-time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== RESULTS — DESIRE ==================== -->
+  <section class="results">
+    <div class="container">
+      <span class="section-label">Real Results</span>
+      <h2 class="section-title">Merchants Are Already Winning with Chatty</h2>
+
+      <div class="results-grid">
+        <div class="result-card">
+          <div class="result-card-value">$29,586</div>
+          <div class="result-card-label">Assisted revenue in first month<br><strong>Yoeleo Bike</strong></div>
+        </div>
+        <div class="result-card">
+          <div class="result-card-value">96%</div>
+          <div class="result-card-label">AI resolution rate<br><strong>Decathlon</strong></div>
+        </div>
+        <div class="result-card">
+          <div class="result-card-value">18.75%</div>
+          <div class="result-card-label">Chat-to-sale conversion<br><strong>Happy Hair Brush</strong></div>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <blockquote>"We expected basic FAQ automation. What we got was a sales assistant that works alongside our team 24/7."</blockquote>
+        <cite>— Decathlon, Global sporting goods retailer</cite>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== USE CASES — DESIRE ==================== -->
+  <section class="use-cases">
+    <div class="container">
+      <span class="section-label">Built For You</span>
+      <h2 class="section-title">Works for Every eCommerce Store</h2>
+      <p class="section-subtitle">Whether you sell fashion, electronics, or supplements — Chatty adapts to your products.</p>
+
+      <div class="use-cases-grid">
+        <div class="use-case">
+          <div class="use-case-icon">&#128087;</div>
+          <h3>Fashion & Apparel</h3>
+          <p>AI-powered size guides, style recommendations, and return policy automation. Reduce "what size am I?" tickets by 90%.</p>
+        </div>
+        <div class="use-case">
+          <div class="use-case-icon">&#128132;</div>
+          <h3>Beauty & Cosmetics</h3>
+          <p>Ingredient questions, shade matching, and routine building — answered instantly with deep product knowledge.</p>
+        </div>
+        <div class="use-case">
+          <div class="use-case-icon">&#128187;</div>
+          <h3>Electronics</h3>
+          <p>Technical specs, compatibility checks, and setup guides. Train AI on manuals and product documents.</p>
+        </div>
+        <div class="use-case">
+          <div class="use-case-icon">&#127968;</div>
+          <h3>Home & Garden</h3>
+          <p>Product dimensions, installation help, and seasonal recommendations — all handled automatically.</p>
+        </div>
+        <div class="use-case">
+          <div class="use-case-icon">&#128138;</div>
+          <h3>Health & Wellness</h3>
+          <p>Product safety, usage instructions, and supplement questions with AI transfer to human for complex cases.</p>
+        </div>
+        <div class="use-case">
+          <div class="use-case-icon">&#127828;</div>
+          <h3>Food & Beverage</h3>
+          <p>Allergen info, freshness questions, and subscription management automated through smart AI responses.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== PRICING — DESIRE ==================== -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <span class="section-label">Simple Pricing</span>
+      <h2 class="section-title">Start Free. Scale As You Grow.</h2>
+      <p class="section-subtitle">No per-ticket fees. No per-agent charges. Flat-rate pricing that gets cheaper as your AI handles more.</p>
+
+      <div class="pricing-cards">
+        <div class="pricing-card">
+          <div class="pricing-card-name">Free</div>
+          <div class="pricing-card-desc">Try Chatty with zero risk</div>
+          <div class="pricing-card-price">$0</div>
+          <div class="pricing-card-period">Free forever</div>
+          <ul>
+            <li>50 AI conversations</li>
+            <li>100 products for AI training</li>
+            <li>Live chat widget</li>
+            <li>Unlimited FAQs</li>
+            <li>Basic analytics</li>
+          </ul>
+          <a href="https://apps.shopify.com/chatty" class="btn btn-secondary">Get Started Free</a>
+        </div>
+
+        <div class="pricing-card featured">
+          <div class="pricing-card-name">Basic</div>
+          <div class="pricing-card-desc">For growing stores</div>
+          <div class="pricing-card-price">$19.99<span>/mo</span></div>
+          <div class="pricing-card-period">7-day free trial</div>
+          <ul>
+            <li>50 AI conversations/month</li>
+            <li>500 products for AI training</li>
+            <li>5 team members</li>
+            <li>WhatsApp, Messenger, Instagram</li>
+            <li>Klaviyo & Shopify Flow</li>
+            <li>CSAT survey</li>
+          </ul>
+          <a href="https://apps.shopify.com/chatty" class="btn btn-primary">Start Free Trial</a>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-card-name">Pro</div>
+          <div class="pricing-card-desc">For scaling brands</div>
+          <div class="pricing-card-price">$68.99<span>/mo</span></div>
+          <div class="pricing-card-period">7-day free trial</div>
+          <ul>
+            <li>300 AI conversations/month</li>
+            <li>8,000 products for AI training</li>
+            <li>10 team members</li>
+            <li>AI on social channels</li>
+            <li>Smart product recommendations</li>
+            <li>Unlimited chat history</li>
+          </ul>
+          <a href="https://apps.shopify.com/chatty" class="btn btn-secondary">Start Free Trial</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== FAQ — DESIRE ==================== -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <span class="section-label">Questions?</span>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+
+      <div class="faq-list">
+        <div class="faq-item active">
+          <button class="faq-question">How long does setup take?</button>
+          <div class="faq-answer">
+            <p>Under 10 minutes. Install from the Shopify App Store, and Chatty automatically connects to your store. Your AI learns your product catalog overnight — no manual training required.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Do I need coding or technical skills?</button>
+          <div class="faq-answer">
+            <p>Not at all. Chatty is fully no-code. Everything from setup to customization happens through a visual interface. Our support team can even configure things for you.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">What happens when the AI can't answer?</button>
+          <div class="faq-answer">
+            <p>Chatty seamlessly transfers the conversation to a human agent with full context. Your team picks up right where the AI left off — no customer frustration.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">How is this different from Gorgias or Tidio?</button>
+          <div class="faq-answer">
+            <p>Chatty is built to sell, not just support. While Gorgias charges per ticket ($0.33+) and Tidio per seat, Chatty uses flat-rate pricing — your costs stay the same as AI handles more conversations. Plus, Chatty is Shopify-native with deeper integrations.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Is there a money-back guarantee?</button>
+          <div class="faq-answer">
+            <p>Yes. Every paid plan comes with a 7-day free trial and a 30-day money-back guarantee. Try Chatty risk-free.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== CTA — ACTION ==================== -->
+  <section class="cta">
+    <div class="container">
+      <h2>Chat. Smile. <span>Buy.</span></h2>
+      <p>Join 50,000+ Shopify merchants who are turning conversations into revenue with Chatty AI.</p>
+      <div class="cta-buttons">
+        <a href="https://apps.shopify.com/chatty" class="btn btn-primary btn-large">
+          Install Free on Shopify
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12m0 0l-4-4m4 4l-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="https://chatty.net" class="btn btn-ghost btn-large">View Live Demo</a>
+      </div>
+      <p class="cta-note">Free plan available. No credit card required. Setup in under 10 minutes.</p>
+    </div>
+  </section>
+
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logo">
+        <img src="../brand/logo/icon-white-blue-bg.png" alt="Chatty">
+        chatty
+      </div>
+      <p>The AI-first chat platform built for eCommerce sales.</p>
+      <div class="footer-links">
+        <a href="https://chatty.net">Website</a>
+        <a href="https://apps.shopify.com/chatty">Shopify App</a>
+        <a href="https://chatty.net/blog">Blog</a>
+        <a href="https://chatty.net/privacy-policy">Privacy</a>
+      </div>
+      <p style="margin-top: 24px;">&copy; 2026 Chatty by Avada Commerce. All rights reserved.</p>
+    </div>
+  </footer>
+
+
+  <!-- ==================== SCRIPTS ==================== -->
+  <script>
+    // FAQ Accordion
+    document.querySelectorAll('.faq-question').forEach(button => {
+      button.addEventListener('click', () => {
+        const item = button.parentElement;
+        const isActive = item.classList.contains('active');
+
+        // Close all
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+
+        // Open clicked (if it wasn't already active)
+        if (!isActive) item.classList.add('active');
+      });
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Nav background on scroll
+    const nav = document.querySelector('.nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.08)';
+      } else {
+        nav.style.boxShadow = 'none';
+      }
+    });
+  </script>
+
+</body>
+</html>

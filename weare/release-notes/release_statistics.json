@@ -1,0 +1,286 @@
+{
+  "overview": {
+    "total_releases": 326,
+    "date_range": {
+      "start": "November 16, 2023",
+      "end": "February 6, 2026"
+    },
+    "months_span": 27
+  },
+  "categories": {
+    "AI Assistant": 190,
+    "Live Chat / Inbox": 48,
+    "Widget / Chatbox": 24,
+    "Other": 25,
+    "FAQ Page": 13,
+    "Integrations": 7,
+    "Design / UI/UX": 5,
+    "Analytics / Dashboard": 4,
+    "Settings": 4,
+    "Translations": 3,
+    "Notifications": 2,
+    "Onboarding": 1
+  },
+  "monthly_breakdown": {
+    "May 20, 2025": 7,
+    "February 4, 2026": 6,
+    "January 8, 2026": 6,
+    "July 8, 2024": 6,
+    "November 11, 2025": 5,
+    "October 31, 2025": 5,
+    "August 27, 2025": 5,
+    "November 5, 2024": 5,
+    "August 6, 2024": 5,
+    "February 2, 2026": 4,
+    "December 24, 2025": 4,
+    "December 2, 2025": 4
+  },
+  "recent_features": [
+    {
+      "feature_name": "Update product list view",
+      "time": "February 6, 2026",
+      "description": "[Improvement] Hiển thị & quản lý toàn bộ sản phẩm trong Product List\n• Vấn đề: Hiện tại chỉ các sản phẩm được sync theo plan limit mới hiển thị trong list view, khiến MC khó xem và quản lý toàn bộ sản..."
+    },
+    {
+      "feature_name": "Improve FAQs translation (Bỏ Updated status)",
+      "time": "February 6, 2026",
+      "description": ""
+    },
+    {
+      "feature_name": "Zendesk integration",
+      "time": "February 4, 2026",
+      "description": "[New Feature] Zendesk integration – Tự động tạo ticket gửi transcript sau khi resolve \n• Mục đích: Giúp MC tự động lưu lại lịch sử hội thoại trên Zendesk để theo dõi chất lượng hỗ trợ và quản lý ticke..."
+    },
+    {
+      "feature_name": "[Improvement] Gợi ý câu hỏi Test AI theo bộ câu hỏi chung",
+      "time": "February 4, 2026",
+      "description": "[Improvement] Gợi ý câu hỏi Test AI theo chủ đề chung\n• Vấn đề: Câu hỏi gợi ý khi Test AI hiện phụ thuộc vào custom training data, gây khó khăn khi merchant muốn test nhanh AI ở giai đoạn setup ban đầ..."
+    },
+    {
+      "feature_name": "Related conversation tại inbox",
+      "time": "February 4, 2026",
+      "description": "[New Feature] Related conversations tại Inbox\n- Mục đích: giúp agent xem nhanh lịch sử các conversation liên quan của khách hàng ngay khi đang chat, để hỗ trợ nhanh và hiệu quả hơn mà không cần rời kh..."
+    },
+    {
+      "feature_name": "Tạo default FAQs theo ngôn ngữ lựa chọn tại Onboarding",
+      "time": "February 4, 2026",
+      "description": "[Improvement] Tự động tạo FAQs theo ngôn ngữ onboarding\n• Vấn đề: Sau khi cài app, FAQs mặc định luôn là tiếng Anh, khiến MC phải chỉnh sửa thủ công và đổi default language (đặc biệt với Free plan chỉ..."
+    },
+    {
+      "feature_name": "[Improvement] Hiển thị Discount đúng đối tượng khách hàng",
+      "time": "February 4, 2026",
+      "description": "[Improvement] Hiển thị Discount đúng đối tượng khách hàng\n• Mục đích: Đảm bảo khách chỉ thấy các mã giảm giá họ thực sự đủ điều kiện sử dụng, tăng tính cá nhân hoá và cải thiện tỷ lệ convert\n• Mô tả:\n..."
+    },
+    {
+      "feature_name": "Conversation attribute",
+      "time": "February 4, 2026",
+      "description": "[New Feature] Conversation attributes\n• Mục đích: Cho phép MC gắn thêm thông tin tuỳ chỉnh vào từng conversation để quản lý, lọc và phân tích dữ liệu hiệu quả hơn\n• Vị trí: Inbox → Conversation detail..."
+    },
+    {
+      "feature_name": "[Improvement] Cập nhật hiển thị Additional AI Conversation Charge",
+      "time": "February 3, 2026",
+      "description": "[Improvement] Hiển thị đúng additional AI conversation charge\n• Vấn đề: Khi phát sinh additional AI conversation charge, app tạo bill theo từng $10 và reset additional charge tại bảng Subscription → M..."
+    },
+    {
+      "feature_name": "[Inbox menu] Improve insert link",
+      "time": "February 2, 2026",
+      "description": "[New Feature] Paste link nhanh vào tin nhắn tại Inbox\n• Mục đích: Giúp merchant chèn link vào tin nhắn nhanh chóng khi trả lời khách hàng.\n• Vị trí: Inbox → Ô nhập tin nhắn.\n• Mô tả:\n    ◦ Cho phép pa..."
+    },
+    {
+      "feature_name": "Refactor code proactive chat",
+      "time": "February 2, 2026",
+      "description": "[Improvement] Chuẩn hoá luồng gửi proactive chat \n• Vấn đề: 1 số proactive chat hiện không theo cùng quy chuẩn do mở rộng tính năng theo thời gian, dẫn đến hành vi không nhất quán và khó maintain\n• Mụ..."
+    },
+    {
+      "feature_name": "Improve trả lời câu hỏi về collection",
+      "time": "February 2, 2026",
+      "description": "[Improvement] Cải thiện AI trả lời câu hỏi về Collection\n• Mục đích: Giúp AI tư vấn đúng sản phẩm trong collection, phù hợp với nhu cầu tìm kiếm của khách hàng.\n• Mô tả: Cải thiện cách AI xử lý các câ..."
+    },
+    {
+      "feature_name": "Định nghĩa conversation tính vào usage",
+      "time": "February 2, 2026",
+      "description": "[Improvement] Chuẩn hoá cách tính AI usage theo conversation\n• Mục đích: Làm rõ khi nào 1 conversation được tính vào AI usage, giúp MC dễ hiểu, minh bạch usage\n• Mô tả: AI usage được tính theo convers..."
+    },
+    {
+      "feature_name": "Thêm email thông báo khi đạt monthly usage (trường hợp spending limit > 0)",
+      "time": "January 28, 2026",
+      "description": "[Improvement] Cập nhật email thông báo AI usage charge\nVấn đề\nVới spending limit mặc định = $1000, merchant không nhận được thông báo khi vượt monthly limit, dẫn đến việc phát sinh chi phí mà không đư..."
+    },
+    {
+      "feature_name": "Update onboarding segment tệp khách hàng",
+      "time": "January 28, 2026",
+      "description": "Update onboarding experience\nMục đích\n• Khảo sát để phân loại đúng nhu cầu merchant\n• Thể hiện rõ value của AI, giúp merchant setup nhanh và đúng hướng\nMô tả \nCập nhật survey: \n• Câu hỏi chính: Bạn mu..."
+    },
+    {
+      "feature_name": "[New Feature] Gợi ý Complementary Products trong Proactive Chat",
+      "time": "January 28, 2026",
+      "description": "[New Feature] Gợi ý complementary products trong proactive chat\n• Mục đích: giúp MC gợi ý sản phẩm bổ trợ để tăng giá trị đơn hàng\n• Vị trí: Proactive chat → Product recommendation\n• Mô tả:\n    ◦ Bổ s..."
+    },
+    {
+      "feature_name": "[Joy integration] Require ultimate plan",
+      "time": "January 26, 2026",
+      "description": "[Improvement] Cải thiện UX khi kết nối JOY Loyalty\n• Vấn đề: JOY chỉ cấp quyền API từ plan Ultimate, khiến merchant ở các plan khác không sử dụng được integration (hiển thị profile & AI trả lời loyalt..."
+    },
+    {
+      "feature_name": "Create new conversation",
+      "time": "January 26, 2026",
+      "description": "[New Feature] Tạo Conversation trực tiếp tại Inbox\n• Mục đích: giúp MC chủ động tạo hội thoại với khách hàng ngay từ Inbox để xử lý hỗ trợ hoặc follow-up nhanh hơn\n• Mô tả:\n    ◦ Thêm nút Create Conve..."
+    },
+    {
+      "feature_name": "Update AI assistant list view layout",
+      "time": "January 23, 2026",
+      "description": "[Improvement] Tối ưu layout màn AI để dễ tập trung thao tác\n• Vấn đề: Màn AI hiện hiển thị nhiều layout khác nhau, khiến merchant khó tập trung vào tác vụ chính\n• Mục đích: Đơn giản hóa giao diện, giú..."
+    },
+    {
+      "feature_name": "Tách general instruction",
+      "time": "January 23, 2026",
+      "description": "[Improvement] Cấu trúc lại trang General Instruction để train AI hiệu quả hơn\n• Vấn đề: Merchant gặp khó khăn khi thêm instruction cho AI, dễ nhập trùng với system prompt hoặc thêm nội dung thừa/sai, ..."
+    }
+  ],
+  "top_features_by_category": {
+    "ai_assistant": [
+      {
+        "feature_name": "[Improvement] Gợi ý câu hỏi Test AI theo bộ câu hỏi chung",
+        "time": "February 4, 2026"
+      },
+      {
+        "feature_name": "[Improvement] Cập nhật hiển thị Additional AI Conversation Charge",
+        "time": "February 3, 2026"
+      },
+      {
+        "feature_name": "Thêm email thông báo khi đạt monthly usage (trường hợp spending limit > 0)",
+        "time": "January 28, 2026"
+      },
+      {
+        "feature_name": "Update AI assistant list view layout",
+        "time": "January 23, 2026"
+      },
+      {
+        "feature_name": "[Improvement] Report Issue cho AI Response",
+        "time": "January 8, 2026"
+      },
+      {
+        "feature_name": "Đổi domain email forwarding",
+        "time": "December 31, 2025"
+      },
+      {
+        "feature_name": "Thêm AI thinking state khi AI trả lời",
+        "time": "December 25, 2025"
+      },
+      {
+        "feature_name": "Dịch email message admin gửi cho customer",
+        "time": "December 23, 2025"
+      },
+      {
+        "feature_name": "Update màn Test AI",
+        "time": "December 2, 2025"
+      },
+      {
+        "feature_name": "[New Feature] AI đọc & phân tích ảnh khách hàng gửi qua chat",
+        "time": "November 14, 2025"
+      }
+    ],
+    "live_chat": [
+      {
+        "feature_name": "Related conversation tại inbox",
+        "time": "February 4, 2026"
+      },
+      {
+        "feature_name": "Conversation attribute",
+        "time": "February 4, 2026"
+      },
+      {
+        "feature_name": "[Improvement] Cập nhật hiển thị Additional AI Conversation Charge",
+        "time": "February 3, 2026"
+      },
+      {
+        "feature_name": "[Inbox menu] Improve insert link",
+        "time": "February 2, 2026"
+      },
+      {
+        "feature_name": "Định nghĩa conversation tính vào usage",
+        "time": "February 2, 2026"
+      },
+      {
+        "feature_name": "Create new conversation",
+        "time": "January 26, 2026"
+      },
+      {
+        "feature_name": "[Improvement] Nâng trải nghiệm trial với conversation bonus & product limit",
+        "time": "January 13, 2026"
+      },
+      {
+        "feature_name": "[Design] Update UI các form trên inbox và storefront",
+        "time": "January 8, 2026"
+      },
+      {
+        "feature_name": "Block conversation theo IP customer",
+        "time": "December 15, 2025"
+      },
+      {
+        "feature_name": "[Improvement] Tự động mark as read cho resolved conversation",
+        "time": "December 11, 2025"
+      }
+    ],
+    "integrations": [
+      {
+        "feature_name": "Zendesk integration",
+        "time": "February 4, 2026"
+      },
+      {
+        "feature_name": "[Joy integration] Require ultimate plan",
+        "time": "January 26, 2026"
+      },
+      {
+        "feature_name": "[New Feature] Integration với Powerful Contact Form",
+        "time": "December 18, 2025"
+      },
+      {
+        "feature_name": "Website integration",
+        "time": "October 14, 2025"
+      }
+    ],
+    "widget": [
+      {
+        "feature_name": "Thêm paste ảnh tại chatbox",
+        "time": "December 18, 2025"
+      },
+      {
+        "feature_name": "[Improvement] Thêm embed float chatbox button",
+        "time": "December 4, 2025"
+      },
+      {
+        "feature_name": "Cài đặt hiển thị online status trên chatbox",
+        "time": "November 11, 2025"
+      },
+      {
+        "feature_name": "[Improvement] Cải thiện hiển thị tin nhắn trên chatbox",
+        "time": "October 15, 2025"
+      },
+      {
+        "feature_name": "Thêm action Send transcription tại chatbox header",
+        "time": "September 18, 2025"
+      },
+      {
+        "feature_name": "Auto add to cart in chatbox",
+        "time": "August 27, 2025"
+      },
+      {
+        "feature_name": "Show chatbox in Checkout & Thank you page",
+        "time": "July 8, 2025"
+      },
+      {
+        "feature_name": "[Improvement] Sắp xếp layout Automation, Chatbox settings",
+        "time": "May 20, 2025"
+      },
+      {
+        "feature_name": "[New feature] Mặc định mở cửa sổ chat khi mở chatbox",
+        "time": "May 13, 2025"
+      },
+      {
+        "feature_name": "Cải thiện chatbox để đảm bảo accessibility",
+        "time": "May 5, 2025"
+      }
+    ]
+  }
+}

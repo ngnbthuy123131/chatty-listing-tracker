@@ -1,0 +1,1060 @@
+#,Time,Feature Name,Description,Task URL,Changelog URL
+1,"February 6, 2026",Update product list view,"[Improvement] Hiển thị & quản lý toàn bộ sản phẩm trong Product List
+• Vấn đề: Hiện tại chỉ các sản phẩm được sync theo plan limit mới hiển thị trong list view, khiến MC khó xem và quản lý toàn bộ sản...",Update màn list product | Training Data (https://www.notion.so/Update-m-n-list-product-Training-Data-2ccb0da449f180b893dee89c31d397ec?pvs=21),
+2,"February 6, 2026",Improve FAQs translation (Bỏ Updated status),,Improve FAQs translation (Bỏ Updated status) (https://www.notion.so/Improve-FAQs-translation-B-Updated-status-2b5b0da449f18070afb0ec979661ce60?pvs=21),
+3,"February 4, 2026",Zendesk integration,"[New Feature] Zendesk integration – Tự động tạo ticket gửi transcript sau khi resolve 
+• Mục đích: Giúp MC tự động lưu lại lịch sử hội thoại trên Zendesk để theo dõi chất lượng hỗ trợ và quản lý ticke...",Integration Zendesk (https://www.notion.so/Integration-Zendesk-288b0da449f180f7ae69ec1dea2a749a?pvs=21),
+4,"February 4, 2026",[Improvement] Gợi ý câu hỏi Test AI theo bộ câu hỏi chung,"[Improvement] Gợi ý câu hỏi Test AI theo chủ đề chung
+• Vấn đề: Câu hỏi gợi ý khi Test AI hiện phụ thuộc vào custom training data, gây khó khăn khi merchant muốn test nhanh AI ở giai đoạn setup ban đầ...",Gợi ý test case trong preview chat (https://www.notion.so/G-i-test-case-trong-preview-chat-296b0da449f180528df5c20b543add7c?pvs=21),
+5,"February 4, 2026",Related conversation tại inbox,"[New Feature] Related conversations tại Inbox
+- Mục đích: giúp agent xem nhanh lịch sử các conversation liên quan của khách hàng ngay khi đang chat, để hỗ trợ nhanh và hiệu quả hơn mà không cần rời kh...",[Inbox] Related conversation  (https://www.notion.so/Inbox-Related-conversation-2e5b0da449f180918423f161c7ce1a85?pvs=21),
+6,"February 4, 2026",Tạo default FAQs theo ngôn ngữ lựa chọn tại Onboarding,"[Improvement] Tự động tạo FAQs theo ngôn ngữ onboarding
+• Vấn đề: Sau khi cài app, FAQs mặc định luôn là tiếng Anh, khiến MC phải chỉnh sửa thủ công và đổi default language (đặc biệt với Free plan chỉ...",Tạo default FAQs theo ngôn ngữ lựa chọn tại Onboarding (https://www.notion.so/T-o-default-FAQs-theo-ng-n-ng-l-a-ch-n-t-i-Onboarding-2d5b0da449f180f5ba95cfdc3b180acc?pvs=21),
+7,"February 4, 2026",[Improvement] Hiển thị Discount đúng đối tượng khách hàng,"[Improvement] Hiển thị Discount đúng đối tượng khách hàng
+• Mục đích: Đảm bảo khách chỉ thấy các mã giảm giá họ thực sự đủ điều kiện sử dụng, tăng tính cá nhân hoá và cải thiện tỷ lệ convert
+• Mô tả:
+...",Sync điều kiện về customer segment trên discount (https://www.notion.so/Sync-i-u-ki-n-v-customer-segment-tr-n-discount-2b8b0da449f180e59c32ff14f06c3780?pvs=21),
+8,"February 4, 2026",Conversation attribute,"[New Feature] Conversation attributes
+• Mục đích: Cho phép MC gắn thêm thông tin tuỳ chỉnh vào từng conversation để quản lý, lọc và phân tích dữ liệu hiệu quả hơn
+• Vị trí: Inbox → Conversation detail...",Set attribute cho conversation (https://www.notion.so/Set-attribute-cho-conversation-2f0b0da449f1805bb407dbf1db882944?pvs=21),
+9,"February 3, 2026",[Improvement] Cập nhật hiển thị Additional AI Conversation Charge,"[Improvement] Hiển thị đúng additional AI conversation charge
+• Vấn đề: Khi phát sinh additional AI conversation charge, app tạo bill theo từng $10 và reset additional charge tại bảng Subscription → M...","[Subscription] Update logic hiển thị additional charge, usage (https://www.notion.so/Subscription-Update-logic-hi-n-th-additional-charge-usage-2f5b0da449f180fe97dbf231337dbdd1?pvs=21)",
+10,"February 2, 2026",[Inbox menu] Improve insert link,"[New Feature] Paste link nhanh vào tin nhắn tại Inbox
+• Mục đích: Giúp merchant chèn link vào tin nhắn nhanh chóng khi trả lời khách hàng.
+• Vị trí: Inbox → Ô nhập tin nhắn.
+• Mô tả:
+    ◦ Cho phép pa...",[Inbox menu] Improve insert link (https://www.notion.so/Inbox-menu-Improve-insert-link-6eb8e058d61b47f2a31acbcfa0a7b34f?pvs=21),
+11,"February 2, 2026",Refactor code proactive chat,"[Improvement] Chuẩn hoá luồng gửi proactive chat 
+• Vấn đề: 1 số proactive chat hiện không theo cùng quy chuẩn do mở rộng tính năng theo thời gian, dẫn đến hành vi không nhất quán và khó maintain
+• Mụ...",Refactor luồng gửi message campaign hiện tại (https://www.notion.so/Refactor-lu-ng-g-i-message-campaign-hi-n-t-i-2eab0da449f1800e8c5ed875e739f98d?pvs=21),
+12,"February 2, 2026",Improve trả lời câu hỏi về collection,"[Improvement] Cải thiện AI trả lời câu hỏi về Collection
+• Mục đích: Giúp AI tư vấn đúng sản phẩm trong collection, phù hợp với nhu cầu tìm kiếm của khách hàng.
+• Mô tả: Cải thiện cách AI xử lý các câ...",Improve trả lời câu hỏi về collection (https://www.notion.so/Improve-tr-l-i-c-u-h-i-v-collection-280b0da449f18045ba03ff7da1478c07?pvs=21),
+13,"February 2, 2026",Định nghĩa conversation tính vào usage,"[Improvement] Chuẩn hoá cách tính AI usage theo conversation
+• Mục đích: Làm rõ khi nào 1 conversation được tính vào AI usage, giúp MC dễ hiểu, minh bạch usage
+• Mô tả: AI usage được tính theo convers...",Định nghĩa conversation cho AI usage pricing (https://www.notion.so/nh-ngh-a-conversation-cho-AI-usage-pricing-2e5b0da449f180d2a111d28dac2ac4fc?pvs=21),
+14,"January 28, 2026",Thêm email thông báo khi đạt monthly usage (trường hợp spending limit > 0),"[Improvement] Cập nhật email thông báo AI usage charge
+Vấn đề
+Với spending limit mặc định = $1000, merchant không nhận được thông báo khi vượt monthly limit, dẫn đến việc phát sinh chi phí mà không đư...",Thêm email thông báo khi đạt monthly usage (trường hợp spending limit > 0) (https://www.notion.so/Th-m-email-th-ng-b-o-khi-t-monthly-usage-tr-ng-h-p-spending-limit-0-2f5b0da449f180999627f38542b8a4da?pvs=21),
+15,"January 28, 2026",Update onboarding segment tệp khách hàng,"Update onboarding experience
+Mục đích
+• Khảo sát để phân loại đúng nhu cầu merchant
+• Thể hiện rõ value của AI, giúp merchant setup nhanh và đúng hướng
+Mô tả 
+Cập nhật survey: 
+• Câu hỏi chính: Bạn mu...","Update onboarding segment tệp khách hàng (https://www.notion.so/Update-onboarding-segment-t-p-kh-ch-h-ng-299b0da449f180b197eff4cf05bc74f0?pvs=21) 
+
+Update onboarding segment tệp khách hàng 2 (https://www.notion.so/Update-onboarding-segment-t-p-kh-ch-h-ng-2-2e1b0da449f180d182c8d8aa85b4948d?pvs=21)",
+16,"January 28, 2026",[New Feature] Gợi ý Complementary Products trong Proactive Chat,"[New Feature] Gợi ý complementary products trong proactive chat
+• Mục đích: giúp MC gợi ý sản phẩm bổ trợ để tăng giá trị đơn hàng
+• Vị trí: Proactive chat → Product recommendation
+• Mô tả:
+    ◦ Bổ s...",[Product recommendation teaser] Thêm gợi ý sản phẩm complementary (https://www.notion.so/Product-recommendation-teaser-Th-m-g-i-s-n-ph-m-complementary-2cbb0da449f18065a5f5f92b1b9adb73?pvs=21),
+17,"January 26, 2026",[Joy integration] Require ultimate plan,"[Improvement] Cải thiện UX khi kết nối JOY Loyalty
+• Vấn đề: JOY chỉ cấp quyền API từ plan Ultimate, khiến merchant ở các plan khác không sử dụng được integration (hiển thị profile & AI trả lời loyalt...",[JOY integration] Thêm require Ultimate plan khi connect (https://www.notion.so/JOY-integration-Th-m-require-Ultimate-plan-khi-connect-2efb0da449f180b4b450dafbfdffda24?pvs=21),
+18,"January 26, 2026",Create new conversation,"[New Feature] Tạo Conversation trực tiếp tại Inbox
+• Mục đích: giúp MC chủ động tạo hội thoại với khách hàng ngay từ Inbox để xử lý hỗ trợ hoặc follow-up nhanh hơn
+• Mô tả:
+    ◦ Thêm nút Create Conve...",[Inbox] Create conversation (https://www.notion.so/Inbox-Create-conversation-2ecb0da449f180d8b9e6ee0ed03f35c8?pvs=21),
+19,"January 23, 2026",Update AI assistant list view layout,"[Improvement] Tối ưu layout màn AI để dễ tập trung thao tác
+• Vấn đề: Màn AI hiện hiển thị nhiều layout khác nhau, khiến merchant khó tập trung vào tác vụ chính
+• Mục đích: Đơn giản hóa giao diện, giú...",Improve AI assistant layout P2 (https://www.notion.so/Improve-AI-assistant-layout-P2-2a3b0da449f180e09b1ae9a845dfdb64?pvs=21),
+20,"January 23, 2026",Tách general instruction,"[Improvement] Cấu trúc lại trang General Instruction để train AI hiệu quả hơn
+• Vấn đề: Merchant gặp khó khăn khi thêm instruction cho AI, dễ nhập trùng với system prompt hoặc thêm nội dung thừa/sai, ...",Tách general instruction thành các mục (https://www.notion.so/T-ch-general-instruction-th-nh-c-c-m-c-277b0da449f1801b9380d572162c7415?pvs=21),
+21,"January 23, 2026",Improve UI scenario size guide,"Update layout, UI, fix bug Agent instruction | Size guide",Improve UI scenario size guide  (https://www.notion.so/Improve-UI-scenario-size-guide-2b6b0da449f180349c63d3fe23529d69?pvs=21),
+22,"January 19, 2026",[Analytics] Agent performance report,"[New feature] Thêm report về Handling time & Resolution time
+• Mục đích: giúp MC đánh giá hiệu quả xử lý hội thoại và tối ưu hiệu suất support
+• Vị trí: Analytics | Human agent  https://capture.avada....",[Analytics] Agent performance report (https://www.notion.so/Analytics-Agent-performance-report-2a4b0da449f180c6a891dad0ab4fefdd?pvs=21),
+23,"January 19, 2026",[Improvement] Thêm tuỳ chọn Subscribe trên Pre-chat form,"[Improvement] Thêm tuỳ chọn subscribe trên pre-chat form
+• Vấn đề: khách sau khi submit pre-chat form chỉ được tạo dưới dạng lead và ko tự động convert thành customer, khó follow-up hoặc gửi campaign ...",Thêm subscribe newsletter trên pre-chat form để convert lead (https://www.notion.so/Th-m-subscribe-newsletter-tr-n-pre-chat-form-convert-lead-2a4b0da449f1801d80c1e70088a8f9d7?pvs=21),
+24,"January 19, 2026",[Improvement] Thêm chỉ số Chatty Contributed Sales,"[Improvement] Thêm chỉ số Chatty contributed sales
+• Mục đích: giúp MC đo lường mức độ đóng góp doanh thu của Chatty đối với store
+• Vị trí: https://capture.avada.io/i/x4Wd67ZjJycd, https://capture.av...",[Analytics] Thêm chỉ số Chatty contributed sales  (https://www.notion.so/Analytics-Th-m-ch-s-Chatty-contributed-sales-2a4b0da449f18040bad5f791402962aa?pvs=21),
+25,"January 13, 2026",[Improvement] Sync cart updates với custom theme,"[Improvement] Sync cart updates với custom stheme
+• Vấn đề:
+    ◦ 1 số Shopify theme (đặc biệt là custom cart / cart drawer tự build) ko tuân theo chuẩn Shopify
+    ◦ Khi Chatty AI add / update / remo...",,
+26,"January 13, 2026",[Improvement] Nâng trải nghiệm trial với conversation bonus & product limit,"[Improvement] Nâng trải nghiệm trial với conversation bonus & product limit
+• Mục đích: Tăng activation và conversion từ Trial sang Paid plan, đồng thời giúp MC trải nghiệm đầy đủ giá trị của AI trước...","Tăng limit product cho trial Basic, Pro (https://www.notion.so/T-ng-limit-product-cho-trial-Basic-Pro-2ccb0da449f180268e79c0c076fa1493?pvs=21) 
+Offer AI usage credit với trial plan (https://www.notion.so/Offer-AI-usage-credit-v-i-trial-plan-2bfb0da449f1803eb980f01b5f775f75?pvs=21)",
+27,"January 12, 2026",New pricing 2026,,"Update pricing tháng 11 (https://www.notion.so/Update-pricing-th-ng-11-299b0da449f180beb4ecdf283cfaeb75?pvs=21) 
+[Pricing] Update AI usage từ số reply sang số conversation (https://www.notion.so/Pricing-Update-AI-usage-t-s-reply-sang-s-conversation-2b0b0da449f180198498c2563a6deb20?pvs=21)",
+28,"January 9, 2026",Proactive chat “Search page”,"[New Feature] Proactive chat “Search page welcome”
+• Mục đích: chủ động tiếp cận khách hàng trên trang tìm kiếm, tăng tương tác, khuyến khích mua hàng 
+• Vị trí: Proactive chat → Create proactive chat...",[Proactive chat] Search page (https://www.notion.so/Proactive-chat-Search-page-25ab0da449f18009bc41f06ef37538dc?pvs=21),
+29,"January 8, 2026",Bổ sung các loại message cho proactive chat,"[Improvement] Bổ sung loại Message cho Proactive Chat
+• Vấn đề: Một số proactive chat chưa hỗ trợ đầy đủ các loại message như coupon hoặc product recommendation.
+• Mô tả:
+    ◦ Welcome Visitor: bổ sun...",Bổ sung các loại message cho proactive chat  (https://www.notion.so/B-sung-c-c-lo-i-message-cho-proactive-chat-263b0da449f18080b8a6d6187ff2597e?pvs=21),
+30,"January 8, 2026",[Design] Update UI các form trên inbox và storefront,"[Improvement] Cải thiện UI các form trên inbox, chatbox 
+Sửa lại UI các form trên inbox, trang test AI và chatbox (light/dark mode)
+• CSAT form
+• contact form
+• transfer form
+• pre-chat form
+• subscri...",[Design] Update UI các form trên inbox và storefront  (https://www.notion.so/Design-Update-UI-c-c-form-tr-n-inbox-v-storefront-2a2b0da449f18017aea2ce637df8d975?pvs=21),
+31,"January 8, 2026",Improve proactive chat design settings,"[Improvement] Cập nhật design proactive chat 
+• Mô tả:
+    ◦ Cập nhật ảnh preview của proactive chat trong list view.
+    ◦ Bổ sung cài đặt Button Label Color để tùy chỉnh màu chữ trên button https://...",Improve proactive chat design settings  (https://www.notion.so/Improve-proactive-chat-design-settings-2bdb0da449f18092bb68e1bd31743b96?pvs=21),
+32,"January 8, 2026",Filter sản phẩm gợi ý còn hàng ở proactive chat,"[Improvement] Chỉ gợi ý sản phẩm còn hàng trong Proactive Chat
+• Vấn đề: Proactive chat có thể gợi ý sản phẩm đã hết hàng, khiến khách không thể mua dù được AI đề xuất
+• Mô tả:
+    ◦ Cập nhật logic pr...",Filter sản phẩm gợi ý còn hàng ở proactive chat (https://www.notion.so/Filter-s-n-ph-m-g-i-c-n-h-ng-proactive-chat-2c5b0da449f180f5a370e9d6b728cb5f?pvs=21),
+33,"January 8, 2026",Thêm default proactive chat cho store mới,"[Improvement] Cập nhật Proactive Chat mặc định
+• Mô tả:
+    1. Tự động tạo proactive chat mặc định khi cài app, bao gồm:
+        ▪ Cart Booster
+        ▪ Abandoned Cart Reminder
+        ▪ Collection B...",Thêm default proactive chat cho store mới (https://www.notion.so/Th-m-default-proactive-chat-cho-store-m-i-2bfb0da449f1804a97d3c8ff678d47cd?pvs=21),
+34,"January 8, 2026",[Improvement] Report Issue cho AI Response,"[Improvement] Report issue cho AI response 
+• Vấn đề: khi MC gửi feedback về AI response, team sẽ nhận qua Slack và liên hệ lại qua Crisp dẫn đến hỗ trợ chậm 
+• Mục đích: thu thập feedback từ merchant...",Thêm report issue dưới mỗi AI response (https://www.notion.so/Th-m-report-issue-d-i-m-i-AI-response-2c0b0da449f1809fa91bd9258ba46604?pvs=21),
+35,"December 31, 2025",Đổi domain email forwarding,"[Improvement] Fix lỗi không kết nối được email forwarding từ Outlook
+• Vấn đề: Email forwarding từ Outlook và 1 số nhà cung cấp khác không kết nối được do bị Cloudflare Email Routing chặn
+• Mục đích: ...",Self-hosted Mail Server (Postfix + AWS) (https://www.notion.so/Self-hosted-Mail-Server-Postfix-AWS-2d6b0da449f1804d89cedb58be82eb25?pvs=21),
+36,"December 31, 2025",Scenarop Inventory status,"[Improvement] Tùy chỉnh AI trả lời theo Inventory status
+• Vấn đề: Với sản phẩm out of stock nhưng vẫn cho phép bán, AI trả lời là “in stock”, gây hiểu nhầm cho khách hàng
+• Mục đích: giúp AI trả lời ...",Scenario inventory status  (https://www.notion.so/Scenario-inventory-status-2d1b0da449f180d0bbf0cfac868fde23?pvs=21),
+37,"December 30, 2025",Custom after-sales support scenario,"[Improvement] Tùy chỉnh Scenario After-sales Service
+• Vấn đề: luồng after-sales hiện đang cố định, khiến merchant không thể tùy chỉnh cách xử lý (nhiều MC tắt scenario mặc định để tạo custom scenario...",Custom scenario after sales (https://www.notion.so/Custom-scenario-after-sales-23fb0da449f1803491cac959f7d885dc?pvs=21),
+38,"December 30, 2025",Đọc ảnh sản phẩm trong tin nhắn từ các channel,"[Improvement] AI đọc ảnh sản phẩm từ các kênh social
+• Mục đích: giúp AI hiểu ngữ cảnh tốt hơn khi khách gửi hình ảnh sản phẩm từ các kênh 
+• Mô tả:
+    ◦ Trước đây: AI chỉ có thể đọc ảnh được gửi từ ...",Suggest sản phẩm tương tự ảnh sản phẩm trong tin nhắn từ các channel  (https://www.notion.so/Suggest-s-n-ph-m-t-ng-t-nh-s-n-ph-m-trong-tin-nh-n-t-c-c-channel-2c0b0da449f180b8b755d0ed7e07a54d?pvs=21),
+39,"December 27, 2025",LinkeIn banner,"Banner follow Chatty trên LinkedIn
+• Mục đích: cập nhật thông tin mới nhất cho merchant, tăng retention
+• Vị trí: Dashboard https://capture.avada.io/i/HczNQbn9s92d
+• Mô tả:
+    ◦ Thêm banner follow tr...",LinkedIn banner - Homepage (https://www.notion.so/LinkedIn-banner-Homepage-2d5b0da449f180019ac9cfb5bcc53d81?pvs=21),
+40,"December 25, 2025",Thêm AI thinking state khi AI trả lời,"[New Feature] AI Thinking State khi trả lời
+• Mục đích: giúp người dùng hiểu cách AI phân tích câu hỏi, tạo cảm giác phản hồi tức thì trong quá trình xử lý, nâng cao trải nghiệm tương tác
+• Vị trí: Ch...",,
+41,"December 24, 2025",Update quy tắc hiển thị preview product đang xem,"[Improvement] Cập nhật logic hiển thị Product Preview trong Chatbox
+• Vấn đề: Khi khách click proactive chat gợi ý sản phẩm khác với sản phẩm đang xem, chatbox vẫn hiển thị preview sản phẩm cũ, gây nh...",Update quy tắc hiển thị preview product đang xem (https://www.notion.so/Update-quy-t-c-hi-n-th-preview-product-ang-xem-2c3b0da449f18048823ee9f61faf859a?pvs=21),
+42,"December 24, 2025",Sales analytics,"[New Feature] Sales Analytics
+• Mục đích: Giúp merchant theo dõi hiệu quả của Chatty trong việc tạo doanh thu, từ đó tăng mức độ gắn bó và sử dụng app lâu dài
+• Vị trí: Analytics → Sales https://captu...",[Analytics] Sales analytics  (https://www.notion.so/Analytics-Sales-analytics-1a6b0da449f180718e5ffe584b63b355?pvs=21),
+43,"December 24, 2025",Cập nhật rule hiển thị lại proactive chat,"[Improvement] Cập nhật tần suất hiển thị Proactive Chat
+• Vấn đề: Proactive chat hiện chỉ hiển thị một lần; khi khách nhấn Close, teaser sẽ không xuất hiện lại
+• Mục đích: Cho phép proactive chat hiển...",Update tần suất hiển thị proactive chat (https://www.notion.so/Update-t-n-su-t-hi-n-th-proactive-chat-288b0da449f180c58a0ff81f6bf6b350?pvs=21),
+44,"December 24, 2025",Improve proactive chat design settings,"- Update ảnh preview 
+- Thêm button label color 
+- Update field Button color 
+- Sửa teaser quick question của Welcome visitor đồng nhất với proactive chat khác",Improve proactive chat design settings  (https://www.notion.so/Improve-proactive-chat-design-settings-2bdb0da449f18092bb68e1bd31743b96?pvs=21),
+45,"December 23, 2025",Dịch email message admin gửi cho customer,"- Thêm translation cho New message from {{ http://shop.name }}
+- Lấy ngôn ngữ từ conversation hoặc last message",Dịch email message admin gửi cho customer (https://www.notion.so/D-ch-email-message-admin-g-i-cho-customer-2c3b0da449f180f58cb6f3798553b6d7?pvs=21),
+46,"December 18, 2025",Thêm paste ảnh tại chatbox,"[New Feature] Paste ảnh trực tiếp vào ô nhập tin nhắn
+• Mục đích: Giúp khách hàng và CS gửi hình ảnh nhanh hơn khi chat, không cần thao tác upload thủ công.
+• Vị trí: Chatbox → Ô nhập tin nhắn.
+• Mô t...",Paste ảnh ở ô input chat trên chatbox (https://www.notion.so/Paste-nh-input-chat-tr-n-chatbox-2c7b0da449f180b19406fa31f5d5abd7?pvs=21),
+47,"December 18, 2025",[Subscribe newsletter] Thêm CTA trên teaser,"[Improvement] Cập nhật teaser proactive chat  “Subscribe newsletter”
+• Vấn đề: Với luồng subscribe newsletter hiện tại, khi khách click teaser sẽ gửi teaser + form ngay, dễ khiến khách rời đi
+• Mục đí...",[Subscribe newsletter] Thêm CTA trên teaser (https://www.notion.so/Subscribe-newsletter-Th-m-CTA-tr-n-teaser-264b0da449f1805e8e3ec02acd4375c8?pvs=21),
+48,"December 18, 2025",[New Feature] Integration với Powerful Contact Form,"[New Feature] Integration với Powerful Contact Form
+•Vấn đề: Khi MC dùng app contact form, mọi form submission đều tạo chung một conversation do email sender mặc định của app, gây khó khăn trong việc ...",[Integration] Powerful form builder (https://www.notion.so/Integration-Powerful-form-builder-296b0da449f180cebbcfde1ce6238efb?pvs=21),
+49,"December 15, 2025",Block conversation theo IP customer,"[New Feature] Block Conversation theo IP Customer
+• Vấn đề: Chức năng block hiện tại chỉ áp dụng cho từng conversation, → trường hợp spam vẫn có thể tiếp tục tạo hội thoại mới bằng cách ẩn danh hoặc x...",Block conversation theo IP customer (https://www.notion.so/Block-conversation-theo-IP-customer-2b9b0da449f1801a8a77d83b7fc36ac0?pvs=21),
+50,"December 12, 2025",Bỏ setting “Send transcript history”,"[Improvement] Cập nhật gửi transcript cho khách hàng
+• Vấn đề:
+    ◦ Khách có thể gửi transcript bất kỳ lúc nào từ chatbox
+    ◦ App đã có tính năng Send transcript trong Inbox (dùng cho gửi nội bộ ho...",Bỏ setting “Send transcript history” (https://www.notion.so/B-setting-Send-transcript-history-2a9b0da449f180df8369d20a7d762b4e?pvs=21),
+51,"December 11, 2025","[Proactive: Product recommendation] Thêm quick message button (custom, auto)","[New Feature] Text message và quick question cho proactive chat “Product recommendation” 
+• Mục đích: giúp khách dễ dàng đặt câu hỏi → tăng tương tác khám phá sản phẩm
+• Vị trí: Proactive Chat → Produ...","[Proactive: Product recommendation] Thêm quick message button (custom, auto) (https://www.notion.so/Proactive-Product-recommendation-Th-m-quick-message-button-custom-auto-25ab0da449f1804d9813cc68a456ad6e?pvs=21)",
+52,"December 11, 2025",[Improvement] Tự động mark as read cho resolved conversation,"We currently do not offer installment payment plans. However, you may want to consider alternative payment options available at checkout. For more details, please refer to our [payment information](UR...",Auto mark as read cho resolved conversation (https://www.notion.so/Auto-mark-as-read-cho-resolved-conversation-2beb0da449f180599466dba3df80472d?pvs=21),
+53,"December 11, 2025",Improve Chatty buddy,"[Improvement] Tối ưu Chatty Buddy để tăng tỷ lệ Activate AI
+• Mục đích: Giúp merchant hoàn tất setup nhanh hơn
+• Mô tả:
+    ◦ Tự động bật AI khi merchant enable Chatty embed app trong Theme Editor, kh...",Improve Chatty buddy (https://www.notion.so/Improve-Chatty-buddy-2bfb0da449f1805fac65f550f8cfdf16?pvs=21),
+54,"December 9, 2025",Translation in app,"[New Feature] Cài đặt ngôn ngữ hiển thị trên app
+• Mục đích: giúp merchant xem và sử dụng app bằng ngôn ngữ quen thuộc, từ đó thao tác cài đặt và quản lý dễ dàng hơn
+• Vị trí: Settings → App Language
+...",Translation in app  (https://www.notion.so/Translation-in-app-07efa4a7ac96409197d2c110217cc470?pvs=21),
+55,"December 9, 2025",[Shopify flow] Tạo trigger create customer,"[New Feature] Sync Contact từ Pre-chat sang App Marketing (Shopify Flow Event)
+• Mục đích: Giúp merchant đồng bộ thông tin contact thu được từ Chatty sang các app marketing để gửi campaign tự động
+• V...",[Shopify flow] Tạo trigger create customer (https://www.notion.so/Shopify-flow-T-o-trigger-create-customer-2b5b0da449f180a7903dcf0feadd3f04?pvs=21),
+56,"December 9, 2025","Export conversation to CSV, TXT","[New Feature] Export conversation transcript
+• Mục đích: giúp merchant tải và lưu trữ conversation transcript để phục vụ lưu trữ, phân tích nội bộ 
+• Vị trí: Inbox → Conversation header 
+• Mô tả:
+Thêm...",Export conversation to CSV (https://www.notion.so/Export-conversation-to-CSV-2a4b0da449f18003b00ce6a648a04c81?pvs=21),
+57,"December 4, 2025",[Improvement] Thêm embed float chatbox button,"[Improvement] Thêm embed float chatbox button
+Mục đích: thêm chatbox  vào website ngoài Shopify dạng float button (trước đó chỉ thêm dưới dạng embed chatbox) 
+Vị trí: Settings | Integrations  | Websit...",Thêm embed float button widget (https://www.notion.so/Th-m-embed-float-button-widget-2bcb0da449f1802bbf9cc7464a50e6d2?pvs=21),
+58,"December 4, 2025",[New feature] Tạo script cho FAQs block,"[New Feature] Tạo script cho FAQs Block
+• Mục đích: cho phép merchant chèn FAQs block vào bất kỳ trang nào bằng snippet code 
+• Vị trí: FAQs | FAQs Block | Edit FAQs block https://capture.avada.io/i/9...",[FAQs] Tạo script cho FAQs block (https://www.notion.so/FAQs-T-o-script-cho-FAQs-block-2b6b0da449f180b683abc3c25c3a529c?pvs=21),
+59,"December 2, 2025",[Improvement] Thêm điều kiện Maximum Cart Value cho Cart Booster,"[Improvement] Thêm điều kiện Maximum Cart Value cho Cart Booster
+Vấn đề: Proactive chat “Cart Booster” chỉ hỗ trợ cài đặt minimum cart value → merchant ko thể giới hạn hiển thị proactive chat khi giá ...",Thêm điều kiện maximum cart value cho Cart Booster (https://www.notion.so/Th-m-i-u-ki-n-maximum-cart-value-cho-Cart-Booster-2b2b0da449f1809ab2bbe880d9eade9c?pvs=21),
+60,"December 2, 2025",Proactive chat “Cart reminder”,"[New Feature] Proactive Chat “Abandoned cart reminder”
+• Mục đích: Remind khách sau khi thêm sản phẩm vào giỏ nhưng chưa hoàn tất mua hàng, giúp tăng tỷ lệ convert
+• Vị trí: Proactive Chat → Create pr...",Thêm proactive chat “Abandoned cart reminder” (https://www.notion.so/Th-m-proactive-chat-Abandoned-cart-reminder-25cb0da449f180cfaa43fdad992961a5?pvs=21),
+61,"December 2, 2025",Thêm hướng dẫn cài đặt mobile app tại Inbox,"[Improvement] Banner hướng dẫn cài đặt mobile app tại Inbox
+• Vấn đề: Setting cài đặt mobile app đang bị ẩn (Setting → Notification), nhiều merchant không biết cách cài app để nhận thông báo
+• Vị trí:...",Thêm hướng dẫn cài đặt mobile app (https://www.notion.so/Th-m-h-ng-d-n-c-i-t-mobile-app-2b5b0da449f180ba8666f635b391500a?pvs=21),
+62,"December 2, 2025",Update màn Test AI,"[Improvement] Cập nhật giao diện trang Test AI
+• Mục đích: Giúp thao tác test AI thuận tiện hơn
+• Mô tả:
+    ◦ Thêm nút Test trên page header tại tất cả các trang ở màn AI 
+    ◦ Click Test → Mở panel...",Improve màn Test AI (https://www.notion.so/Improve-m-n-Test-AI-2a0b0da449f18019ae8af3cea0a87959?pvs=21),
+63,"November 28, 2025",[New Feature],"[New Feature] Tùy chỉnh màu của campaign teaser
+• Mục đích: Hiển thị campaign teaser nổi bật, thu hút người mua và phù hợp với giao diện của store
+• Vị trí: Proactive chat → Edit proactive chat https:...",Thêm design cho Campaign teaser (https://www.notion.so/Th-m-design-cho-Campaign-teaser-253b0da449f18028aeb1e1b993e77845?pvs=21),
+64,"November 27, 2025",Thêm button Ask about it trên product card,"[New Feature] Cập nhật CTA trên teaser của proactive chat 
+• Vấn đề: trên product teaser chỉ hiển thị button View và Click to reply → mức độ tương tác thấp 
+• Mục đích: Tăng mức độ tương tác của khách...","Update CTA trên product teaser, thêm button Ask about it (https://www.notion.so/Update-CTA-tr-n-product-teaser-th-m-button-Ask-about-it-25ab0da449f1806fb75adb0f66a821fe?pvs=21)",
+65,"November 26, 2025",[New Feature] Quick Question cho Welcome Visitor,"Chatty – 26/11/2025
+[New Feature] Quick Question cho Welcome Visitor
+• Mục đích: Tăng tương tác ban đầu và giúp khách truy cập bắt đầu hội thoại nhanh hơn.
+• Vị trí: Proactive chat → Welcome visitor h...",[Welcome visitor] Thêm message type “Quick question” (https://www.notion.so/Welcome-visitor-Th-m-message-type-Quick-question-25cb0da449f1803b8a28f48d8a3b9879?pvs=21),
+66,"November 26, 2025",[New feature] Auto tag conversation,"Chatty – 26/11/2025
+[New Feature] Auto tag conversation by topic
+• Mục đích: tự động gắn tag conversation theo chủ đề, giúp phân loại và quản lý conversation tốt hơn
+• Vị trí: Inbox | Conversation det...",[Inbox] Auto-detect conversation topics (https://www.notion.so/Inbox-Auto-detect-conversation-topics-19ab0da449f180c6b75ddb7caa8f9260?pvs=21),
+67,"November 26, 2025",[New feature] Rewrite message in inbox,"[New Feature] Rewrite message tại Inbox
+Mục đích: giúp merchant chỉnh sửa tin nhắn chuẩn ngữ pháp, rõ nghĩa và chuyên nghiệp hơn trước khi gửi cho khách hàng
+Vị trí: Inbox → Chat menu https://prnt.sc/...",Rewrite message tại inbox (https://www.notion.so/Rewrite-message-t-i-inbox-25ab0da449f180b69a06f06c455aed2c?pvs=21),
+68,"November 20, 2025","Thêm filter, search tại modal select product","[Improvement] Thêm filter, search khi chọn sản phẩm 
+Mục đích: giúp chọn nhóm sản phẩm nhanh hơn khi setup → giảm thao tác chọn thủ công
+Mô tả cập nhật
+Thêm bộ lọc & ô search trong modal Browse produc...",Thêm filter custom product recommendation (https://www.notion.so/Th-m-filter-custom-product-recommendation-25cb0da449f18077bd2bf9978d6ed7df?pvs=21),
+69,"November 20, 2025",Product follow up button,"[New Feature] Follow-up questions khi AI recommend sản phẩm
+Mục đích: giúp khách tiếp tục khám phá sản phẩm dễ dàng hơn, tăng khả năng mua hàng
+Mô tả tính năng
+Sau mỗi câu trả lời của AI về sản phẩm, ...",Product follow up button (https://www.notion.so/Product-follow-up-button-23fb0da449f18083863becbad9cea604?pvs=21),
+70,"November 19, 2025",[New Feature] Advanced spam filter,"[New Feature] Advanced spam filter 
+Vấn đề: trước đây, merchant chỉ có thể block conversation thủ công. AI có nhận diện spam từ email nhưng chỉ để ngăn AI trả lời, không tự động chặn hội thoại → dẫn đ...",[Inbox] AI guardrails (https://www.notion.so/Inbox-AI-guardrails-fab4d299c2ad49f7be5c4684cf68563c?pvs=21),
+71,"November 18, 2025",Tạo conversation riêng khi gửi qua contact form trên store,"[New Feature] Tạo conversation riêng cho mỗi contact form từ store
+Vấn đề: Hiện tại, tất cả yêu cầu gửi từ Shopify contact form đều gửi vào 1 conversation duy nhất (do cùng gửi từ email Shopify) → mer...",Tạo conversation riêng khi gửi qua contact form trên store (https://www.notion.so/T-o-conversation-ri-ng-khi-g-i-qua-contact-form-tr-n-store-27ab0da449f180acb541e3f27d936408?pvs=21),
+72,"November 18, 2025",Thêm insert video ở menu inbox,"[New Feature] Gửi & xem video trong Inbox
+Mục đích: Giúp merchant và khách hàng trao đổi video trực quan, hỗ trợ tư vấn sản phẩm, demo tính năng hoặc xử lý vấn đề (hỏng, lỗi…) — đặc biệt phổ biến với ...",Thêm insert video ở menu inbox (https://www.notion.so/Th-m-insert-video-menu-inbox-27ab0da449f1804485b1ed3262ce3520?pvs=21),
+73,"November 14, 2025",[New Feature] AI đọc & phân tích ảnh khách hàng gửi qua chat,"[New Feature] AI đọc & phân tích ảnh khách hàng gửi
+Mục đích: giúp khách gửi ảnh để mô tả vấn đề trực quan hơn và giúp AI hiểu nội dung ảnh để tư vấn
+Mô tả tính năng
+1. Upload ảnh khi chat với AI
+• Ch...",Suggest sản phẩm tương tự ảnh sản phẩm trong tin nhắn từ khách hàng P2 (https://www.notion.so/Suggest-s-n-ph-m-t-ng-t-nh-s-n-ph-m-trong-tin-nh-n-t-kh-ch-h-ng-P2-25ab0da449f180cb8e75c7c4d3956e68?pvs=21),
+74,"November 14, 2025",[New feature] AI đọc thông tin từ Joy loyalty,"[New Feature] AI trả lời câu hỏi từ thông tin của Joy Loyalty
+Mục đích: giúp AI tự động trả lời các câu hỏi liên quan đến chương trình loyalty của Joy, hỗ trợ KH ngay trong chat mà ko cần liên hệ agen...",Integrate Joy API (https://www.notion.so/Integrate-Joy-API-2a3b0da449f180c2bd77c9ec94462c3d?pvs=21),
+75,"November 13, 2025",Limit auto-translate FAQs,"[Improvement] Giới hạn Auto-translate FAQs theo từng plan
+Vấn đề: tính năng auto-translate cho FAQs ở các gói trả phí đang tạo chi phí rất cao, đặc biệt với store có số lượng FAQ lớn
+Mục đích: Kiểm so...",Limit auto translation P2 (https://www.notion.so/Limit-auto-translation-P2-295b0da449f18071b04cd688bb7a13d7?pvs=21),
+76,"November 12, 2025",Thêm lựa chọn team member được assign,"[New Feature] Chọn thành viên được Auto-Assign
+Vấn đề: theo rule auto-assignment hiện tại, conversation được phân đều cho tất cả thành viên gồm cả admin → admin có thể chỉ tham gia quản lý, không trực...",Thêm lựa chọn team member được assign (https://www.notion.so/Th-m-l-a-ch-n-team-member-c-assign-27ab0da449f1802da8b4f7aa8e9817f1?pvs=21),
+77,"November 11, 2025",Cung cấp đúng variant khi khách hỏi specific variant,"[Improvement] Hiển thị đúng ảnh & tồn kho theo Variant trong product card
+Vấn đề
+• Product card đã có tên + link variant nhưng chưa hiển thị ảnh variant.
+• AI đôi lúc trả lời sai trạng thái tồn kho củ...",Cung cấp đúng variant khi khách hỏi specific variant (https://www.notion.so/Cung-c-p-ng-variant-khi-kh-ch-h-i-specific-variant-286b0da449f180a0b6b0fa211ad1e05e?pvs=21),
+78,"November 11, 2025",Upload image to CDN,"[New Feature] Upload ảnh & file qua CDN riêng
+Mục đích: Giúp merchant lưu trữ ảnh và file khách gửi qua chat an toàn, nhanh và độc lập, không phụ thuộc vào hệ thống lưu trữ của Shopify
+Mô tả tính năng...",Upload images files to own CDN for premium shops (https://www.notion.so/Upload-images-files-to-own-CDN-for-premium-shops-24eb0da449f180dc9f13d39591d0a20f?pvs=21),
+79,"November 11, 2025",Cài đặt hiển thị online status trên chatbox,"[New Feature] Cài đặt hiển thị online status trên chatbox
+Vấn đề: Trạng thái online luôn hiển thị theo working hour và member status, gây cảm giác phải phản hồi ngay cả khi chỉ dùng AI
+Mục đích: cho p...",Cài đặt trạng thái hiển thị online status  (https://www.notion.so/C-i-t-tr-ng-th-i-hi-n-th-online-status-27ab0da449f180aa837ff4e29164f68c?pvs=21),
+80,"November 11, 2025",Send transcript tại inbox,"[New Feature] Send conversation transcript
+Mục đích: giúp merchant chia sẻ nhanh nội dung hội thoại qua email cho khách hàng, chính mình hoặc các bộ phận liên quan để follow-up và xử lý khách hàng hiệ...",Send conversation transcript tại inbox (https://www.notion.so/Send-conversation-transcript-t-i-inbox-26fb0da449f18032bb5befc13e989467?pvs=21),
+81,"November 11, 2025",WhatsApp AI,"[New Feature] AI auto-reply trên WhatsApp
+Mục đích: Giúp AI tự động trả lời khách hàng trên WhatsApp để giảm nguồn lực hỗ trợ và rút ngắn thời gian xử lý conversation
+Vị trí: AI assistant | Settings h...",AI in WhatsApp channel (https://www.notion.so/AI-in-WhatsApp-channel-27db0da449f180138d0fe0dc6294ce0b?pvs=21),
+82,"November 10, 2025",Thêm preview scenario “Transfer to human”,"Thêm preview cho scenario “Transfer to human”, hiển thị luồng tương ứng trên preview theo setting, không cho phép thao tác trên preview",Preview scenario Transfer to human (https://www.notion.so/Preview-scenario-Transfer-to-human-29ab0da449f180d8a1b4cb0309d28d67?pvs=21),
+83,"November 7, 2025",Sync order metafield cho AI training,"[New Feature] AI đọc & sử dụng Order Metafield
+Mục đích: Giúp AI đọc và hiểu dữ liệu từ order metafield để trả lời chính xác các câu hỏi liên quan đến đơn hàng, tăng tỷ lệ self-service và giảm effort ...",Sync order metafield cho AI training (https://www.notion.so/Sync-order-metafield-cho-AI-training-268b0da449f1807d9851c70a2d6b725b?pvs=21),
+84,"November 4, 2025",Update settings AI theo agent,"Improvement] Cập nhật layout trang AI Assistant
+• Vấn đề: giao diện AI Assistant chia thành nhiều tab → khó theo dõi và thao tác setup AI
+• Mục đích: đơn giản hóa bố cục, giúp merchant setup và tối ưu...",Update settings AI theo agent (https://www.notion.so/Update-settings-AI-theo-agent-284b0da449f1809aa756c27792076381?pvs=21),
+85,"November 4, 2025",Toggle push notification for online store only,"Mục đích: giúp cài đặt chỉ nhận thông báo web push cho conversation từ online store
+Mô tả: thêm toggle bật/tắt ở dev zone",Add toggle push only OS notifications (https://www.notion.so/Add-toggle-push-only-OS-notifications-2a0b0da449f180a79a2ef7f7fd9ada90?pvs=21),
+86,"November 3, 2025",Dịch chat conversation,"[New Feature] Dịch toàn bộ hội thoại
+• Mục đích: Giúp CS đọc tin nhắn đa ngôn ngữ tiện hơn, không cần dùng công cụ dịch bên ngoài.
+• Vị trí: Conversation Details (CRM mở từ Store).
+• Mô tả:
+    ◦ Thêm...",Dịch chat conversation (https://www.notion.so/D-ch-chat-conversation-29bb0da449f180c9a7a3e71559abc009?pvs=21),
+87,"October 31, 2025",[Improvement] Update footer email transcript,"[Improvement] Update footer cho Email transcript
+• Vấn đề: email transcript gửi cho KH dùng signature mặc định “Chatty”, ko đồng bộ với email signature mà merchant đã cài đặt trong app
+• Mục đích: giú...",Update footer email transcript (https://www.notion.so/Update-footer-email-transcript-295b0da449f1809b9f11f32748e767a1?pvs=21),
+88,"October 31, 2025",[Proactive chat] Gợi ý sản phẩm tương tự với sản phẩm đang xem,"[New Feature] Recommend sản phẩm dựa trên lịch sử xem sản phẩm
+• Mục đích: giúp AI tự động gợi ý sản phẩm tương tự với sản phẩm khách đang xem, từ đó tăng tính cá nhân hoá và khả năng quyết định mua h...",[Proactive chat] Thêm similar product recommendation  (https://www.notion.so/Proactive-chat-Th-m-similar-product-recommendation-23fb0da449f180219230eaa63c0a663d?pvs=21),
+89,"October 31, 2025",[New proactive chat] Browse collection page,"[New Feature] Proactive chat – Browse collection page
+• Mục đích: tăng tương tác với khách hàng khi họ xem collection page, gợi ý nội dung và ưu đãi phù hợp theo từng collection → giúp tăng conversion...",Thêm proactive chat “Browse collection page”  (https://www.notion.so/Th-m-proactive-chat-Browse-collection-page-25ab0da449f180d1ba76fc836a01dcde?pvs=21),
+90,"October 31, 2025",Embed AI chat on product page,"[New Feature] Embed AI chat trên trang sản phẩm
+• Mục đích: giúp KH chat trực tiếp với AI trên trang sản phẩm mà ko cần rời trang → tăng tương tác và thúc đẩy quyết định mua hàng
+• Vị trí: AI Assistan...",Embed AI chat on product page (https://www.notion.so/Embed-AI-chat-on-product-page-23fb0da449f18083923ecfdc85d441bb?pvs=21),
+91,"October 31, 2025",AI trả lời dựa vào sản phẩm đang xem,"[New Feature] AI trả lời dựa trên sản phẩm khách đang xem
+Mục đích: giúp khách hàng đặt câu hỏi và nhận phản hồi chính xác từ AI về sản phẩm họ đang xem mà không cần nhập lại tên sản phẩm
+Mô tả tính n...",AI trả lời dựa vào sản phẩm đang xem (https://www.notion.so/AI-tr-l-i-d-a-v-o-s-n-ph-m-ang-xem-268b0da449f18075ba5dfed311842643?pvs=21),
+92,"October 29, 2025",Thêm điều kiện hiển thị proactive chat,"[New Feature] Hiển thị Proactive chat theo quốc gia
+• Mục đích: giúp tùy chỉnh hiển thị proactive chat với nội dung khác nhau ở từng thị trường, để phù hợp với ngôn ngữ và chiến lược bán hàng theo từn...",Thêm điều kiện hiển thị proactive chat theo countries (https://www.notion.so/Th-m-i-u-ki-n-hi-n-th-proactive-chat-theo-countries-27ab0da449f18087b763f7efa98af8d4?pvs=21),
+93,"October 28, 2025",Auto-assign cho online member,"[New feature] Auto assign cho online member
+Vấn đề: khi lựa chọn auto assign, conversation vẫn được assign cho cả member offline → khách hàng không được phản hồi
+Mục đích: đảm bảo conversation chỉ đượ...",Auto assign cho online member (https://www.notion.so/Auto-assign-cho-online-member-23fb0da449f1804baf54e6db8abcb421?pvs=21),
+94,"October 27, 2025",Custom setting for scenario “Transfer to human”,"[Improvement] Tuỳ chỉnh linh hoạt scenario “Transfer to Human”
+Vấn đề: Scenario “Transfer to human” được fix cứng luồng, merchant ko thể tuỳ chỉnh điều kiện, nội dung transfer
+Mục đích: Cho phép merch...",Custom setting for scenario “Transfer to human” (https://www.notion.so/Custom-setting-for-scenario-Transfer-to-human-23ab0da449f1802ba892e5c5a63bdc96?pvs=21),
+95,"October 23, 2025",Size guide recommendation,"[New Feature] Quản lý & tư vấn size guide bằng AI
+• Vấn đề
+    ◦ AI hiện chưa đọc được size chart nếu thêm ở theme hoặc bằng app thứ 3
+    ◦ Khi sản phẩm không có size guide, AI vẫn tư vấn hoặc tự tạo...",Scenario size recommendation (https://www.notion.so/Scenario-size-recommendation-23fb0da449f1809b8779ee30ea981c7a?pvs=21),
+96,"October 23, 2025",[New Feature] Banner khuyến mãi BFCM Early Bird,"[New Feature] Banner khuyến mãi BFCM Early Bird
+User story
+Hiển thị deal BFCM Early Bird để khách hàng có thể claim ưu đãi 50% cho annual plan, đồng thời nhận consultation và tài liệu hỗ trợ BFCM
+Mục ...",Deal BFCM annually  (https://www.notion.so/Deal-BFCM-annually-277b0da449f180dbadeec623b0b35f27?pvs=21),
+97,"October 22, 2025",[New feature] Sync variant metafield,"[New feature] Sync variant metafield cho AI training
+Mục đích: 
+• Tăng độ chính xác và kiến thức của AI khi tư vấn sản phẩm
+• Giúp AI phản hồi câu hỏi liên quan đến từng variant cụ thể
+Vị trí: AI assi...",Sync variant metafield cho AI training (https://www.notion.so/Sync-variant-metafield-cho-AI-training-270b0da449f18059b5ffffdd8f9ab1a2?pvs=21),
+98,"October 22, 2025",[Improvement] Thông báo reach đạt metafield,"[Improvement] Thông báo khi đạt giới hạn Metafield
+Vấn đề
+Khi vượt quá giới hạn 10 metafield, hệ thống chỉ hiển thị toast lỗi mặc định (“Cannot enable more than 10 metafields”) → message chưa rõ ràng,...",Thông báo reach limit metafield (https://www.notion.so/Th-ng-b-o-reach-limit-metafield-245b0da449f1801b9241f13219c1c91e?pvs=21),
+99,"October 21, 2025",[Data source] Thêm sync Shopify discount,"[New Feature] AI tư vấn discount & promotion từ Shopify
+Mục đích
+• Giúp AI tư vấn chính xác các chương trình giảm giá hoặc khuyến mãi đang hoạt động
+• Tăng tỷ lệ chuyển đổi (sales conversion) bằng các...",[Data source] Thêm sync Shopify discount (https://www.notion.so/Data-source-Th-m-sync-Shopify-discount-202b0da449f1804cb0a2e6dce0e82f8c?pvs=21),
+100,"October 20, 2025","Promote sản phẩm sales, occasion","[New Feature] Promote sản phẩm theo Sales & Occasion
+Mục đích
+• Giúp AI tự động gợi ý sản phẩm theo chiến lược bán hàng, chiến dịch hoặc mùa vụ của store.
+• Tăng độ chính xác và mức độ liên quan trong...",Product recommendations: Sale & occasion (https://www.notion.so/Product-recommendations-Sale-occasion-23fb0da449f18087af5ad53a65eaf5a3?pvs=21),
+101,"October 15, 2025",[Improvement] Cải thiện hiển thị tin nhắn trên chatbox,"[Improvement] Cải thiện hiển thị tin nhắn trên chatbox
+Mục đích: tăng trải nghiệm trò chuyện mượt mà hơn khi khách hàng nhận tin nhắn mới, đặc biệt trong các cuộc hội thoại dài.
+Mô tả cập nhật
+• Giữ v...",Improve UI chat page to maintain scroll position (https://www.notion.so/Improve-UI-chat-page-to-maintain-scroll-position-257b0da449f180348912f9a3e5e69437?pvs=21),
+102,"October 14, 2025",Website integration,"[New Feature] Website Integration – Embed Chat Page ngoài Shopify
+Mục đích
+Cho phép merchant hiển thị Chatty chat page trên các website tùy chỉnh (non-Shopify) để khách hàng có thể chat trực tiếp với ...",Tạo snippet để chèn chat page vào custom page (https://www.notion.so/T-o-snippet-ch-n-chat-page-v-o-custom-page-279b0da449f1805e8108dcabc0ab61e8?pvs=21),
+103,"October 14, 2025",Bổ sung tình huống xử lý order tracking,"[Improvement] Cải thiện luồng trả lời về order tracking của AI 
+Mục đích: Nâng cao trải nghiệm tra cứu đơn hàng, giúp AI trả lời chính xác và nhanh hơn tuỳ theo thông tin khách hàng cung cấp
+Mô tả cập...",Improve scenario Order tracking (https://www.notion.so/Improve-scenario-Order-tracking-23fb0da449f1804e8512e442d756a89b?pvs=21),
+104,"October 1, 2025",[Improvement] Cập nhật filter trên inbox,"[Improvement] Cập nhật filter tại inbox
+Mục đích
+• Giúp merchant lọc conversation được transfer từ AI để xử lý nhanh hơn và tối ưu workflow support
+Mô tả cập nhật
+1. Tab Conversation
+• Tab All: thêm f...",Thêm filter AI conversation (https://www.notion.so/Th-m-filter-AI-conversation-201b0da449f1800e87b3c68f6334227d?pvs=21),
+105,"October 1, 2025",[Improvement] Update banner liên hệ hỗ trợ AI training,"[Improvement] Update banner hỗ trợ AI training
+Mục đích: Tăng lượng chat và giúp merchant gửi yêu cầu training AI nhanh chóng, dễ dàng hơn.
+Vị trí: AI assistant → Data source
+Mô tả cập nhật
+• Thay thế...",Update banner contact team (https://www.notion.so/Update-banner-contact-team-277b0da449f18045bba5e1506af0ef08?pvs=21),
+106,"September 29, 2025",Smart collection,"[New Feature] Quản lý sản phẩm Best Seller & New Arrival cho AI training
+Vấn đề: Hệ thống tự động gắn tag Best seller và New arrival để AI có dữ liệu recommend → khách có thể chỉnh sửa tag nhưng ko th...",Best seller/ new arrival collection management for AI (https://www.notion.so/Best-seller-new-arrival-collection-management-for-AI-23fb0da449f18065802cd1e07115152f?pvs=21),
+107,"September 29, 2025",Hiển thị giá sản phẩm theo domain,"[New Feature] Hiển thị giá sản phẩm theo domain
+Vấn đề
+Hiện tại, khi AI recommend sản phẩm chỉ hiển thị tên sản phẩm và giá gốc (original product price) → không phản ánh đúng giá theo từng thị trường/...",Hiển thị giá sản phẩm theo domain  (https://www.notion.so/Hi-n-th-gi-s-n-ph-m-theo-domain-270b0da449f1802dbdd3f385c4ce22d2?pvs=21),
+108,"September 29, 2025",Recommend sản phẩm với thông tin đúng theo domain,"[New Feature] AI gợi ý link sản phẩm theo region & domain
+Vấn đề:
+Với các store bán hàng đa thị trường, mỗi locale có domain riêng. Tuy nhiên, AI hiện đang trả về link sản phẩm mặc định, không khớp vớ...","Get product by Storefront API to display URL for current locale (https://www.notion.so/Get-product-by-Storefront-API-to-display-URL-for-current-locale-265b0da449f1805bbfc0f417d20f1088?pvs=21) 
+
+Hiển thị giá sản phẩm theo domain  (https://www.notion.so/Hi-n-th-gi-s-n-ph-m-theo-domain-270b0da449f1802dbdd3f385c4ce22d2?pvs=21)",
+109,"September 23, 2025",[New Feature] Button “View similar” trên Product Card,"New Feature] Button “View similar” trên Product Card
+Mục đích: giúp khách hàng xem nhanh sản phẩm liên quan ngay sau khi AI gợi ý sản phẩm, giúp tăng tương tác và nâng cao trải nghiệm mua hàng
+Mô tả t...",Thêm button “View similar” ở product card (https://www.notion.so/Th-m-button-View-similar-product-card-23fb0da449f18035ad2dcfc6d1379a29?pvs=21),
+110,"September 23, 2025",Thêm tin nhắn tự động sau khi submit pre-chat form,"[New Feature] Auto-reply sau khi submit Pre-chat form
+Vấn đề
+Hiện tại, sau khi khách submit pre-chat form, AI chưa trả lời ngay mà phải đợi khách gửi thêm tin nhắn → trải nghiệm không liền mạch.
+Mục đ...",Thêm tin nhắn tự động sau khi submit pre-chat form (https://www.notion.so/Th-m-tin-nh-n-t-ng-sau-khi-submit-pre-chat-form-263b0da449f18068acddef1d9036821f?pvs=21),
+111,"September 23, 2025",[Improvement] Điều chỉnh hiển thị App Embed Settings,"[Improvement] Điều chỉnh hiển thị App Embed Settings
+Vấn đề: mô tả và vị trí hiển thị App embed settings chưa rõ ràng, dễ gây nhầm lẫn cho người dùng
+Mục đích: Làm rõ trạng thái và vị trí hiển thị của...",Thêm điều kiện hiển thị App embed settings (https://www.notion.so/Th-m-i-u-ki-n-hi-n-th-App-embed-settings-26fb0da449f18058a979d2f6d10e4f56?pvs=21),
+112,"September 19, 2025","AI in Messenger, Instagram","[New Feature] AI auto-reply trên Instagram & Messenger
+Mục đích
+Giúp AI tự động trả lời khách hàng trên kênh social để giảm nguồn lực hỗ trợ và rút ngắn thời gian xử lý conversation
+Mô tả tính năng
+• ...","AI in social channel (Messenger) (https://www.notion.so/AI-in-social-channel-Messenger-239b0da449f180179b2bd3c162fd0123?pvs=21) 
+
+AI in social channel (Instagram) (https://www.notion.so/AI-in-social-channel-Instagram-239b0da449f1805893a8f325c30a1b3c?pvs=21)",
+113,"September 18, 2025",Thêm action Send transcription tại chatbox header,"[Improvement]Thay đổi cách gửi chat transcript 
+Vấn đề: 
+• User chỉ có thể yêu cầu nhận transcript sau khi conversation được resolve
+• Sau khi resolve, app ưu tiên hiển thị form Conversation history e...",Thêm action Send transcription tại chatbox header (https://www.notion.so/Th-m-action-Send-transcription-t-i-chatbox-header-209b0da449f180a9aa25dcee22d3fd07?pvs=21),
+114,"September 12, 2025",Embed chat page in storefront,"[New Feature] Chat assistant block 
+ Mục đích: cho phép merchant dễ dàng tùy chỉnh giao diện chat và thêm vào các page
+Mô tả tính năng
+1. Chatbox settings
+• Tại Chatbox | Advanced: thêm cài đặt Chat a...",Embed chat page in storefront (https://www.notion.so/Embed-chat-page-in-storefront-202b0da449f180a59e9cfd4ad54718d1?pvs=21),
+115,"September 12, 2025",Cập nhật logic pre-chat form với Delay after X min,"[Improvement] Cập nhật logic hiển thị Pre-chat form (Both option)
+Vấn đề
+• Cài đặt delay theo phút khiến thời gian chờ quá dài, trong khi khách thường cần hỗ trợ nhanh
+• Form chỉ hiển thị sau khi AI đ...",Cập nhật logic pre-chat form với Delay after X min (https://www.notion.so/C-p-nh-t-logic-pre-chat-form-v-i-Delay-after-X-min-257b0da449f18022a274d39469a6305d?pvs=21),
+116,"September 12, 2025",Bỏ AI completion score,"[Improvement] Tối ưu cách hiển thị hiệu suất AI
+Vấn đề
+• User dễ hiểu nhầm rằng score thấp = AI trả lời kém
+• Logic hiện tại chưa phù hợp khi tính score dựa cả vào resolution rate – chỉ số không phản ...",Bỏ card AI completion score (https://www.notion.so/B-card-AI-completion-score-248b0da449f1806c9027ca662fd3c077?pvs=21),
+117,"September 11, 2025",Proactive chat analytics,"[New Feature] Proactive Chat Analytics
+Mục đích
+Cung cấp báo cáo chi tiết giúp merchant đo lường hiệu quả của proactive chat, từ đó tối ưu cách triển khai và tăng doanh thu
+
+Vị trí:
+https://prnt.sc/aB...",Proactive chat analytics (https://www.notion.so/Proactive-chat-analytics-24eb0da449f1806189e2d328e42dcd64?pvs=21),
+118,"September 11, 2025","[Improvement] Cho phép điều chỉnh tag Best seller, New arrival cho AI recommend","[New Feature] Quản lý tag sản phẩm “Best seller” & “New arrival
+Vấn đề: Hệ thống tự động gắn tag Best seller và New arrival để AI có dữ liệu recommend → khách không thể tùy chỉnh sản phẩm nào được gợi...","Manage best seller, new arrival meta tags (https://www.notion.so/Manage-best-seller-new-arrival-meta-tags-25cb0da449f180139fa5f56c3b993665?pvs=21)",
+119,"September 11, 2025",[Improvement] Cập nhật logic Welcome message theo online status,"[Improvement] Cập nhật logic Welcome message theo online status
+Vấn đề
+Welcome message và 1st auto reply hiện chỉ dựa vào working hour và agent online status (auto-detect khi mở app) → không phản ánh ...",Update logic xác định online status sử dụng cho welcome message (https://www.notion.so/Update-logic-x-c-nh-online-status-s-d-ng-cho-welcome-message-255b0da449f1809c8fe6e3eaa6604e0d?pvs=21),
+120,"September 11, 2025",[Improvement],"[Improvement] Đơn giản hoá cài đặt “Page to show” cho Proactive Chat
+Vấn đề
+Proactive chat “Welcome visitor” và “Product recommendation” đều có cài đặt trang hiển thị, ko phù hợp với mục tiêu của mỗi ...","[Product recommendation] Bỏ option tại cài đặt Page to show (https://www.notion.so/Product-recommendation-B-option-t-i-c-i-t-Page-to-show-268b0da449f180338e6dea431270ec8c?pvs=21) 
+
+[Welcome visitor] Bỏ cài đặt Page to show (https://www.notion.so/Welcome-visitor-B-c-i-t-Page-to-show-25cb0da449f1801da6f6c98a3653c416?pvs=21)",
+121,"September 10, 2025",[New feature] AI replies usage history,"[New Feature] AI replies usage charge history
+Vấn đề: MC không thể theo dõi số AI replies và chi phí phát sinh hàng tháng, gây khó khăn khi quản lý ngân sách và lựa chọn plan phù hợp
+
+Mục đích: giúp m...",Thêm AI replies usage history (https://www.notion.so/Th-m-AI-replies-usage-history-21bb0da449f1801f8794f06eaac8fc46?pvs=21),
+122,"September 4, 2025",[Improvement] Cải thiện màn AI product management,"[Improvement] Quản lý sản phẩm cho AI training
+• Vấn đề: danh sách sản phẩm hiển thị cả sản phẩm không được dùng cho AI training, merchant khó quản lý và train AI
+• Mục đích: đơn giản hoá màn quản lý ...",Improve AI product list management (https://www.notion.so/Improve-AI-product-list-management-25ab0da449f1801dac17e98dbdda321c?pvs=21),
+123,"September 4, 2025",[Improvement] Thêm translation cho order status,"[Improvement] Thêm translation cho order status
+Mô tả: Thêm bản dịch cho section Order tracking tại chatbox: Order status, Placeholder các field trên form Order tracking",Thêm translation cho order status (https://www.notion.so/Th-m-translation-cho-order-status-263b0da449f180119068dd110af3f713?pvs=21),
+124,"September 4, 2025",[AI Assistant] Thêm FAQ cho từng product,"[New Feature] Product FAQs for AI training
+
+Vấn đề
+AI hiện chỉ dùng knowledge base sản phẩm để trả lời. Khi merchant thêm thông tin sản phẩm dưới dạng Q&A/metafield không hỗ trợ, AI không sử dụng dữ l...",[AI Assistant] Thêm FAQ cho từng product (https://www.notion.so/AI-Assistant-Th-m-FAQ-cho-t-ng-product-216b0da449f1806ca935cef824d1eff3?pvs=21),
+125,"September 4, 2025",[Improvement] Cập nhật Conversation Starter,"[Improvement] Cập nhật Conversation Starter
+
+Vấn đề
+• Conversation starter mặc định đang tắt → user không biết để bật.
+• Khi xoá hết question, hệ thống không validate, dẫn đến lỗi hiển thị 
+🔗 https://...",Cập nhật conversation starter (https://www.notion.so/C-p-nh-t-conversation-starter-254b0da449f180deb540e2a40b418ae0?pvs=21),
+126,"August 27, 2025","Xoá conversation, contacts","[New Feature] Xoá Conversation & Contact
+Vấn đề
+App chưa hỗ trợ xoá conversation/contact, gây ra:
+• Nhiều conversation test, spam khó quản lý
+• Không đáp ứng yêu cầu xóa dữ liệu theo GDPR
+ Mục đích
+• ...","Xoá conversation, contact (https://www.notion.so/Xo-conversation-contact-20db0da449f1805aaf12ed26f9a012a4?pvs=21)",
+127,"August 27, 2025",[Improvement] Cải thiện giao diện quản lý Translation,"[Improvement] Cải thiện giao diện quản lý Translation
+Vấn đề: có quá nhiều field dịch → khó quản lý và chỉnh sửa bản dịch
+Mục đích: Giúp merchant quản lý, tìm kiếm và chỉnh sửa bản dịch dễ dàng hơn
+Mô...",Sửa lại trang Translation (https://www.notion.so/S-a-l-i-trang-Translation-1ecb0da449f18008aafaf004436c19e9?pvs=21),
+128,"August 27, 2025",[Improvement] Thêm tuỳ chọn bật/tắt Market sync,"Vấn đề
+Hiện tại app luôn tự động sync market (currency, exchange rate) và quy đổi giá theo công thức. Với store sử dụng app thứ 3 đề điều chỉnh giá theo quốc gia, merchant muốn tắt tính năng này để hi...",Thêm setting tắt sync Market (https://www.notion.so/Th-m-setting-t-t-sync-Market-25ab0da449f18068b661f6c13a4d6e1c?pvs=21),
+129,"August 27, 2025","[Improvement] Thêm format tin nhắn tại các kênh Messenger, Instagram","Mục đích
+• Tăng trải nghiệm người dùng trên các kênh social 
+Mô tả 
+Mở rộng menu chat khi xử lý conversation từ Messenger và Instagram, hỗ trợ thêm các loại tin nhắn: File, Image, FAQs, Quick replies ...","[Messenger, Instagram] Thêm insert image, file, FAQs, quick replies (https://www.notion.so/Messenger-Instagram-Th-m-insert-image-file-FAQs-quick-replies-1eeb0da449f1804ebc9ec510cdec028e?pvs=21)",
+130,"August 27, 2025",Auto add to cart in chatbox,"[New Feature] Add to cart trực tiếp trong chatbox 
+Vấn đề
+• Luồng add to cart hiện tạo cart session riêng → khách mở cart không thấy sản phẩm vừa yêu cầu thêm trong chat
+• Khách không thể checkout chu...",Auto add to cart in chatbox (https://www.notion.so/Auto-add-to-cart-in-chatbox-20ab0da449f1802fbf30daa7231607f7?pvs=21),
+131,"August 25, 2025",Index FAQs entries in Search engine,Mục đích: thay đổi structure FAQs page JSON-LD để google đọc được và index content → tăng khả năng search và index content trên Google search,Index FAQs entries in Search engine (https://www.notion.so/Index-FAQs-entries-in-Search-engine-1cbb0da449f180438356d82701d90f83?pvs=21),
+132,"August 20, 2025",[New Feature] Quick button chuyển trạng thái Online/Offline,"[New Feature] Quick button chuyển trạng thái Online/Offline
+Vấn đề
+• Trạng thái online hiện chỉ hiển thị theo working hours và khi có ít nhất 1 agent mở Inbox
+• Agent ko thể tự thay đổi thủ công trạng...",Quick button to change online status (https://www.notion.so/Quick-button-to-change-online-status-c649d338e37c4babb4577a814da997d1?pvs=21),
+133,"August 19, 2025",Show ‘Powered by Chatty’,"Mục đích: tăng độ nhận diện của Chatty
+Mô tả:
+Hiển thị Powered by chatty mặc định tại các khu vực sau:
+• Chatbox
+• FAQs page
+• FAQ block
+• Chat assistant block 
+Lưu ý:
+• Store cũ giữ nguyên, ko show b...",Show lại ‘Powered by Chatty’ (https://www.notion.so/Show-l-i-Powered-by-Chatty-226b0da449f180118c51cb40007b2444?pvs=21),
+134,"August 19, 2025",[New feature] Welcome message theo online status,"[New feature] Welcome message theo online status
+Vấn đề: welcome message ko thể hiện online status, 1st auto reply message (theo online status) lại gửi sau khi khách gửi tin nhắn đầu tiên → khách ko b...",Welcome message theo online status (https://www.notion.so/Welcome-message-theo-online-status-249b0da449f180a5b790ec0e5f53b9b0?pvs=21),
+135,"August 14, 2025",Update AI setup checklist,Bổ sung bước Optimize sau khi hoàn thành 4 bước,Thêm step Optimize AI tại AI checklist  (https://www.notion.so/Th-m-step-Optimize-AI-t-i-AI-checklist-237b0da449f18028aed7ec1e984624ca?pvs=21),
+136,"August 14, 2025",Tạo mẫu instruction theo ngành hàng,"[Improvement] Tự động tạo instruction mặc định theo ngành hàng
+Vấn đề
+Khi cài app, nhiều merchant không chủ động tạo instruction, dẫn đến chất lượng trả lời AI chưa tối ưu
+Mục đích
+Hỗ trợ merchant tra...",Tạo mẫu instruction dựa trên ngành hàng  (https://www.notion.so/T-o-m-u-instruction-d-a-tr-n-ng-nh-h-ng-241b0da449f1809796a4ee879c059e81?pvs=21),https://prnt.sc/wxfhyEZw2TRR
+137,"August 13, 2025",Đánh intent cho mỗi AI response,"[New Feature] Gắn intent cho mỗi AI response – Phân tích xu hướng & nhu cầu khách hàng
+
+Vấn đề
+Merchant ko thể phân loại và phân tích intent của câu hỏi AI trả lời → khó nắm xu hướng, nhu cầu khách hà...",Đánh intent cho mỗi AI response (https://www.notion.so/nh-intent-cho-m-i-AI-response-1ffb0da449f180e6b364f0a5a3fd0984?pvs=21),
+138,"August 13, 2025",[New feature] Satisfaction survey analytics,"[New Feature] CSAT Analytics 
+Mục đích: cung cấp báo cáo CSAT trực quan giúp merchant theo dõi và cải thiện support
+Mô tả tính năng: 
+Hiển thị các chỉ số CSAT:
+• CSAT rate: Tỷ lệ hài lòng của khách hà...",Satisfaction survey analytics  (https://www.notion.so/Satisfaction-survey-analytics-1dab0da449f180a7ad4ad0344216d4a2?pvs=21),
+139,"August 11, 2025",[New Feature] Nâng cấp Automation thành Campaign – Proactive chat theo hành trình khách hàng,"[New Feature] Nâng cấp Automation thành Campaign – Proactive chat theo hành trình khách hàng
+🛠 Vấn đề
+Automation cũ chỉ hỗ trợ luồng đơn giản (Welcome visitor, Subscribe newsletter) → ít tùy chỉnh, ch...",[Automation/Campaign] Làm automation (campaign) theo logic mới (welcome visitor) (https://www.notion.so/Automation-Campaign-L-m-automation-campaign-theo-logic-m-i-welcome-visitor-152337e26dfd4680afd42b4249b35571?pvs=21),
+140,"August 5, 2025",[Improvement] Stream AI,"Mục đích: Giảm độ trễ khi AI trả lời bằng cách tách các bước xử lý và sử dụng streaming – cơ chế giúp AI vừa nghĩ vừa trả lời, hiển thị nội dung từng phần để phản hồi nhanh và mượt hơn",Stream AI response (https://www.notion.so/Stream-AI-response-223b0da449f180a7a555e426a390c130?pvs=21),
+141,"August 5, 2025",[Improvement] Cập nhật cài đặt giới hạn AI usage,"Vấn đề
+• Modal ""Set usage limit"" chưa rõ ràng
+    ◦ Toggle bật/tắt limit gây hiểu nhầm
+    ◦ Không hiển thị số lượng AI replies đã sử dụng / hạn mức
+    ◦ Có thể set limit < current limit 
+Mục đích
+Gi...",Update logic AI usage limit (https://www.notion.so/Update-logic-AI-usage-limit-201b0da449f18040bbd2cda16e6dfa08?pvs=21),
+142,"August 5, 2025",Cải thiện gửi ảnh kèm văn bản tại inbox qua email,"Vấn đề: 
+Gửi nhiều ảnh/text từ inbox qua email sẽ tạo nhiều email riêng biệt gây phiền và thiếu chuyên nghiệp 
+Mô tả: 
+Khi gửi tin nhắn qua email từ Inbox, hệ thống sẽ:
+• Gộp nội dung text + tất cả ản...",Improve send attachment từ Inbox (https://www.notion.so/Improve-send-attachment-t-Inbox-1eab0da449f18030a8d0f63916d182ce?pvs=21),
+143,"August 5, 2025",Send survey for AI conversation,"[Improvement] Thêm logic gửi survey với conversation do AI xử lý
+Vấn đề
+Survey không được gửi nếu AI trả lời sau tin nhắn cuối của user chứa keyword
+Mục đích
+Tăng cơ hội thu thập đánh giá, kể cả những...",Send survey for AI conversation (https://www.notion.so/Send-survey-for-AI-conversation-22db0da449f18048b797d23168cb473c?pvs=21),
+144,"August 1, 2025",Thêm card “Book call” tại trang AI Instruction,"Mục đích: hỗ trợ merchant thiết lập AI dễ dàng hơn và tăng tỷ lệ hoàn tất setup, từ đó cải thiện hiệu quả sử dụng và conversion
+Mô tả tính năng
+• Thêm card “Let’s set up your AI together!” tại trang A...",Thêm card “Book call” tại trang AI Instruction (https://www.notion.so/Th-m-card-Book-call-t-i-trang-AI-Instruction-23eb0da449f1809aa876e103a1f7eeb7?pvs=21),
+145,"August 1, 2025",[Improvement] Cập nhật luồng hiển thị pre-chat form,"Vấn đề
+Với tùy chọn Pre-chat form = Show both options, hệ thống hiện form sau khi AI đã trả lời → khách đã nhận được thông tin nên không còn động lực điền form, dẫn đến tỷ lệ rời đi cao
+Mục đích
+Hiển ...",Cập nhật luồng hiển thị pre-chat form khi chọn both options (https://www.notion.so/C-p-nh-t-lu-ng-hi-n-th-pre-chat-form-khi-ch-n-both-options-226b0da449f180819857d15e7638027b?pvs=21),
+146,"August 1, 2025","[Improvement] Gộp First name, Last name  trên pre-chat, subscribe form","[Improvement] Gộp First name & Last name trên Pre-chat và Subscribe form
+Trước đây: form hiển thị 2 field First name và Last name:
+• Gây tốn thời gian điền form, cản trở việc start chat
+• 1 số quốc gi...","Gộp First name, Last name  trên pre-chat, subscribe form (https://www.notion.so/G-p-First-name-Last-name-tr-n-pre-chat-subscribe-form-21bb0da449f1805f81ebd633a26512ce?pvs=21)",
+147,"July 29, 2025","[New feature] Thêm filter tag, vendor, collection","[New Feature] Thêm filter lọc sản phẩm cho AI training 
+Mục đích
+Giúp merchant lọc và lựa chọn nhóm sản phẩm cụ thể để train AI (đặc biệt với store có số lượng sản phẩm lớn), giúp giảm thời gian set u...","[AI assistant] Thêm filter tag, vendor, collection (https://www.notion.so/AI-assistant-Th-m-filter-tag-vendor-collection-239b0da449f180c4a2e4d166c7f797f0?pvs=21)",
+148,"July 29, 2025",[New feature] Cài đăt AI chỉ trả lời lúc agent offline,"[New Feature] Cài đặt AI chỉ trả lời khi agent offline
+Vấn đề: Khi activate AI, AI luôn trả lời dù agent đang online → không tối ưu cho store muốn ưu tiên human support hoặc tiết kiệm chi phí AI
+Mục đ...",Cài đặt AI chỉ trả lời lúc agent offline (https://www.notion.so/C-i-t-AI-ch-tr-l-i-l-c-agent-offline-1f8b0da449f180308461c08355d0f2d5?pvs=21),
+149,"July 29, 2025",[New feature] Gợi ý giá sản phẩm theo market,"Vấn đề: 
+AI chỉ gợi ý giá sản phẩm mặc định, không phản ảnh đúng giá theo từng thị trường hoặc đơn vị tiền tệ của KH
+→ Dễ gây hiểu nhầm và ảnh hưởng đến trải nghiệm mua hàng, đặc biệt với store hoạt đ...",[AI Assistant] Sync product price theo market (https://www.notion.so/AI-Assistant-Sync-product-price-theo-market-1afb0da449f180bea303dddc5c7d18aa?pvs=21),
+150,"July 17, 2025",[New feature] Bật AI trả lời tự động trên email channels,"Mục đích: mở rộng khả năng của AI assistant sang nhiều kênh, giúp merchant tiết kiệm thời gian khi xử lý conversation 
+Vị trí: AI assistant → Settings → AI channels
+Mô tả:
+• Thêm cài đặt bật/tắt AI as...",AI in social channel (Email) (https://www.notion.so/AI-in-social-channel-Email-1f3b0da449f1804bb08fe71f3b19d729?pvs=21),
+151,"July 17, 2025",[Improvement] Sync thêm thông tin product cho AI training,"[Improvement] Bổ sung thông tin product cho AI training
+Mục đích: giúp AI có thêm thông tin về sản phẩm để trả lời chính xác hơn các tình huống tư vấn sản phẩm liên quan đến đặc điểm kỹ thuật
+Mô tả: 
+...","Update sku, barcode, weight of product (https://www.notion.so/Update-sku-barcode-weight-of-product-230b0da449f180bcbe31dba78ff2d111?pvs=21)",
+152,"July 17, 2025",[Improvement] Update AI assistant layout,"[Improvement] Update AI assistant layout
+Vấn đề
+Giao diện trang AI Assistant chưa trực quan, khó thao tác khi quản lý nhiều nguồn dữ liệu
+Mục đích: giúp user set up AI dễ dàng và nhanh cho
+Mô tả cập n...",Update layout AI assistant (https://www.notion.so/Update-layout-AI-assistant-1cfb0da449f180998902d9dc9cf7470e?pvs=21),
+153,"July 17, 2025",Thêm proactive chat hướng dẫn thêm AI instruction,"Mục đích: chủ động hỗ trợ khách set up instruction
+Mô tả:
+- Trigger tin nhắn tự động từ Crisp khi người dùng vào trang Instruction lần đầu (sau 5s) 
+- Tần suất: chỉ trigger 1 lần
+- Nội dung: Not sure ...",Thêm proactive chat ở trang Instruction (https://www.notion.so/Th-m-proactive-chat-trang-Instruction-229b0da449f1806c8cc7dc7a695c778b?pvs=21),
+154,"July 15, 2025",[New feature] Rate AI response,"[New feature] Rate AI response
+• Vấn đề: hiện tại, KH ko thể phản hồi chất lượng trả lời của AI, dẫn đến việc merchant khó đánh giá và cải thiện độ chính xác của AI
+• Mục đích: cho phép KH đánh giá nh...",Rate AI response (https://www.notion.so/Rate-AI-response-199b0da449f180fdb546f4a170eb4a2b?pvs=21),
+155,"July 15, 2025",Scenario “Transfer to human”,"Scenario “Transfer to human”
+• Vấn đề:
+    ◦ Merchant ko thể cặt đặt khi nào chuyển conversation cho agent (do đã bỏ phần ""Transfer message"", hiện tại AI ko có logic để xác định khi nào cần transfer)
+...",Update scenario Transfer to human (https://www.notion.so/Update-scenario-Transfer-to-human-223b0da449f18072a157da6091703128?pvs=21),
+156,"July 11, 2025",[Improvement] Tối ưu luồng hiển thị Subscribe & Pre-chat – Tránh hiển thị chồng chéo khi mở chat,"Vấn đề
+Với luồng mới của subscribe newsletter, khi pre-chat = Chat as guest, hệ thống đồng thời hiển thị:
+• Welcome message
+• Subscribe form
+• Pre-chat form
+→ Gây quá tải và nhầm lẫn cho người dùng do...",Update pre-chat kết hợp campaign subscribe newsletter (https://www.notion.so/Update-pre-chat-k-t-h-p-campaign-subscribe-newsletter-214b0da449f180849fe5e78d6888a9a2?pvs=21),
+157,"July 11, 2025",[Improvement] Thêm conversation history trên AI notification email,"[Improvement] Cập nhật nội dung tại email thông báo conversation từ AI
+• Vấn đề: email thông báo AI conversation hiện tại chỉ hiển thị tin nhắn từ KH, ko có nội dung phản hồi từ AI, khiến merchant ko ...",Thêm conversation history trên email AI notification (https://www.notion.so/Th-m-conversation-history-tr-n-email-AI-notification-1f9b0da449f180fe995ced64379ffc82?pvs=21),
+158,"July 10, 2025",[Improvement] AI trả về đúng link sản phẩm theo từng variant,"Vấn đề
+AI hiện chỉ gửi được link sản phẩm chung, không phân biệt theo variant (màu, size…), khiến KH khó tìm đúng sản phẩm họ quan tâm
+Mục đích
+• Giúp AI trả lời chính xác hơn theo nhu cầu cụ thể của ...","[AI assistant] Xử lý các câu hỏi liên quan đến variant, thêm link cho từng variant (https://www.notion.so/AI-assistant-X-l-c-c-c-u-h-i-li-n-quan-n-variant-th-m-link-cho-t-ng-variant-1bdb0da449f180fba1d8f1e71a452319?pvs=21)",
+159,"July 10, 2025",[New feature] Reset conversation,"Vấn đề
+Session 1 conversation là 7 ngày khiến conversation có thể kéo dài và chứa nhiều chủ đề khác nhau
+→ Dễ dẫn đến việc AI trả lời sai ngữ cảnh, giảm độ chính xác
+Mục đích
+• Giúp khách hàng chủ độn...",[Chatbox] Reset conversation (https://www.notion.so/Chatbox-Reset-conversation-831b4c8b8b81474cad7b9a1eba651a28?pvs=21),
+160,"July 10, 2025",[Improvement] Update Scenario instruction,"Vấn đề
+Việc xác định intent dựa trên field “Keyword” chưa đủ chính xác, dễ gây hiểu sai ngữ cảnh dẫn đến sử dụng sai scenario
+Mục đích
+Cải thiện khả năng nhận diện intent của AI, giúp áp dụng đúng sce...",Update context cho scenario instruction (https://www.notion.so/Update-context-cho-scenario-instruction-224b0da449f180c5b813c4a3165ad903?pvs=21),
+161,"July 8, 2025",[New feature] AI hỗ trợ tra cứu trạng thái đơn hàng,"Vấn đề:
+KH thường xuyên đặt câu hỏi về trạng thái đơn hàng qua live chat. Tuy nhiên, hiện tại AI chưa thể tự động phản hồi, phải chờ agent hỗ trợ thủ công → làm gián đoạn trải nghiệm và tăng effort ch...","[AI assistant] Update order tracking scenario  (https://www.notion.so/AI-assistant-Update-order-tracking-scenario-1aeb0da449f180949c1ed7cb8c0a68a6?pvs=21) 
+
+Move setting order tracking to integrations in setting page, sửa lại màn chatbox (https://www.notion.so/Move-setting-order-tracking-to-integrations-in-setting-page-s-a-l-i-m-n-chatbox-21bb0da449f180cfa026f8ec80b578fb?pvs=21)",
+162,"July 8, 2025",Show chatbox in Checkout & Thank you page,"Mục đích
+Hỗ trợ khách hàng tương tác ngay trong quá trình thanh toán và sau khi mua hàng, giúp tăng conversion và cải thiện trải nghiệm sau mua
+
+Mô tả tính năng 
+• Hiển thị chatbox trên cả 2 trang: Ch...",Chat in Checkout page (https://www.notion.so/Chat-in-Checkout-page-202b0da449f1802dbe33d72ed344fff4?pvs=21),
+163,"July 1, 2025","Update proactive chat in app, focus on AI","Vấn đề: Proactive chat trên app bị outdate, ko còn phù hợp với mục tiêu hỗ trợ AI 
+Mục đích: Chủ động hỗ trợ merchant setup và test AI đúng cách
+Mô tả cập nhật
+1. Dashboard 
+• Khi click “Let us set up...",[Growth] Update Crisp proactive chat (https://www.notion.so/Growth-Update-Crisp-proactive-chat-214b0da449f1809cadb5f26af0bcb109?pvs=21),
+164,"July 1, 2025","[Improvement] Update customer profile edit, auto convert customer","Vấn đề: khi merchant chỉnh sửa email cho Lead hoặc Anonymous, hệ thống ko tự động chuyển đổi thành Customer → merchant phải thao tác thủ công gây bất tiện
+Mục đích: rút gọn thao tác chỉnh sửa profile,...","[Inbox] Sửa form edit profile, Auto convert guest/anonymous to customer khi edit profile (https://www.notion.so/Inbox-S-a-form-edit-profile-Auto-convert-guest-anonymous-to-customer-khi-edit-profile-1c0b0da449f180a9a41cc655196a8d10?pvs=21)",
+165,"July 1, 2025",[Improvement] Update transfer setting,"Mục đích
+• Loại bỏ cài đặt không cần thiết, ít sử dụng, thay thế bằng AI scenario và instruction
+Vị trí: AI assistant → Settings (chuyển sang page header)  
+https://prnt.sc/BOI0z24kDhbE, https://prnt....",Update transfer setting (https://www.notion.so/Update-transfer-setting-203b0da449f180e8bc36c8ad784836c9?pvs=21),
+166,"June 27, 2025",[Improvement] Tách trang Manage account,"[Improvement] Tách trang Manage account
+• Vấn đề: gộp chung màn Edit member profile và Manage account, khiến user gặp khó khăn khi muốn cập nhật thông tin cá nhân hoặc thay đổi mật khẩu
+• Mục đích: gi...",Tách trang Manage account ở Web app (https://www.notion.so/T-ch-trang-Manage-account-Web-app-206b0da449f180aa8cd4f3b95ece3192?pvs=21),
+167,"June 27, 2025",[New feature] Form hỗ trợ xử lý post purchase,"[New feature] Scenario hỗ trợ xử lý post-purchase
+• Mục đích: giúp hướng dẫn AI xử lý các tình huống liên quan đến post purchase và chuyển giao qua email, giảm thời gian xử lý issue của khách hàng
+• V...",Form hỗ trợ xử lý post purchase (https://www.notion.so/Form-h-tr-x-l-post-purchase-1f3b0da449f1802495d2ec044812665c?pvs=21),
+168,"June 24, 2025",[Improvement] Cài đặt email nhận thông báo về budget,"Mục đích: 
+Giúp merchant chủ động kiểm soát AI usage budget, nhận cảnh báo kịp thời khi sắp vượt giới hạn để tránh phát sinh ngoài ý muốn và điều chỉnh kịp thời
+Mô tả tính năng
+• Khi bật Budget contro...",Settings nhận email noti về budget (https://www.notion.so/Settings-nh-n-email-noti-v-budget-1ebb0da449f1802f97c5c7f95ced9aeb?pvs=21),
+169,"June 23, 2025",[Improvement] Update default chat page setting,"Vấn đề:
+Mở Chatbox → Chat page: ko tự động mở preview chat, khiến người dùng khó hiểu cải đặt Chat page là gì 
+
+Mô tả thay đổi:
+1. Tự động preview trang Chat khi mở setting “Chat page”
+2. Tự động prev...",[Chatbox setting] Update default chat page (https://www.notion.so/Chatbox-setting-Update-default-chat-page-203b0da449f18050bf93e51826658512?pvs=21),
+170,"June 23, 2025",[New feature] Detect intent transfer to human,"Vấn đề:
+Hiện tại, để chuyển cuộc trò chuyện từ AI sang agent, user phải click vào button ""Feedback message"" sau mỗi câu trả lời của AI → gây bất tiện
+Mục đích: 
+• Giúp AI tự động nhận diện ý định của ...",Intent detection: talk to agent (https://www.notion.so/Intent-detection-talk-to-agent-1ffb0da449f1809583b4d51df866b3f5?pvs=21),
+171,"June 13, 2025",[New Feature] Hỗ trợ thiết lập số Zalo tùy chỉnh & Zalo Business,"Vấn đề
+Trước đây, cài đặt Zalo chỉ chấp nhận số điện thoại có đầu số theo quốc gia (ví dụ: Việt Nam = +84)
+→ Không phù hợp với:
+• Merchant dùng hotline nước ngoài (ví dụ: +1 – US/Canada)
+• Merchant sử...",Create enable custom zalo  (https://www.notion.so/Create-enable-custom-zalo-210b0da449f1804abf0ef08881ee5114?pvs=21),
+172,"June 13, 2025",[Improvement] Chặn gửi tin nhắn khi AI đang trả lời,"Vấn đề
+Trong lúc AI đang phản hồi, user vẫn có thể tiếp tục gửi thêm tin nhắn → khiến AI trả lời nhiều tin cùng lúc, gây lặp nội dung hoặc mâu thuẫn thông tin, ảnh hưởng đến trải nghiệm.
+
+Mục đích
+• T...",Chặn gửi tin nhắn khi AI đang trả lời (https://www.notion.so/Ch-n-g-i-tin-nh-n-khi-AI-ang-tr-l-i-207b0da449f1806fa084d6305245e477?pvs=21),
+173,"June 13, 2025",[New feature] Gửi email thông báo về report trên app,"Vấn đề
+Chưa có email gửi báo cáo hiệu suất ứng dụng định kỳ cho merchant, dẫn đến thiếu dữ liệu để đánh giá giá trị app, khó thúc đẩy engagement và retention
+Mục đích
+• Tăng retention: giúp merchant c...",Email reports in app (https://www.notion.so/Email-reports-in-app-1afb0da449f180f6919efc1d78428244?pvs=21),
+174,"June 13, 2025",[Improvement] Cập nhật pre-chat form dạng inline,"Vấn đề: 
+Pre-chat form hiển thị dạng modal, tạo cảm giác cứng nhắc, gián đoạn trải nghiệm và khiến nhiều khách rời đi trước khi điền thông tin
+
+Mục đích: 
+• Tăng tỷ lệ engagement: tạo trải nghiệm tự n...",[Chatbox] Sửa pre-chat form dạng inline trong chat (https://www.notion.so/Chatbox-S-a-pre-chat-form-d-ng-inline-trong-chat-1bcb0da449f180c0b899edeece581571?pvs=21),
+175,"June 10, 2025",[Pre-chat form] Show form sau một vài message/certain time,"[New feature] Show pre-form sau một vài message/certain time
+• Mục đích: cho phép visitor bắt đầu trò chuyện ngay lập tức mà không bị bắt buộc cung cấp thông tin từ đầu. Tăng tỷ lệ tương tác và giảm t...",[Pre-chat form] Show form sau một vài message/certain time (https://www.notion.so/Pre-chat-form-Show-form-sau-m-t-v-i-message-certain-time-1c7b0da449f18068b77ef82a3dfcb33d?pvs=21),
+176,"June 10, 2025",Satisfaction survey,"[New feature] Satisfaction survey
+• Mục đích: giúp merchant thu thập phản hồi từ khách hàng sau khi cuộc hội thoại được xử lý, nhằm đo lường chất lượng hỗ trợ, nâng cao trải nghiệm và cải thiện dịch v...",Satisfaction survey (https://www.notion.so/Satisfaction-survey-1a1b0da449f18057aebce7bc2e204617?pvs=21),
+177,"June 6, 2025",[Growth hacking] Mở data source limit & offer discount theo tệp khách hàng,"1. Tăng AI usage của các gói 
+- Tăng số lượng AI replies cho các gói trả phí để giảm lo ngại về chi phí phát sinh và giúp khách dễ ra quyết định đăng ký
+- Chi tiết: https://prnt.sc/5Srn93zipY32
+
+2. Of...",Growth tasks (https://www.notion.so/Growth-tasks-1fab0da449f180aca9cffcbaeea9010b?pvs=21),
+178,"June 5, 2025",WhatsApp Channel,"Mục đích: Giúp merchant dễ dàng kết nối với khách hàng qua WhatsApp và quản lý toàn bộ hội thoại tập trung trong Inbox
+Mô tả:
+Cách kết nối:
+1. Truy cập Settings → Channels → WhatsApp https://prnt.sc/F...","Whatsapp business integration (https://www.notion.so/Whatsapp-business-integration-0e6b557b65ca4f84be0cc4db49289fb1?pvs=21) 
+Create WhatsApp template (https://www.notion.so/Create-WhatsApp-template-1f2b0da449f18002b051e56760f0416d?pvs=21)",
+179,"June 4, 2025",[Improvement] Tích hợp Shopify MCP storefront,"###Chatty - 04/06/2025
+[Improvement] Tích hợp Shopify MCP storefront
+• Mục đích: tích hợp với Shopify MCP để truy xuất dữ liệu từ cửa hàng, nhằm hỗ trợ AI trả lời hiệu quả hơn các câu hỏi liên quan đế...",Add Shopify MCP storefront (https://www.notion.so/Add-Shopify-MCP-storefront-1fbb0da449f180b99decfd34170e9a8e?pvs=21),
+180,"May 28, 2025",[New feature] Manage account in web app,"• Mục đích: giúp team member của store quản lý tài khoản cá nhân và thay đổi mật khẩu
+• Vị trí: Web app → My account https://prnt.sc/CPIrJQrDE8_q
+• Mô tả:
+    ◦ Cập nhật profile: cho phép chỉnh sửa Av...",[Web app] Manage account  (https://www.notion.so/Web-app-Manage-account-1d5b0da449f18059b18afd90d054e032?pvs=21),
+181,"May 28, 2025",[Improvement] Hỗ trợ mailto ở tin nhắn chứa email,"• Mục đích: hỗ trợ người dùng mở nhanh ứng dụng email khi nhấn vào email trong tin nhắn, giảm thao tác và nâng cao hiệu quả liên hệ qua email
+• Mô tả:
+    ◦ Tích hợp mailto ở tin nhắn chứa email
+    ◦...",Improve nhập email tại transfer message (https://www.notion.so/Improve-nh-p-email-t-i-transfer-message-1f8b0da449f180c1aca7ce2192628bab?pvs=21),
+182,"May 28, 2025",[Improvement] Optimize dashboard setup guide,"• Mục đích: tối ưu setup guide tại dashboard, giúp merchant setup nhanh và đạt đúng mục tiêu hơn
+• Vị trí: Dashboard → Set up https://prnt.sc/KNVFSw5OtZbh
+• Mô tả
+    ◦ Set up live chat
+        ▪ Chuy...",Update setup guide on Dashboard (focus on AI) (https://www.notion.so/Update-setup-guide-on-Dashboard-focus-on-AI-1afb0da449f180739b8df9d950ef1803?pvs=21),
+183,"May 26, 2025",[New feature] Manual summarize chat,"Mục đích: giúp merchant tóm tắt đoạn hội thoại khi chuyển giao cho thành viên khác hoặc đóng conversation 
+Vị trí: Inbox → Menu chat https://prnt.sc/QOfiwITxVmYo
+Mô tả
+Để summarize đoạn hội thoại, cli...",[Inbox] Manual summarize conversations   (https://www.notion.so/Inbox-Manual-summarize-conversations-1b9b0da449f1807199c8fe69188180ac?pvs=21),
+184,"May 23, 2025",[New feature] Conversation analytics,"Vị trí: Analytics → Conversation
+Mô tả: 
+ • All vs Resolved conversations: thể hiện xu hướng của tổng conversation nhận được và resolved conversation → cho thấy hiệu suất xử lý conversation 
+ • First ...",[Analytics] 1.1 Conversations (https://www.notion.so/Analytics-1-1-Conversations-a0ba9666a789498eab0c5ed3d71accd0?pvs=21),
+185,"May 21, 2025",Generate instruction by AI,"• Mục đích: giúp merchant training AI theo instruction một cách nhanh chóng và phù hợp với ngành hàng của store để tạo ra 1 nhân viên bán hàng chuyên nghiệp
+• Vị trí: AI assistant → Personality → Gene...",Generate instruction by AI (https://www.notion.so/Generate-instruction-by-AI-1c8b0da449f1808d8acbc94d49fc6a6a?pvs=21),
+186,"May 20, 2025","[Improvement] Sắp xếp layout Automation, Chatbox settings","• Mục đích: sắp xếp lại cài đặt trang Automation và Chatbox giúp người dùng setup dễ dàng hơn 
+• Vị trí: Chatbox -> General, Chat page
+• Mô tả:
+    ◦ Thêm tab Chat page tại trang Chatbox setting bao g...","Move Welcome message, Suggested FAQs to Chatbox settings  (https://www.notion.so/Move-Welcome-message-Suggested-FAQs-to-Chatbox-settings-1ecb0da449f180b2a3e8f2ce1bbd27f6?pvs=21)",
+187,"May 20, 2025",[Improvement] Cải thiện layout Overview analytics,"• Mục đích: tối ưu hiển thị chỉ số quan trọng ở Dashboard 
+• Mô tả: 
+    ◦ Tại màn Dashboard: move chỉ số phụ sang màn Analytics_Overview https://prnt.sc/NNTqeFpXFIoD
+    ◦ Thêm link redirect to View ...",Move chỉ số phụ ở Dasbhoard sang Analytics (https://www.notion.so/Move-ch-s-ph-Dasbhoard-sang-Analytics-1edb0da449f180b988d1f564f1e55327?pvs=21),
+188,"May 20, 2025",[Improvement] Recommend product variant with lowest price,"• Mục đích: giúp AI gợi ý sản phẩm giá thấp nhất, thu hút khách xem sản phẩm để tăng cơ hội convert
+• Mô tả:
+    ◦ Trước cập nhật: AI gợi ý ngẫu nhiên variant của sản phẩm 
+    ◦ Sau cập nhật: gợi ý s...","AI suggest product (nhiều variant, giá) với giá thấp nhất  (https://www.notion.so/AI-suggest-product-nhi-u-variant-gi-v-i-gi-th-p-nh-t-1edb0da449f180769606da54469d389d?pvs=21)",
+189,"May 20, 2025",Record conversation test in merchant’s store,"Mục đích:
+- Lưu lịch sử test của merchant với AI tại trang AI assistant | Test 
+- Sử dụng để phân tích các trường hợp AI không xử lý được để cải thiện, giảm tỷ lệ merchant rời đi sau khi test AI ko th...",Record conversation test in merchant’s store (https://www.notion.so/Record-conversation-test-in-merchant-s-store-1c4b0da449f180c29c0ee4dbe0b45b67?pvs=21),
+190,"May 20, 2025",[New feature] Reply new and best seller product,"Mục đích: giúp AI trả lời được các câu hỏi liên quan đến new arrival và best seller 
+Mô tả: 
+- Gắn tag new, best seller theo Shopify (dựa trên thời gian tạo order và số lượng order)
+- Cập nhật tag này...",Sync product attributes new and best selling (https://www.notion.so/Sync-product-attributes-new-and-best-selling-1e4b0da449f180cea033f3bb16765e4a?pvs=21),
+191,"May 20, 2025",[New feature] Sync metafield product cho AI training,"Mục đích: giúp merchant sync product metafield để train AI, giúp AI trả lời đúng/đầy đủ hơn các câu hỏi về sản phẩm
+Vị trí: AI assistant | Data source
+Mô tả tính năng:
+・Trang assistant/Data sources/Pr...",[AI assistant] Sync metafield của product (https://www.notion.so/AI-assistant-Sync-metafield-c-a-product-1b2b0da449f1808792c1cc933ef2b8e6?pvs=21),
+192,"May 20, 2025",[New feature] Thêm cài đặt bắt buộc cho thông tin trên pre-chat form,"Mục đích: giúp merchant tăng tỷ lệ collect lead, dễ dàng tạo profile khách hàng trong Shopify ngay khi chat ở Inbox
+
+Mô tả:
+- Pre-chat form: thêm cài đặt optional/required cho các thông tin hiển thị (...",[Pre-chat form] Require ít nhất 1 contact field (https://www.notion.so/Pre-chat-form-Require-t-nh-t-1-contact-field-1bdb0da449f18026b2ebe483bec04f09?pvs=21),
+193,"May 16, 2025",Handover by contact form,"Mục đích: giúp merchant gửi thông tin đoạn hội thoại đến email khi AI không trả lời được, để xử lý nhanh chóng mà không cần mở app (phù hợp với store nhỏ, không có nguồn lực để trực chat) 
+
+• Mục đích...",[AI assistant] Send contact form after handover (https://www.notion.so/AI-assistant-Send-contact-form-after-handover-19ab0da449f18015af78ed3f25b1eb47?pvs=21),
+194,"May 13, 2025","[New feature] Refresh URL, Preview content từ URL","• Mục đích: giúp merchant xem thông tin đọc được từ URL dùng để traing AI, làm mới dữ liệu sync từ URL khi nội dung trang thay đổi
+• Vị trí: AI Assistant → Data Source → URL
+• Mô tả:
+    ◦ Tại danh sá...","[AI assistant/Data sources] Refresh URL, Preview content từ URL (https://www.notion.so/AI-assistant-Data-sources-Refresh-URL-Preview-content-t-URL-1a7b0da449f1801d8addf0161e34efbd?pvs=21)",
+195,"May 13, 2025",[New feature] Mặc định mở cửa sổ chat khi mở chatbox,"Mục đích: giúp khách hàng kết nối với support chỉ trong 1 bước, để tăng sự tương tác, tăng conversion rate và nâng cao trải nghiệm khách hàng
+Vị trí: Chatbox → General  
+Mô tả:
+• Thêm cài đặt Chat foc...",Mặc định mở chat khi mở chatbox (https://www.notion.so/M-c-nh-m-chat-khi-m-chatbox-e45a708fb9de427eb0557b7f0ead66d6?pvs=21),
+196,"May 13, 2025",Train AI with store’s page URL,"Mục đích: giúp merchant nhanh chóng train AI ngay sau khi cài đặt app bằng cách tự động đồng bộ thông tin từ website của store
+Vị trí: AI Assistant → Data Source → URL
+Mô tả: 
+• Thời điểm sync: khi ac...",[AI assistant/Data sources] Sync pages URL từ Shopify (https://www.notion.so/AI-assistant-Data-sources-Sync-pages-URL-t-Shopify-1a7b0da449f180f4a70bd5b83263c41f?pvs=21),
+197,"May 12, 2025",[Improvement] Cập nhật order status trên trang Order tracking,"[Improvement] Cập nhật thêm order status
+Mục đích: giúp khách hàng của merchant tra cứu trạng thái order chính xác hơn
+Vị trí: Chatbox | section Order tracking
+Mô tả
+Trước thay đổi:
+Order status: chỉ ...",[Chatbox] Update order tracking status (https://www.notion.so/Chatbox-Update-order-tracking-status-1c2b0da449f180a781cdfd71750c6c7e?pvs=21),
+198,"May 6, 2025",[New feature] Review source khi test AI,"Mục đích: giúp merchant biết AI dựa vào thông tin nào để trả lời khi test, để có thể hướng dẫn AI trả lời đúng theo mong muốn 
+Đối tượng: all users
+Vị trí: trang AI assistant | Test https://prnt.sc/VH...",Review sources khi test AI (https://www.notion.so/Review-sources-khi-test-AI-1c3b0da449f1805fa5d2c5207945d4f5?pvs=21),
+199,"May 6, 2025",[New feature] AI instruction by scenarios,"Mục đích: giúp merchant train AI theo tình huống cụ thể, giúp AI trả lời tốt hơn các câu hỏi của khách hàng 
+Đối tượng: all users
+Vị trí: trang AI assistant | Personality, mục Instructions https://prn...",AI instruction by scenarios and industry (https://www.notion.so/AI-instruction-by-scenarios-and-industry-1a4b0da449f1806bba4aec80a6a2c46c?pvs=21),
+200,"May 6, 2025",[New feature] Upload category icon,"Mục đích: cho phép merchant customize icon category hiển thị tại Chatbox, FAQs page 
+Đối tượng: all users
+Mô tả: 
+• Cho phép upload file với các định dạng .svg, .jpg, .jpeg, .gif, .png.,
+• Được phép u...",[FAQs] Thêm upload category icon (https://www.notion.so/FAQs-Th-m-upload-category-icon-1dab0da449f1805ab973e2c803dfda0b?pvs=21),
+201,"May 5, 2025",Cải thiện chatbox để đảm bảo accessibility,"Cải thiện chatbox để đảm bảo accessibility
+• Ưu tiên đọc chatbox button khi sử dụng screen reader giúp người dùng dễ dàng tương tác với chatbox hơn
+• Thêm accessibility label cho các element trên chat...",[Accessibility] Hỗ trợ cho người khiếm khuyết về mắt (https://www.notion.so/Accessibility-H-tr-cho-ng-i-khi-m-khuy-t-v-m-t-1d2b0da449f1805b8478e3f5e2f40eed?pvs=21),
+202,"May 5, 2025",Thêm thông báo về AI completion rate,"Vấn đề:
+- Ko thể hiện rõ hành động cần thực hiện 
+- Trường hợp Unanswerred question = 0, vẫn hiển thị button Go to review
+
+Sau cập nhật:
+1. Thêm banner Next action tại card AI completion rate
+- Điều k...",[AI completion rate] Thêm next action (https://www.notion.so/AI-completion-rate-Th-m-next-action-1c1b0da449f1806ba628c53794bac5cf?pvs=21),
+203,"May 5, 2025",Cài đặt usage charge limit,"Mục đích: giúp merchant cài đặt giới hạn AI replies usage charge, để kiểm soát được chi phí từ AI replies phát sinh mỗi tháng
+Đối tượng: Paid plan
+Vị trí: Subscription 
+Mô tả: Tại mục Subscription det...",[Pricing] Thêm limit usage charge (https://www.notion.so/Pricing-Th-m-limit-usage-charge-1e0b0da449f1806eacfad0437a890588?pvs=21),
+204,"April 26, 2025",Feature request by feedbear,Sử dụng feature request power bởi Feedbear để tránh vi phạm BFS trên app và quản lý feature request tốt hơn https://prnt.sc/Zv5AFj6DqB13,Feature request by feedbear (https://www.notion.so/Feature-request-by-feedbear-1d9b0da449f1806bbb51ed0ed14c452c?pvs=21),
+205,"April 26, 2025",Feature request by feedbear,Sử dụng feature request power bởi Feedbear để tránh vi phạm BFS trên app và quản lý feature request tốt hơn https://prnt.sc/Zv5AFj6DqB13,Feature request by feedbear (https://www.notion.so/Feature-request-by-feedbear-1d9b0da449f1806bbb51ed0ed14c452c?pvs=21),
+206,"April 26, 2025","[New feature] [AI assistant] Bulk delete, set active/inactive","Mục đích: giúp merchant xoá, set active/inactive hàng hoạt data source để tiết kiệm thời gian chỉnh sửa
+Vị trí: AI assistant | General | Data source
+Mô tả tính năng:
+- Tại list data source, thêm check...","[AI assistant] Bulk delete, set active/inactive (https://www.notion.so/AI-assistant-Bulk-delete-set-active-inactive-1c0b0da449f180cd9fe3ea9111a1a314?pvs=21)",
+207,"April 26, 2025",[Improvement] Transfer admin to other member,"Vấn đề:
+- 1 merchant có nhiều store, khi đổi email của tk admin ở 1 store thì đồng thời các store khác đổi theo
+- Merchant muốn đổi admin email riêng của 1 store:
+Vị trí: Setting | Team 
+Các bước thực...",[Team] Convert member thành admin (https://www.notion.so/Team-Convert-member-th-nh-admin-1d8b0da449f18061a91bdaf32158aead?pvs=21),
+208,"April 23, 2025",[Improvement],,Assign AI to conversation được follow up by email (https://www.notion.so/Assign-AI-to-conversation-c-follow-up-by-email-1deb0da449f180fcbc19f300a1a26f2a?pvs=21),
+209,"April 23, 2025",[New feature] Resize chat zone,"Mục đích: giúp merchant xem được nhiều dòng thông tin tại ô chat dể dễ dảng review thông tin (đặc biệt là với email)
+
+Mô tả tính năng
+1. Chỉnh size mặc định / tối đa của ô chat: 
+- Default: 3 dòng (de...",[UI] [Inbox] Update chat zone size  (https://www.notion.so/UI-Inbox-Update-chat-zone-size-1afb0da449f18033a0bef9d6422e9517?pvs=21),
+210,"April 23, 2025",[Improvement] Tăng bảo mật khi download app,"Vấn đề: Khi sử dụng mã QR / link web app để cài app, user tự động vào tài khoản đang đăng nhập trên Shopify mà không phải log in lại
+Sau cập nhật: Khi mở web app, kiểm tra trình duyệt đã lưu thông tin...",[Download app] Yêu cầu login khi mở web app (https://www.notion.so/Download-app-Y-u-c-u-login-khi-m-web-app-1b9b0da449f1807fa33fc206e4625eb3?pvs=21),
+211,"April 23, 2025",[Improvement] Improve chat performance,"1. Cải thiện tốc độ loading pre-chat form
+2. Thêm transition khi gửi tin nhắn AI replies và tin nhắn của KH",[Chatbox] Improve chatbox performance (https://www.notion.so/Chatbox-Improve-chatbox-performance-1b4b0da449f180e6ad72cf26648fdb33?pvs=21),
+212,"April 19, 2025",Overview analytics,Mục đích: giúp merchant xem report tổng quan về các chỉ số của app tại trang Analytics,[Analytics] Thêm tab Overview  (https://www.notion.so/Analytics-Th-m-tab-Overview-1a6b0da449f180feb8a9f177b1e98a42?pvs=21),
+213,"April 19, 2025",Thêm analytics về revenue trên dashboard,"Thêm số liệu về sales trên dashboard:
+• Assisted revenue: tổng giá trị đơn hàng được tạo ra từ conversation với Chatty
+• Chat-to-sales rate: tỷ lệ phần trăm conversation tạo ra sales",[Dashboard - Sales] Update analytics (https://www.notion.so/Dashboard-Sales-Update-analytics-1a1b0da449f18094a799daf4d9462681?pvs=21),
+214,"April 18, 2025",[Notifications] Thêm event “New message from AI conversations”,"Mục đích: Giúp merchant nhận thông báo về những conversation do Ai trả lời, để có thể chủ động xử lý conversation khi đang không mở mở Inbox (trước đó chỉ gửi thông báo khi conversation được chuyển gi...",[Notifications] Thêm event “New message from AI conversations” (https://www.notion.so/Notifications-Th-m-event-New-message-from-AI-conversations-1b9b0da449f1801eab27cd118880ac77?pvs=21),
+215,"April 14, 2025",Sửa UI product card ở AI replies,"Sửa giao diện product card gửi tại chatbox, giúp user dễ dàng thao tác để xem sản phẩm:
+• Thêm dark mode
+• Thêm button next/back",Sửa UI product card ở AI replies (https://www.notion.so/S-a-UI-product-card-AI-replies-1c2b0da449f180ac8423e3fac92815fa?pvs=21),
+216,"April 14, 2025",[Improvement] Xử lý với open conversation khi tắt AI assistant,"###Chatty - 11/04/2025
+[Improvement] Xử lý với open conversation khi tắt AI assistant
+• Why
+Giúp merchant kiểm soát việc sử dụng AI, tránh trường hợp AI tiếp tục trả lời ngoài ý muốn gây phát sinh exp...",Xử lý với open conversation khi tắt AI assistant (https://www.notion.so/X-l-v-i-open-conversation-khi-t-t-AI-assistant-1c7b0da449f18037979cc1c043a665f8?pvs=21),
+217,"April 14, 2025",[Improvement] Bổ sung context cho AI với link gửi tại chatbox,"Mục đích: Giúp AI trả lời chính xác khi khách hàng gửi câu hỏi kèm link 
+Flow:
+1. KH chat kèm link (product, FAQs page…)
+2. AI đọc trang để lấy thông tin lưu vào context 
+3. AI sử dụng context để trả ...",[AI assistant] Đọc product link ở tin nhắn và trên màn đang mở - Shopify page (https://www.notion.so/AI-assistant-c-product-link-tin-nh-n-v-tr-n-m-n-ang-m-Shopify-page-1bbb0da449f1807291cbd313fa14dce6?pvs=21),
+218,"April 14, 2025","[Inbox] Thêm review data source (URL, File)","Mục đích: Giúp merchant review source từ câu trả lời của AI đầy đủ với các loại data source 
+Flow
+1. Tại inbox, click Review sources tại câu trả lời của AI 
+2. Tại mục Review sources, hiển thị danh sá...",[AI correction] Thêm review sources URL và files (https://www.notion.so/AI-correction-Th-m-review-sources-URL-v-files-1c0b0da449f1809d9b8ff1e548ed5b56?pvs=21),
+219,"April 11, 2025",New pricing,,"New pricing in 1/2025 (https://www.notion.so/New-pricing-in-1-2025-77527f9bbf864cf4b360fcf505e21a15?pvs=21) 
+[Pricing] Convert shop cũ đang sub sang pricing mới có limit (https://www.notion.so/Pricing-Convert-shop-c-ang-sub-sang-pricing-m-i-c-limit-1b9b0da449f18061af2eeac1f11230fb?pvs=21) 
+[Subscription] Thêm Yearly plan (https://www.notion.so/Subscription-Th-m-Yearly-plan-1afb0da449f1807598bcfd349e287962?pvs=21)",
+220,"April 2, 2025",[Improvement] Auto sync products after onboarding,"###Chatty - 02/04/2025
+[Improvement] Auto sync products after onboarding
+• Why: giúp merchant nhanh chóng sync sản phẩm theo plan đã chọn, phục vụ cho AI training mà ko phải thao tác thủ công
+• Where:...",Auto sync product từ Onboarding (https://www.notion.so/Auto-sync-product-t-Onboarding-1bab0da449f180d793f1d1c29bdc6f71?pvs=21),
+221,"April 2, 2025",Analytics overview,"###Chatty - 02/04/2025
+[New feature] Analytics overview
+• Why: Giúp merchant nhanh chóng nắm bắt hiệu suất sử dụng app thông qua các số liệu tổng quan hiển thị trên dashboard.
+• Where: Dashboard (top ...",[Dashboard - Conversations] Update analytics (https://www.notion.so/Dashboard-Conversations-Update-analytics-1b9b0da449f180d1bbe2e53b527c3c25?pvs=21),
+222,"November 5, 2024","[Inbox] Update list view Your inbox, Unassigned, AI","1. Update tab Unassigned trên list view
+- Hiện tại: hiển thị tất cả status
+- Thay đổi: chỉ hiển thị status = Open → giúp merchant tập trung vào các conversation chưa được xử lý 
+2. Thêm filter:
++ Open...","[Inbox] Update list view Your inbox, Unassigned, AI  (https://www.notion.so/Inbox-Update-list-view-Your-inbox-Unassigned-AI-5da4b50b1901462db765111e93bb7bb2?pvs=21)",
+223,"November 5, 2024",[Email channel] Giới hạn connect email ở Free plan,"Giới hạn số lượng email được connect với Free plan:
+- Free plan: Chỉ connect được 1 email (khi downgrade thì giữ lại email đầu tiên, ưu tiên email đã verified, udpate các email khác thành unverified)
+...",[Email channel] Giới hạn connect email ở Free plan (https://www.notion.so/Email-channel-Gi-i-h-n-connect-email-Free-plan-1fba37163ca6491da435ec0433d91f17?pvs=21),
+224,"November 5, 2024",Lỗi Outlook email channel bị chặn forward,"Thông báo lỗi khi connect Outlook:
+Nguyên nhân:
+• Automatic forwarding bị disable vì lý do bảo mật 
+• Phổ biến với company/organization Outlook accounts
+Chi tiết lỗi và cách khắc phục được cập nhật tr...",Lỗi Outlook email channel bị chặn forward (https://www.notion.so/L-i-Outlook-email-channel-b-ch-n-forward-a49cb67b6319419d982af763a2e9073d?pvs=21),
+225,"November 5, 2024",[Bug] Manage Contact,"1. Guest: gộp chung 1 profile với conversation:
++ Type = Guest
++ Cùng email 
+2. Lỗi sửa address
+3. Lỗi  không tự động convert customer với conversation từ email
+và 1 số lỗi nhỏ khác",[Bug] Manage Contact (https://www.notion.so/Bug-Manage-Contact-c3f091e1a744482c912a8bb49862e9a9?pvs=21),
+226,"November 5, 2024",Improve UI/UX chatbox,"Cải thiện UX:
+1. Lỗi các element khác đè lên chatbox khi mở https://prnt.sc/HFiur3QY4jmq
+2. Scroll bottom sheet mượt hơn 
+3. Fix page background khi scroll trong chatbox",Improve UI/UX chatbox (https://www.notion.so/Improve-UI-UX-chatbox-ab9c4a4ff3cc4e79af145e8fefe46fd4?pvs=21),
+227,"October 3, 2024",Manage contacts,Thêm trang quản lý khách hàng từ inbox,Manage contacts(simple) (https://www.notion.so/Manage-contacts-simple-8d6b9f44cdce4161988f3ffa4cb3f9ce?pvs=21),
+228,"October 3, 2024",Update list view,"Bổ sung cột List view trên navigation 
+Update filter",[Inbox] Update list view (https://www.notion.so/Inbox-Update-list-view-b290c5c4a2444bcb9a73da93505e77f7?pvs=21),
+229,"August 23, 2024",Update luồng tạo conversation,"Vấn đề: Merchant bị miss first message do khách hàng không điền email trong pre-chat form hoặc click Continue as anonymous
+Giải pháp:
+• Tạo conversation ngay khi khách nhắn lần đầu tiên
+• Khi merchant...",,
+230,"August 20, 2024",First auto reply,"• Thêm tin nhắn tự động khi khách hàng hỏi lần đầu tiên theo status và availability của store
+• Chat bot sẽ hoạt động hết luồng, khi khách hàng nhắn thì First reply mới hoạt động
+• Sửa lỗi hiện issue ...",,
+231,"August 16, 2024",Deeplink,"• Giúp merchant lấy quick link để hướng khách hàng mở trang và mặc định open chat theo menu (vd: Chat, Order tracking, help,…)
+• Thêm setting Deeplink tại Chatbox -> Advanced https://prnt.sc/AG2y3oUpj...",,
+232,"August 16, 2024",Support pasting & sending images,"Giúp merchant & customer gửi ảnh bằng cách Copy + Paste. Ảnh vẫn được upload vào File của Shopify https://prnt.sc/oXXqLIf4nEdM
+
+Admin:
+• Có thể upload nhiều ảnh (như trước)
+• Update modal khi quá 20MB...",,
+233,"August 15, 2024",Update translation settings,"Giúp khách hàng quản lý danh sách ngôn ngữ tốt hơn
+• Cập nhật giao diện trang Edit translation: Chia thành 2 block Published languages, Unpublished languages để tìm kiếm dễ hơn https://prnt.sc/0n2c6Pb...",,
+234,"August 14, 2024",Update phone number input,"• Đổi quốc gia sẽ update đầu số theo quốc gia đó, update tại trường phone trên các field điền phone trên admin https://prnt.sc/CvbjQGcdwJK9",,
+235,"August 14, 2024",[Email channel] Gộp email khi reply,• Sửa vấn đề luồng tin nhắn qua email không liền mạch do customer gửi bằng email cho merchant bằng nhiều hình thức thì khi trả lời sẽ tạo một email mới mà không reply vào email khách hàng gửi.,,
+236,"August 13, 2024",Send email sumup,"Giúp merchant gửi email sumup về đoạn hội thoại cho khách hàng sau khi resolved
+• Tại Settings -> Thêm ‘Conversation sum-up notification’ https://prnt.sc/9q0xmzL6fFda
+• Sau khi mark ‘Resolved’: Sumup ...",,
+237,"August 12, 2024",Update font & style trên admin,"Update font, skeleton load, avatar,… giúp trải nghiệm về UX/UI tốt hơn",,
+238,"August 12, 2024",Keep last chat screen & activity,Giữ nguyên trang inbox widget đang mở khi chuyển page thay vì phải mở lại trang và điều hướng tới menu vừa xem,,
+239,"August 8, 2024",Tự động matching customer,"• Khi guest nhập email tại Prechat form https://prnt.sc/yMx52uke3Y2i, nếu email trùng với email của customer đã có, phía chat inbox sẽ tự động matching thông tin và show các thông tin về Profile và Or...",,
+240,"August 8, 2024",Open & Share chat thông qua standalone,"Tại Dashboard -> Go to inbox https://prnt.sc/XyJsZjHW4xXi:  mở standalone version
+• Khách hàng có thể dùng link để mở lại chat trước đó
+• Tại menu inbox, vẫn mở full-width modal. Thêm nút Open fullscr...",,
+241,"August 7, 2024",Improve insert FAQs,"• Thêm insert ảnh FAQs:
+• Admin có thể upload ảnh lên FAQs, giới hạn số lượng ảnh là 10 ảnh (ảnh) https://prnt.sc/jzIcH-6MX6a6
+• Khi gửi tin nhắn tại inbox: Cho phép admin Insert FAQs trên chat bao gồ...",,
+242,"August 6, 2024",Migrate customer data,"Migrate customer data: Giúp merchant quản lý thông tin của 1 customer liền mạch khi customer đó có nhiều đoạn hội thoại
+• Khi merchant update profile ở 1 conversation, các conver liên quan cũng sẽ đượ...",,
+243,"August 6, 2024",Include/Exclude pages/URL to display chatbox widget,"• Cho phép setup hiển thị Chatbox tại device (mobile/ desktop)
+• Merchant có thể setup chatbox hiển thị hoặc không hiển thị theo setting",,
+244,"August 6, 2024",Specific offline status,,,
+245,"August 6, 2024",Improve customer profile,"• Order information: Update icon,thêm tooltip và toast khi copy https://take.ms/60YzE
+• Customer information:
+• Thêm icon copy khi hover tại các trường: Name, Email, Phone https://take.ms/j6Cjv
+• Cho ...",,
+246,"August 6, 2024","Public live chat features for all customer, no more Beta version","• Tại Onboarding, cho phép enable Livechat, Bỏ các badge ‘Beta’ thay bằng ‘New’ https://take.ms/gIW3D
+• Hiển thị step Activate live chat tại Setup guide với tất cả users (ẩn step Enable notifications ...",,
+247,"August 5, 2024","Xoá image, file ở chat inbox và Shopify files","• Admin có thể xoá ảnh & files đã gửi https://take.ms/wjepr
+• Ảnh và files khi xoá đồng thời được xoá tại Shopify files",,
+248,"August 5, 2024","Remove, edit message","• Admin có thể remove hoặc sửa tin nhắn đã gửi tới khách hàng https://take.ms/pQ0xi
+• Edit: Tin nhắn sau khi chỉnh sửa sẽ có định dạng <Message> (edited) (chỉ hiển thị ở backend) Chỉ cho phép chỉnh sử...",,
+249,"August 1, 2024",Thêm chat activity,"Thêm các sự kiện giúp merchant nắm được action của customer và đưa ra câu trả lời phù hợp gồm có:
+• Place order: khách đặt hàng
+• View FAQs: khách view FAQs trên chatbox
+• Track order: khách track ord...",,
+250,"July 31, 2024",[Channel] Email inbox,"Giúp merchant kết nối email vào chat, merchant có thể nhận và gửi mail thông qua tin nhắn https://prnt.sc/K-w4tPQTGvoeMerchant:
+• Nhận email tại Chatty inbox: https://prnt.sc/y3jm4OsKp-m6
+• Hiển thị p...",,
+251,"July 30, 2024",Sắp xếp giao diện app,"Bố cục app gọn gàng, rõ ràng hơn các chức năng chính, thuận tiện đẩy thêm tính năng sau này
+• Move FAQs page vào menu FAQs https://prnt.sc/_YDxFVKIWqld
+• Tại menu Chatbox, chia 3 tab:
+• General: gồm c...",,
+252,"July 30, 2024",Export FAQs,"Thêm nút export, khách hàng có thể lựa chọn All FAQs hoặc published FAQs để export https://prnt.sc/VhWOzKhL29Av",,
+253,"July 30, 2024",FAQs block,"Khách có thể add block FAQs ở các trang khác nhau
+• Tại FAQs -> Click FAQs block: Redirect tới hướng dẫn add block FAQs
+• Khách có thể lựa chọn FAQs từ Block, section để add vào trong trang https://pr...",,
+254,"July 29, 2024","Star, filter starred","Giúp admin đánh dấu conversation quan trọng
+• Thêm nút Star cạnh Resolve button https://prnt.sc/1Gr1fhFpDVyC
+• Khi đánh dấu Star, thêm note activity https://prnt.sc/SOuOJLW4IX1G
+• Thêm filter các conv...",,
+255,"July 25, 2024",Improvement: Cập nhật banner refresh order,"Với trường hợp Guest/Customer có nhiều conversationKhi có order mới, click Refresh ở banner refresh order đồng thời sẽ update order của các conversation của guest/customer đó",,
+256,"July 25, 2024",Manage profile guest/anonymous,"Giúp admin convert và edit các thông tin của khách hàng chưa phải customer (guest, anonymous)Các thông tin gồm có name, email, phone, location, tag. Đối với email, sẽ chia rõ ra 2 case:
+• Create profi...",,
+257,"July 24, 2024",Sửa lỗi update customer profile,"• Bỏ thông báo lỗi khi đóng modal
+• Sửa lỗi update location https://go.screenpal.com/watch/cZibiRVP6Ar
+• Sửa lỗi Nhập/Edit Phone number > mở modal > Phone number bị bỏ trống > mở lần 2 mới hiện lại ht...",,
+258,"July 24, 2024",Insert emoji,,,
+259,"July 24, 2024",Insert link,"• Gửi link với format gạch chân
+• Khi gửi link sản phẩm của store bất kỳ: hiện thông tin sản phẩm gồm title, description và price và CTA view product (sẽ delay một chút) https://i.imgur.com/ZjRMDI2.pn...",,
+260,"July 23, 2024",Update translation,"User story: tôi là merchant ở Anh nhưng tôi bán cho khách ở Đức, tôi muốn dịch ngôn ngữ mặc định của Chatbox theo tiếng ĐứcFix bugs + Update translation status: Với trường hợp ngôn ngữ Default khác vớ...",,
+261,"July 23, 2024",Online/offline status,"Giúp merchant xem trạng thái hoạt động của khách hàng
+• Các trạng thái:
+• Offline sẽ hiển thị khi thời gian hoạt động cuối cùng của khách >5 phút
+• Online: Hiện ""Just now"" khi hoạt động <1 phút, hiện ...",,
+262,"July 22, 2024",Inline chat button,"Merchant đã có thể add chat button nhằm thúc đẩy khách hàng contact
+• Merchant cần add block vào vị trí mong muốn từ Chatbox -> Contact button (https://i.imgur.com/FmAADcD.png)
+• Turn on/turn off để ẩ...",,
+263,"July 22, 2024",Insert FAQs in chat,"Cho phép merchant add các FAQs vào chat
+• Khi insert, khách hàng có thể xem trước Category, Question & Answers https://i.imgur.com/0DPJcsS.png",,
+264,"July 18, 2024",Quick replies,"Cho phép admin quản lý các shortcut để trả lời câu hỏi nhanh chóng
+• Thêm Settings -> Quick replies https://i.imgur.com/CnCF4JZ.png
+• Bảng quản lý Quick replies https://i.imgur.com/HjQir4s.png
+• Thêm/...",,
+265,"July 18, 2024",Upload image & file,"Admin có thể upload ảnh & file để gửi cho người dùng https://i.imgur.com/oYmqDvR.png
+• Giới hạn cho mỗi tệp hoặc ảnh là 20MB
+• Với ảnh, hỗ trợ JPG, JPEG, PNG, GIF
+• Khách hàng có thể gửi nhiều ảnh và ...",,
+266,"July 18, 2024",Resolved/unresolved conversation:,"Đánh dấu đoạn hội thoại đã được hoàn thành
+• Ở inbox, thêm nút Resolve https://i.imgur.com/zBvOT5Q.png
+• Đổi filter mặc định là open https://i.imgur.com/ObrW7cJ.png
+• Khi resolved, thêm admin activiti...",,
+267,"July 12, 2024",Update Subscribe newsletter chatbot,"Dịch thông tin của discount theo ngôn ngữ của khách hàng https://i.imgur.com/vknr41s.pngKhi khách hàng select coupon, tự động xác định dạng discount và dịch theo ngôn ngữ đã publish của khách hàngUpda...",Translate discount (https://www.notion.so/Translate-discount-c9c7e9bd6bbb41588c7026b3874974b1?pvs=21),
+268,"July 11, 2024",Insert discount,"• Khách hàng khi nhận discount có thể sử dụng discount theo setting của shopify và checkout
+• Tính năng cho phép add static discount - chưa hỗ trợ dynamic discount
+• Thêm preview discount ở chat",Insert discount - Static (https://www.notion.so/Insert-discount-Static-e3d82b2f675b4bf2bd70df52b9e37d6f?pvs=21),
+269,"July 9, 2024",Subscribe newsletter chatbot improvements,"Update từ feedback của khách hàng và trải nghiệm sau khi live tính năng
+• Admin: bỏ lựa chọn Select audience, mặc định hiển thị cho toàn bộ new visitor và customer chưa subscribe https://i.imgur.com/d...",Subscribe newsletter chatbot feedback (https://www.notion.so/Subscribe-newsletter-chatbot-feedback-a1bd837a605b4b52b5df3a63e9d28682?pvs=21),
+270,"July 9, 2024",Gửi tin nhắn cho customer qua email (hidden feature),"Đảm bảo customer k bị miss chat, cho phép merchant gửi chat cho customer qua email
+• Khi chat hết session, app sẽ show modal giúp merchant nhắn cho khách hàng. Khi confirm sẽ gửi qua email, khi không ...",Gửi tin nhắn cho customer qua email (https://www.notion.so/G-i-tin-nh-n-cho-customer-qua-email-0eaabec9515e4929a0be0be9792b9fbb?pvs=21),
+271,"July 9, 2024",Update customer profile,"cho phép merchant update thông tin của khách hàng
+• Các thông tin gồm có: Name, Email, Phone, Location, Tag
+• Với customer: Show các thông tin của customer dưới tên của khách hàng",Update customer profile (https://www.notion.so/Update-customer-profile-1cccaec937d444fbad1a53c311cb9c4f?pvs=21),
+272,"July 9, 2024",Block customer & Filter blocked,"Giúp merchant block những conver xấu (như cách bạn hay block nyc vậy :oke:)
+• Thêm filter Block ở Inbox https://i.imgur.com/cVZ1NUG.png
+• Khi ấn block https://i.imgur.com/MQPEJFV.png, hiên modal confi...",Block customer | Filter blocked (https://www.notion.so/Block-customer-Filter-blocked-4b24740572bc44f7af2c6f08162f0f30?pvs=21),
+273,"July 8, 2024",Update Preheader email notification,"Giúp khách xem nhanh được khách đã nhắn gì
+• Các thông tin được ngắn gọn hơn và hiển thị tin nhắn của khách hàng thay vì quá nhiều thông tin",Thêm preheader ở email notification (https://www.notion.so/Th-m-preheader-email-notification-a2c9dcedfc224da895c4d91aa1444b6b?pvs=21),
+274,"July 8, 2024",Order info in conversation,"Hiện thông tin order nếu matching tài khoản customer
+• Với guest (khách đã để lại email nhưng chưa đăng nhập), nếu matching email với customer, hiện banner thông báo match với thông tin của customer s...",Order in conversation (https://www.notion.so/Order-in-conversation-893d24cda9e8464ca07220446359ae7f?pvs=21),
+275,"July 8, 2024",Convert anoymous & guest to customer,"Giúp merchant chuyển đổi & generate lead sang customer profile và chăm sóc tốt hơn
+• Tại Profile, khi khách hàng là anonymous & guest (đã để lại email), thêm banner giúp khách hàng update thành custom...",Convert anonymous & guest to customer (https://www.notion.so/Convert-anonymous-guest-to-customer-8eb05755faeb4b5183243657e24e1eea?pvs=21),
+276,"July 8, 2024",Play sound notification ở admin và storefront,"Play sound notification ở admin và storefront:
+• Khác với push notification, Merchant và customer của merchant đều sẽ mặc định nhận được âm thanh thông báo khi có tin nhắn mới
+• Với Admin:
+• Thêm sett...",Play sound to customer & admin (https://www.notion.so/Play-sound-to-customer-admin-eaa0488d1771438eb2d1e1e71998e22f?pvs=21),
+277,"July 8, 2024",Update menu PWA,"Thêm menu navigation tới các tính năng
+Update nút Unread",Đồng nhất giao diện PWA với mobile/desktop (https://www.notion.so/ng-nh-t-giao-di-n-PWA-v-i-mobile-desktop-d6449ac284b34e63b31350e30d5caee2?pvs=21),
+278,"July 8, 2024",Mobile PWA,"• Show app icon ở Home screen https://i.imgur.com/S5FJC9P.png
+• Hỗ trợ Push notification trên cách device sử dụng IOS & Android https://i.imgur.com/rrJ646I.png
+• PWA cắt gọn function so với desktop, c...","Push notification trên iOS: Chrome, Safari (https://www.notion.so/Push-notification-tr-n-iOS-Chrome-Safari-56e8f5f3ca994d598c526230295227bc?pvs=21)",
+279,"June 27, 2024",Sửa logo Chatty in app & top save bar,"Thay logo Avada bằng logo Chatty trên app để tăng trải nghiệm người dùng và đẩy mạnh branding
+1. Top save bar: https://prnt.sc/4Vet9HuJvFNQ → Đổi top save bar theo polaris (chuyển lên trên, bỏ logo)
+2...",Đổi Chatty logo in app  (https://www.notion.so/i-Chatty-logo-in-app-ce03b1eb8b4d45309ae72dc2a3d54c04?pvs=21),
+280,"June 27, 2024",Thêm count unread conversation in menu,"Count unread conversation in menu:
+Giúp merchant preview số tin nhắn chờ ở inbox
+• Khi không có unread conver, không hiện count
+• Khi >100 unread conversation, hiện 99+
+Giảm size scripttag: giúp tối ư...",,
+281,"June 27, 2024",Thêm số unread conversation trên menu,,,
+282,"June 27, 2024","Sửa logo Chatty khi reload, đổi top save bar lên trên header","Thay logo Avada bằng logo Chatty trên app để tăng trải nghiệm người dùng, đẩy mạnh branding 
+1. Top save bar: https://prnt.sc/4Vet9HuJvFNQ → Đổi top save bar theo polaris (chuyển lên trên, bỏ logo)
+2....",Đổi Chatty logo in app  (https://www.notion.so/i-Chatty-logo-in-app-ce03b1eb8b4d45309ae72dc2a3d54c04?pvs=21),
+283,"June 26, 2024",Update Chat availability,"Giúp merchant show clear hơn về trạng thái hoạt động cho customer
+• Các settings về Chat appearance, Chat availability & Notification sẽ được move vào trong Menu settings https://prnt.sc/NcrVAn7Y30e9
+...",,
+284,"June 26, 2024",Update expiration cho chat session của guest và anonymous:,Update session thành 30 ngày kể từ tin nhắn cuối cùng của khách - thay vì tin nhắn đầu tiên,,
+285,"June 26, 2024","Search conversation by name, email",Cho phép khách hàng search đoạn hội thoại theo tên và email của khách hàng,,
+286,"June 26, 2024",Update chat availability,"Giúp merchant show clear hơn về trạng thái hoạt động cho customer
+• Các settings về Chat appearance, Chat availability & Notification sẽ được move vào trong Menu settings https://prnt.sc/NcrVAn7Y30e9
+...",Cập nhật Chat availability (https://www.notion.so/C-p-nh-t-Chat-availability-464e674af5164e2ba0fc010558f94e41?pvs=21),
+287,"June 25, 2024",Thêm settings disclaimer consent,Move settings về disclaimer consent vào settings: Khách hàng có thể custom text và link policy https://prnt.sc/PYCUG-3xh49p,,
+288,"June 25, 2024","Search conversation, Update expiration","Search conversation by name, email ở admin: Cho phép khách hàng search đoạn hội thoại theo tên và email của khách hàng
+Update expiration cho chat session của guest và anonymous:Update session thành 30...","[Inbox] Search customer message (https://www.notion.so/Inbox-Search-customer-message-7b353a4124ad40ef9c6990072ecebeef?pvs=21) 
+Update expiration cho chat session của guest/anonymous (https://www.notion.so/Update-expiration-cho-chat-session-c-a-guest-anonymous-2997873ac08d429781eca70d55dc9fb3?pvs=21)",
+289,"June 25, 2024",Assistant -> Subscribe newsletter chatbot:,"Giúp merchant generate lead bằng cách cho phép customer subscrible email
+• General settings: cho phép chọn hiển thị chatbot với Not logged in & All visitors https://prnt.sc/BeCn3gR_Ou2s
+• Offer reward...",Subscribe newsletter chatbot (https://www.notion.so/Subscribe-newsletter-chatbot-ffa37e6c55da4892b46d52be15c65c91?pvs=21),
+290,"June 25, 2024",Thêm unread status và filter unread,"Với những tin nhắn chưa đọc, hiện chữ đậm hơn và chấm xanh bên cạnh
+Thêm filter 'Unread'. Giúp khách filter những conversation chưa đọc để reply",Thêm unread | filter read/unread (https://www.notion.so/Th-m-unread-filter-read-unread-e73e0ac631db491c8a9db5dd232f98a3?pvs=21),
+291,"June 20, 2024",Hiển thị thông tin Customer & Orders tại Conversation details,"• Customer: thông tin của khách hàng đã login tại store (Name, email, phone, location, order, spent amout, tag) https://prnt.sc/LC6UIjxANTGX
+• Order: Hiển thị thông tin order của customer (tối đa 60 n...","[Livechat #0.4.2] Conversation details > Customers (https://www.notion.so/Livechat-0-4-2-Conversation-details-Customers-d1af1840bfc3443188babe35f57a44b6?pvs=21) 
+[Livechat #0.4.1] Conversation details > Orders (https://www.notion.so/Livechat-0-4-1-Conversation-details-Orders-a571c4eaff534d6a85ffea56719363ff?pvs=21)",
+292,"June 19, 2024",Copy text ở admin & front end,"Copy text:
+• Khách hàng có thể bôi đen text để copy
+• Ở mobile, khi giữ vào textbox, hiện nút Copy
+
+Sửa/ update nhỏ về giao diện
+• Khi mở chatbox, btn của chatbox bị khuyết https://prnt.sc/E6CDxkKPOjS...",Không chọn & copy được text tại admin & store front (https://www.notion.so/Kh-ng-ch-n-copy-c-text-t-i-admin-store-front-ad1c56eb5e304931bb6dee5fb52cc694?pvs=21),
+293,"June 13, 2024",Cho phép dịch Question & Answer tại FAQs:,"• Tại Translations -> chọn ngôn ngữ: thêm trường FAQs ở menu https://prnt.sc/LC1j3znnXeR-
+• Cho phép dịch Category (https://prnt.sc/3FAKn23SE-XW) và Q&A (https://prnt.sc/s39_DhzXMNud)
+• Khi khách hàng...",Translate Q&A hiển thị trên widget & FAQ page (https://www.notion.so/Translate-Q-A-hi-n-th-tr-n-widget-FAQ-page-af86e033e7b342929489b5b703d5a22b?pvs=21),
+294,"June 12, 2024",Show customer activities tại store ở admin chat,"• Tính năng giúp merchant nhìn thấy được activity & intent của khách hàng, từ đó đưa ra response phù hợp
+• Những activities bao gồm:
+• Start chat
+• Add to cart
+• Add to existing cart
+• Remove item fro...",Customer activities in store front (https://www.notion.so/Customer-activities-in-store-front-8875dcf36bf94b3586fe28dac2bceab6?pvs=21),
+295,"June 10, 2024",Thêm setting name & avatar,"Thêm menu Settings:
+• Cho phép cài đặt tên và avatar hiển thị trên cửa sổ chat 
+• Default tên và avatar của store, cho phép chọn từ icon có sẵn và upload ảnh",Thêm settings store name & avatar (https://www.notion.so/Th-m-settings-store-name-avatar-bccb239b0b2740e39f04f0e147ba1ee6?pvs=21),
+296,"June 10, 2024",Cải thiện giao diện front end chatbox,"1. Cải thiện giao diện inbox và chatbox đẹp và chuyên nghiệp hơn:
++ Cập nhật về màu chữ, font chữ, spacing
++ Transition khi đóng mở, chuyển trang trên chatbox 
+2. Chỉnh sửa giao điện setting trên app ...",Cải thiện front end chatbox (https://www.notion.so/C-i-thi-n-front-end-chatbox-96f2186b267846aab5dadc4c35b706f6?pvs=21),
+297,"June 10, 2024",Cập nhật preset mới,"1. Cập nhật preset mới và giao diện chatbox theo preset mới 
+2. Cho phép customize header dạng gradient 
+3. Thêm color mode: dark/light",Theme concepts (https://www.notion.so/Theme-concepts-81fa9092a4004befafe8e5efb4586283?pvs=21),
+298,"June 10, 2024","Sent, Unread status","Cho phép xem trạng thái tin nhắn của merchant trên inbox để biết khách hàng đã đọc chưa, bao gồm:
++ Chưa đọc: Sending 
++ Chưa đọc: Sent 
++ Đã đọc: Seen","Hiện sent, read status (https://www.notion.so/Hi-n-sent-read-status-314a0b2ade5444ad893418a27a1643c7?pvs=21)",
+299,"June 5, 2024",Web Push notification,Cho phép merchant nhận thông báo khi có tin nhắn từ customer,Push web notification (https://www.notion.so/Push-web-notification-b7724214378f4fa2bf7c6709fa193870?pvs=21),
+300,"June 5, 2024",Chat analytics,"Thêm các số liệu về livechat cho khách hàng, gồm: 
++ All conversation
++ New conversation
++ Average first response time - p75) 
+
+Hình ảnh: https://prnt.sc/tWHvNye14UHF",[Dashboard] Chat analytics (https://www.notion.so/Dashboard-Chat-analytics-8d81e84a1f854777b88e01e42dc24cea?pvs=21),
+301,"May 31, 2024",Menu Assistant,"• Bổ sung Assistant menu
+• Thêm chat bot welcome visitors, các chatbot còn lại để coming soon
+• Các settings của welcome popup (https://prnt.sc/JnBrRwkkcK6O) trước đó sẽ được chuyển vào Welcome visito...",Welcome new visitor chatbot (https://www.notion.so/Welcome-new-visitor-chatbot-55102c244fd5481298c50c54fbe89f4b?pvs=21),
+302,"May 30, 2024",Update luồng order tracking,"Cập nhật tính năng order tracking, cho phép track order tại chatbox với 2 cách sau:
+1. Order number và email/phone 
+2. Tracking number và email 
++ Nếu điền email: hiển thị thông tin tracking tại chatb...",Update luồng order tracking (widget only) (https://www.notion.so/Update-lu-ng-order-tracking-widget-only-5adeae70e18c4364ad52b7fee3184e70?pvs=21),
+303,"May 30, 2024",Cho phép điều chỉnh độ rộng cột Conversation list và conversation details,"Trên trang Inbox, cho phép người dùng kéo chuột để thay đổi độ rộng của 2 cột conversation preview và conversation details
++ Khi kéo, các phần nội dung bên trong sẽ tự động điều chỉnh theo để phù hợp ...",[Inbox] Điều chỉnh độ rộng conversation preview & conversation details (https://www.notion.so/Inbox-i-u-ch-nh-r-ng-conversation-preview-conversation-details-15ba9989485a466387ab0ec6d4bdbee5?pvs=21),
+304,"May 23, 2024",[Livechat] Cài đặt thông báo tin nhắn mới,"Cài đặt gửi thông báo
+1. Loại thông báo:
++ New message: tin nhắn chưa đọc trong 1 phút
++ No replies: tin nhắn chưa trả lời trong 15 phút
+2. Người nhận thông báo: nhập 1 hoặc nhiều email",Push notification email (https://www.notion.so/Push-notification-email-dafe30ae908240658c68d6c8ef594058?pvs=21),https://help.meetchatty.com/live-chat/notifications
+305,"May 14, 2024",Update app theo polaris 12,"• Đổi toggle theo polaris mới: https://prnt.sc/iZpeFBEmzoLy
+• Đổi tất cả những cả những chỗ có màu branding Avada thành màu đen (#303030)
+• Những chỗ text link ko để màu branding Avada, thay bằng màu ...",Update app theo polaris mới (https://www.notion.so/Update-app-theo-polaris-m-i-703031ef716e434393f7da288b442396?pvs=21),
+306,"May 6, 2024",Ẩn contact method WeChat,- Tạm ẩn contact method We chat tại trang setting Chat box: https://prnt.sc/u3c6n3SavukY,[Chatbox] Ẩn contact method We chat (https://www.notion.so/Chatbox-n-contact-method-We-chat-8114eaeed778449496c27ca82c7c4f94?pvs=21),
+307,"April 23, 2024",Live chat & translation,"- Tính năng Livechat - bản beta
+- Khách hàng có thể",,
+308,"April 3, 2024",Update app listing logo,,https://drive.google.com/drive/u/1/folders/11_rox0fvESagZ0R-ha1WlyxBdDf5ax6O,
+309,"March 31, 2024",Move FAQs sang partner Chatty,"Chuyển sang partner Chatty
+Update lại app listing content",,
+310,"March 8, 2024","[Translation] Bổ sung dịch label, ngôn ngữ phổ biến","• Bổ sung translation trường hợp chọn Show navigation
+• Thêm translate cho các ngôn ngữ: German, Dutch, Italian, Turkish",https://trello.com/c/ghuKcUfW/159-th%C3%AAm-ng%C3%B4n-ng%E1%BB%AF-translate-cho-c%C3%A1c-label-c%C3%B2n-thi%E1%BA%BFu-ch%C6%B0a-%C4%91%E1%BB%A7-faqs,
+311,"March 8, 2024",Disable remove branding,"• Giữ nguyên dòng branding ở footer của widget & FAQ page
+• Bỏ button close ở dòng branding “Powered by Avada” trên FAQ page",https://trello.com/c/KIjEKdIm/176-disable-remove-branding,
+312,"March 6, 2024",[Widget] Bổ sung widget display style & Mobile widget ratio,"• Thêm preview desktop trên widget setting https://prnt.sc/EwabIrlZ7lfZ
+• Bổ sung setting về cách hiển thị widget
+• Widget display style: No navigation/Show navigation https://prnt.sc/OXltckGJUgqN
+• M...",https://trello.com/c/N1QXP54t/148-sprint-121-update-widget-preview,
+313,"February 25, 2024",[FAQ page] Update category display,"• Hiển thị category theo dạng tab -> dễ dàng đọc và tìm kiếm FAQ theo chủ đề https://prnt.sc/sos_prTD0lmY
+• Bổ sung preview mobile https://prnt.sc/1NRLjL9W2nzy",https://trello.com/c/CSEcuvGv,
+314,"February 23, 2024",Cập nhật user guide trên Avada Helpdesk center,Cập nhật lại user guide theo danh sách https://www.notion.so/e152de4967a143838a6575ac520c489f?pvs=21,https://trello.com/c/Jv9svFm1,
+315,"February 2, 2024",[Chat] More widget button type,"thêm lựa chọn về widget button gồm các giá trị:
+• Icon only
+• Label only
+• Icon & Label",https://trello.com/c/RzPeAROk,
+316,"January 30, 2024",[Onboarding+Dashboard] Cập nhật checklist status trên Dashboard khi hoàn thành onboarding,"Tự động cập nhật checklist status trên Dashboard khi hoàn thành step tương ứng trên onboarding:
+1. User chuyển đến step 2 -> tự động tích Completed task Customize widget appearance
+2. User chuyển đến ...",https://trello.com/c/NeNjtWcp,
+317,"January 30, 2024",Bổ sung translation cho widget và FAQ page,"Bổ sung các trường dịch các thông tin còn thiếu:
+• Trạng thái Online / Offline trên widget
+• Tên tab “All” trên FAQ page
+• Message khi không có kết quả search",https://trello.com/c/LzvEuYjc,
+318,"January 29, 2024",[Widget] Update widget launcher,"Bổ sung cách hiển thị widget button: Icon only, Label only, Icon & label  • - • Khuyến khích chat/tìm kiếm trợ giúp
+• Tăng tương tác với người dùng
+https://prnt.sc/Szgki0Qwn3Sb",https://trello.com/c/RzPeAROk/114-chat-more-widget-button-type,
+319,"January 25, 2024",[FAQ page] Update category display,"• Hiển thị category theo dạng tab -> dễ dàng đọc và tìm kiếm FAQ theo chủ đề https://prnt.sc/sos_prTD0lmY
+• Bổ sung preview mobile https://prnt.sc/1NRLjL9W2nzy",https://trello.com/c/CSEcuvGv/95-sprint-15-c%E1%BA%A3i-thi%E1%BB%87n-faq-pagecategory-d%E1%BA%A1ng-accordion,
+320,"January 8, 2024","Update BFS mandatory @January 8, 2024","Cải thiện onboarding steps
+Update tiêu chuẩn hiển thị theo BFS","https://trello.com/c/MK1xGGq2
+https://trello.com/c/j4BzOHqK
+https://trello.com/c/rty4kyow",
+321,"December 4, 2023",Update in-app app name,"Change name: Avada WhatsApp Chat, FAQ Page → Avada Helpdesk & FAQ",,
+322,"November 16, 2023 9:00 AM (GMT+7)","Update settings, add welcome popup & chat availability functions","• Update new widget settings: https://trello.com/c/FECx6TuA
+• New feature Chat availability: https://trello.com/c/syrt3L9d
+• New feature: Welcome popup: https://trello.com/c/xCQPvmIT",https://trello.com/c/FECx6TuA,https://helpdesk.avada.io/changelog#1.2.9
+323,"April 2, 2025 → December 31, 2025","Block conversation từ channels (email, messenger, instagram)","Fix lỗi block/unblock conversation trên các channel: Email, Messenger, Instagram",,
+324,"April 1, 2025 → December 31, 2025",Template,,,
+325,,Preview scenario Transfer to human,,,
+326,,Update AI limitation mới,,,
