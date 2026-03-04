@@ -782,6 +782,12 @@ async function renderCompetitors() {
     }).join(' ');
   }
 
+  function bfsBadge(val) {
+    if (val === true)  return `<span style="display:inline-flex;align-items:center;gap:4px;background:#e8f5e9;color:#2e7d32;font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px">✦ Built for Shopify</span>`;
+    if (val === false) return `<span style="background:#f5f5f5;color:#aaa;font-size:11px;padding:2px 8px;border-radius:10px">No BfS</span>`;
+    return '<span style="color:#ccc;font-size:11px">—</span>';
+  }
+
   function changesForComp(handle) {
     return history.filter(h => h.handle === handle).length;
   }
@@ -820,7 +826,10 @@ async function renderCompetitors() {
             <div class="comp-field-label">Pricing</div>
             <div class="comp-pricing-row">${formatPricing(snap)}</div>
           </div>` : ''}
-          ${chCount > 0 ? `<div><span class="comp-changed-badge">⚡ ${chCount} change${chCount > 1 ? 's' : ''} detected</span></div>` : ''}
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:6px">
+            ${bfsBadge(snap.builtForShopify)}
+            ${chCount > 0 ? `<span class="comp-changed-badge">⚡ ${chCount} change${chCount > 1 ? 's' : ''}</span>` : ''}
+          </div>
           <div class="comp-last-check">Last checked: ${lastCheck}</div>
         </div>
       </div>`;
@@ -861,6 +870,7 @@ async function renderCompetitors() {
     const name = snap.name || COMP_NAMES[handle] || handle;
     return `<tr>
       <td style="font-weight:700;white-space:nowrap">${name}</td>
+      <td style="text-align:center">${bfsBadge(snap.builtForShopify)}</td>
       <td>${snap.tagline || '—'}</td>
       <td>${snap.features && snap.features[0] ? snap.features[0] : '—'}</td>
       <td style="text-align:center">${snap.rating ?? '—'} ★</td>
@@ -871,13 +881,59 @@ async function renderCompetitors() {
   // Insert Chatty as first row
   compareRows.unshift(`<tr class="chatty-row">
     <td>Chatty ✦</td>
+    <td style="text-align:center">${bfsBadge(true)}</td>
     <td>${chattyTagline}</td>
     <td>${chattyFeatures[0]}</td>
     <td style="text-align:center">4.9 ★</td>
-    <td style="text-align:center">251+</td>
+    <td style="text-align:center">1,765</td>
   </tr>`);
 
+  // ── Ranking algorithm signals ─────────────────────────────────────────
+  const ASO_FACTORS = [
+    { label: 'App Name / Title',    weight: 80,  tip: 'Keywords in the app name have the highest impact on ranking. Shopify prioritizes exact keyword matches here.' },
+    { label: 'App Card Subtitle',   weight: 65,  tip: 'Second most important field. Up to 62 chars. Keywords here rank almost as strongly as the title.' },
+    { label: 'Built for Shopify',   weight: 55,  tip: 'Shopify-certified badge. Gives a significant organic ranking boost + prominent badge shown on listing.' },
+    { label: 'Review Count',        weight: 50,  tip: 'More reviews = stronger trust signal. Shopify weighs volume + recency. Getting reviews consistently matters.' },
+    { label: 'Star Rating',         weight: 45,  tip: 'Higher rating improves ranking. Rating drops below 4.5 start to hurt visibility.' },
+    { label: 'App Description',     weight: 40,  tip: 'First 100 chars (intro) carry most weight. Keywords in description help but less than title/subtitle.' },
+    { label: 'Feature Bullets',     weight: 30,  tip: '5 bullet points (80 chars each). Keyword-rich bullets help long-tail keyword ranking.' },
+    { label: 'Install Velocity',    weight: 45,  tip: 'Recent install rate is a strong signal. Apps gaining installs fast get ranking boosts.' },
+    { label: 'Uninstall Rate',      weight: -35, tip: 'High uninstall rate hurts ranking — it signals poor product-market fit or broken UX.' },
+    { label: 'Media (Screenshots)', weight: 15,  tip: 'Alt text on screenshots contributes to keyword indexing. Quality images affect install conversion rate.' },
+  ];
+
+  const asoRows = ASO_FACTORS.map(f => {
+    const isNeg = f.weight < 0;
+    const abs = Math.abs(f.weight);
+    const color = isNeg ? '#ef4444' : abs >= 60 ? '#16a34a' : abs >= 40 ? '#2563eb' : '#f59e0b';
+    return `<tr>
+      <td style="font-weight:600;white-space:nowrap">${f.label}</td>
+      <td style="width:200px">
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="flex:1;background:#f0f0f0;border-radius:4px;height:8px;overflow:hidden">
+            <div style="width:${abs}%;height:100%;background:${color};border-radius:4px"></div>
+          </div>
+          <span style="font-size:12px;font-weight:700;color:${color};white-space:nowrap">${isNeg ? '-' : '+'}${abs}%</span>
+        </div>
+      </td>
+      <td style="font-size:12px;color:#666">${f.tip}</td>
+    </tr>`;
+  }).join('');
+
   el.innerHTML = `
+    <div class="rank-section-title">Shopify App Store Ranking Algorithm</div>
+    <div class="rank-updated">Based on Shopify Partner docs + ASO community research. Weights are approximate — not official Shopify numbers.</div>
+    <div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;overflow:hidden;margin-bottom:28px">
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead><tr style="background:#f7f7f9">
+          <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;color:#888;border-bottom:1px solid #e8e8e8;width:200px">Factor</th>
+          <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;color:#888;border-bottom:1px solid #e8e8e8;width:220px">Weight</th>
+          <th style="padding:10px 16px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;color:#888;border-bottom:1px solid #e8e8e8">Notes</th>
+        </tr></thead>
+        <tbody>${asoRows}</tbody>
+      </table>
+    </div>
+
     <div class="rank-section-title">Competitor Listings</div>
     <div class="rank-updated">Last scraped: ${lastCheck} &nbsp;·&nbsp; ${Object.keys(snapshots).length} competitors tracked</div>
     <div class="comp-grid">${cards}</div>
@@ -901,8 +957,9 @@ async function renderCompetitors() {
     <table class="comp-compare-table">
       <thead><tr>
         <th style="min-width:100px">App</th>
-        <th style="min-width:260px">Tagline / Subtitle</th>
-        <th style="min-width:260px">Top Feature</th>
+        <th>BfS</th>
+        <th style="min-width:240px">Tagline / Subtitle</th>
+        <th style="min-width:240px">Top Feature</th>
         <th>Rating</th>
         <th>Reviews</th>
       </tr></thead>
