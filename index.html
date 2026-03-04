@@ -125,6 +125,43 @@
   .chart-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
   .kw-toggle { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; border: 2px solid; transition: opacity .15s; }
   .kw-toggle.off { opacity: 0.3; }
+
+  /* Competitor Intel */
+  .comp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; margin-bottom: 28px; }
+  .comp-card { background: #fff; border: 1px solid #e8e8e8; border-radius: 12px; overflow: hidden; }
+  .comp-card-head { padding: 14px 16px 10px; border-bottom: 1px solid #f0f0f0; display: flex; align-items: flex-start; gap: 10px; }
+  .comp-card-head .comp-name { font-size: 14px; font-weight: 700; color: #1a1a2e; flex: 1; }
+  .comp-card-head .comp-link { font-size: 11px; color: #1A0A7A; text-decoration: none; font-weight: 500; }
+  .comp-card-head .comp-link:hover { text-decoration: underline; }
+  .comp-rating { display: flex; align-items: center; gap: 4px; margin-top: 4px; }
+  .comp-rating .stars { color: #f59e0b; font-size: 12px; }
+  .comp-rating .val { font-size: 12px; font-weight: 700; color: #1a1a2e; }
+  .comp-rating .cnt { font-size: 11px; color: #aaa; }
+  .comp-card-body { padding: 12px 16px; }
+  .comp-field { margin-bottom: 10px; }
+  .comp-field-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: #aaa; margin-bottom: 3px; }
+  .comp-field-value { font-size: 12.5px; color: #444; line-height: 1.5; }
+  .comp-features { list-style: disc; padding-left: 16px; }
+  .comp-features li { font-size: 12px; color: #555; margin-bottom: 3px; line-height: 1.4; }
+  .comp-pricing-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+  .comp-plan-pill { background: #f0f0f5; color: #555; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px; }
+  .comp-plan-pill.free { background: #dcfce7; color: #16a34a; }
+  .comp-changed-badge { display: inline-flex; align-items: center; gap: 4px; background: #fef3c7; color: #92400e; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; }
+  .comp-last-check { font-size: 10px; color: #bbb; margin-top: 8px; }
+
+  .comp-changes-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; border: 1px solid #e8e8e8; font-size: 12.5px; margin-bottom: 28px; }
+  .comp-changes-table th { background: #f7f7f9; padding: 8px 14px; text-align: left; font-size: 11px; font-weight: 700; color: #888; text-transform: uppercase; border-bottom: 1px solid #e8e8e8; }
+  .comp-changes-table td { padding: 10px 14px; border-bottom: 1px solid #f4f4f4; vertical-align: top; }
+  .comp-changes-table tr:last-child td { border-bottom: none; }
+  .comp-diff-before { color: #ef4444; text-decoration: line-through; font-size: 12px; }
+  .comp-diff-after  { color: #16a34a; font-size: 12px; margin-top: 2px; }
+  .comp-compare-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; border: 1px solid #e8e8e8; font-size: 12px; margin-bottom: 24px; }
+  .comp-compare-table th { background: #1A0A7A; color: #fff; padding: 9px 14px; text-align: left; font-size: 11px; font-weight: 700; border-right: 1px solid #2d1a99; white-space: nowrap; }
+  .comp-compare-table td { padding: 9px 14px; border-bottom: 1px solid #f4f4f4; border-right: 1px solid #f0f0f0; vertical-align: top; color: #444; line-height: 1.4; }
+  .comp-compare-table tr:last-child td { border-bottom: none; }
+  .comp-compare-table tr:hover td { background: #fafafa; }
+  .comp-compare-table .chatty-row td { background: #fffbeb; font-weight: 600; color: #1A0A7A; }
+  .no-snapshot { text-align: center; padding: 40px; color: #bbb; font-size: 13px; line-height: 1.8; }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
@@ -141,6 +178,7 @@
   <div class="tab" onclick="switchView('current')">Current Content</div>
   <div class="tab" onclick="switchView('rankings')">Rankings</div>
   <div class="tab" onclick="switchView('reports')">Change Reports</div>
+  <div class="tab" onclick="switchView('competitors')">Competitor Intel</div>
 </div>
 
 <div class="layout">
@@ -160,6 +198,9 @@
     </div>
     <div class="view" id="view-reports">
       <div id="reports-content"></div>
+    </div>
+    <div class="view" id="view-competitors">
+      <div id="competitors-content"></div>
     </div>
   </div>
 </div>
@@ -683,14 +724,200 @@ async function renderReports() {
     : '<div class="empty-state">No change reports yet</div>';
 }
 
+// ── Competitor Intel ──────────────────────────────────────────────────────────
+async function renderCompetitors() {
+  const el = document.getElementById('competitors-content');
+  el.innerHTML = '<div class="empty-state">Loading competitor data...</div>';
+
+  let data = null;
+  try {
+    const res = await fetch('competitor-snapshots.json');
+    data = await res.json();
+  } catch (e) {
+    el.innerHTML = `<div class="no-snapshot">Could not load competitor-snapshots.json.<br><small>${e.message}</small><br><br>Run <code>node scripts/competitor-watch.cjs</code> to generate data.</div>`;
+    return;
+  }
+
+  if (!data || !data.snapshots || Object.keys(data.snapshots).length === 0) {
+    el.innerHTML = '<div class="no-snapshot">No competitor snapshots yet.<br>Run the competitor-watch script to start tracking.</div>';
+    return;
+  }
+
+  const snapshots = data.snapshots;
+  const history   = data.history || [];
+  const lastCheck = data.lastChecked ? new Date(data.lastChecked).toLocaleString('en-GB', {
+    day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
+  }) : 'Unknown';
+
+  const COMP_NAMES = {
+    'tidio-chat':             'Tidio',
+    'rep-ai-sales-associate': 'Rep AI',
+    'moosedesk':              'Moosedesk',
+    'zipchat':                'Zipchat',
+    'livechat':               'LiveChat',
+    'tawk-to':                'tawk.to',
+    'vanchat':                'Vanchat',
+    'reamaze':                'Reamaze',
+  };
+
+  // ── Recent changes (from history) ────────────────────────────────────────
+  const recentChanges = [...history].reverse().slice(0, 30);
+  const hasChanges = recentChanges.length > 0;
+
+  // ── Competitor cards ──────────────────────────────────────────────────────
+  function stars(rating) {
+    if (!rating) return '';
+    const full  = Math.floor(rating);
+    const half  = rating - full >= 0.5 ? 1 : 0;
+    const empty = 5 - full - half;
+    return '★'.repeat(full) + (half ? '½' : '') + '☆'.repeat(empty);
+  }
+
+  function formatPricing(snap) {
+    if (!snap.pricing || snap.pricing.length === 0) return snap.pricingNote || '';
+    return snap.pricing.map(p => {
+      const isFree = (p.price || '').toLowerCase().includes('free') || (p.plan || '').toLowerCase().includes('free');
+      return `<span class="comp-plan-pill ${isFree ? 'free' : ''}">${p.plan}${p.price && p.price !== p.plan ? ': ' + p.price : ''}</span>`;
+    }).join(' ');
+  }
+
+  function changesForComp(handle) {
+    return history.filter(h => h.handle === handle).length;
+  }
+
+  const cards = Object.entries(snapshots).map(([handle, snap]) => {
+    const name = snap.name || COMP_NAMES[handle] || handle;
+    const chCount = changesForComp(handle);
+    return `
+      <div class="comp-card">
+        <div class="comp-card-head">
+          <div style="flex:1">
+            <div class="comp-name">${name}</div>
+            <div class="comp-rating">
+              <span class="stars">${stars(snap.rating)}</span>
+              <span class="val">${snap.rating ?? '—'}</span>
+              <span class="cnt">${snap.reviewCount ? '(' + snap.reviewCount.toLocaleString() + ' reviews)' : ''}</span>
+            </div>
+          </div>
+          <a class="comp-link" href="https://apps.shopify.com/${handle}" target="_blank">View ↗</a>
+        </div>
+        <div class="comp-card-body">
+          ${snap.tagline ? `
+          <div class="comp-field">
+            <div class="comp-field-label">Tagline</div>
+            <div class="comp-field-value">${snap.tagline}</div>
+          </div>` : ''}
+          ${snap.features && snap.features.length > 0 ? `
+          <div class="comp-field">
+            <div class="comp-field-label">Features</div>
+            <ul class="comp-features">
+              ${snap.features.map(f => `<li>${f}</li>`).join('')}
+            </ul>
+          </div>` : ''}
+          ${(snap.pricing && snap.pricing.length > 0) || snap.pricingNote ? `
+          <div class="comp-field">
+            <div class="comp-field-label">Pricing</div>
+            <div class="comp-pricing-row">${formatPricing(snap)}</div>
+          </div>` : ''}
+          ${chCount > 0 ? `<div><span class="comp-changed-badge">⚡ ${chCount} change${chCount > 1 ? 's' : ''} detected</span></div>` : ''}
+          <div class="comp-last-check">Last checked: ${lastCheck}</div>
+        </div>
+      </div>`;
+  }).join('');
+
+  // ── Change history table ──────────────────────────────────────────────────
+  function renderChangeValue(val) {
+    if (Array.isArray(val)) return val.map(v => typeof v === 'object' ? JSON.stringify(v) : v).join(', ');
+    if (typeof val === 'object' && val !== null) return JSON.stringify(val);
+    return String(val ?? '—');
+  }
+
+  const changeRows = recentChanges.map(item => {
+    const compName = item.competitor || COMP_NAMES[item.handle] || item.handle;
+    return item.changes.map(ch => `
+      <tr>
+        <td style="white-space:nowrap;color:#888">${item.date}</td>
+        <td style="font-weight:700;white-space:nowrap">${compName}</td>
+        <td style="font-weight:600;color:#1A0A7A">${ch.field}</td>
+        <td>
+          <div class="comp-diff-before">${renderChangeValue(ch.before).slice(0, 120)}</div>
+          <div class="comp-diff-after">${renderChangeValue(ch.after).slice(0, 120)}</div>
+        </td>
+      </tr>`).join('');
+  }).join('');
+
+  // ── Side-by-side comparison table (taglines) ──────────────────────────────
+  const chattyTagline  = 'Sell more: AI chatbot, livechat, inbox, help center & WhatsApp';
+  const chattyFeatures = [
+    'AI chatbot & live chat: 24/7 sales support with smart product recommendations',
+    'Inbox & team: Manage WhatsApp, Instagram, Messenger & live chat in one place',
+    'Help center & FAQ: Let shoppers self-serve and reduce support load instantly',
+    'Sales automation: Trigger proactive chat to recover carts and boost conversions',
+    'Mobile app: Reply to shoppers from your phone. Never miss a chat anywhere',
+  ];
+
+  const compareRows = Object.entries(snapshots).map(([handle, snap]) => {
+    const name = snap.name || COMP_NAMES[handle] || handle;
+    return `<tr>
+      <td style="font-weight:700;white-space:nowrap">${name}</td>
+      <td>${snap.tagline || '—'}</td>
+      <td>${snap.features && snap.features[0] ? snap.features[0] : '—'}</td>
+      <td style="text-align:center">${snap.rating ?? '—'} ★</td>
+      <td style="text-align:center">${snap.reviewCount ? snap.reviewCount.toLocaleString() : '—'}</td>
+    </tr>`;
+  });
+
+  // Insert Chatty as first row
+  compareRows.unshift(`<tr class="chatty-row">
+    <td>Chatty ✦</td>
+    <td>${chattyTagline}</td>
+    <td>${chattyFeatures[0]}</td>
+    <td style="text-align:center">4.9 ★</td>
+    <td style="text-align:center">251+</td>
+  </tr>`);
+
+  el.innerHTML = `
+    <div class="rank-section-title">Competitor Listings</div>
+    <div class="rank-updated">Last scraped: ${lastCheck} &nbsp;·&nbsp; ${Object.keys(snapshots).length} competitors tracked</div>
+    <div class="comp-grid">${cards}</div>
+
+    ${hasChanges ? `
+    <div class="rank-section-title">Change History</div>
+    <div class="rank-updated">Fields that changed since first snapshot — newest first</div>
+    <div style="overflow-x:auto;margin-bottom:28px">
+    <table class="comp-changes-table">
+      <thead><tr>
+        <th>Date</th><th>Competitor</th><th>Field</th><th>Change</th>
+      </tr></thead>
+      <tbody>${changeRows}</tbody>
+    </table></div>` : `
+    <div style="background:#f9f9fb;border:1px dashed #e0e0e0;border-radius:10px;padding:20px;margin-bottom:28px;font-size:13px;color:#aaa;text-align:center">
+      No changes detected yet. History will appear here after the script runs a second time.
+    </div>`}
+
+    <div class="rank-section-title">Chatty vs Competitors — Tagline Comparison</div>
+    <div style="overflow-x:auto">
+    <table class="comp-compare-table">
+      <thead><tr>
+        <th style="min-width:100px">App</th>
+        <th style="min-width:260px">Tagline / Subtitle</th>
+        <th style="min-width:260px">Top Feature</th>
+        <th>Rating</th>
+        <th>Reviews</th>
+      </tr></thead>
+      <tbody>${compareRows.join('')}</tbody>
+    </table></div>`;
+}
+
 function switchView(view) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   event.target.classList.add('active');
   document.getElementById('view-' + view).classList.add('active');
-  if (view === 'current') renderCurrent();
-  if (view === 'rankings') renderRankings();
-  if (view === 'reports') renderReports();
+  if (view === 'current')     renderCurrent();
+  if (view === 'rankings')    renderRankings();
+  if (view === 'reports')     renderReports();
+  if (view === 'competitors') renderCompetitors();
 }
 
 // Init
