@@ -415,11 +415,36 @@ async function renderRankings() {
       return `<tr><td style="font-weight:600">${r.keyword}</td>${historyCells}</tr>`;
     }).join('');
 
+    // Competitor comparison table
+    const competitors = latest.results[0].competitors ? Object.keys(latest.results[0].competitors) : [];
+    const compRows = latest.results.map(r => {
+      if (!r.competitors) return '';
+      const chattyPill = `<span class="rank-pill ${rankClass(r.organicPosition)}">${r.organicPosition ? '#' + r.organicPosition : '—'}</span>`;
+      const compCells = competitors.map(c => {
+        const pos = r.competitors[c];
+        return `<td style="text-align:center"><span class="rank-pill ${rankClass(pos)}">${pos ? '#' + pos : '—'}</span></td>`;
+      }).join('');
+      return `<tr><td style="font-weight:600">${r.keyword}</td><td style="text-align:center">${chattyPill}</td>${compCells}</tr>`;
+    }).filter(Boolean).join('');
+
     el.innerHTML = `
       <div class="rank-section-title">Current Organic Rankings</div>
       <div class="rank-updated">Last checked: ${updated}</div>
       <div class="rank-grid">${cards}</div>
-      <div class="rank-section-title">History</div>
+
+      <div class="rank-section-title" style="margin-top:24px">Chatty vs Competitors (Organic)</div>
+      <div class="rank-updated">Green = top 3 &nbsp;|&nbsp; Blue = top 6 &nbsp;|&nbsp; Yellow = top 10 &nbsp;|&nbsp; Red = 11+</div>
+      <div style="overflow-x:auto">
+      <table class="rank-history-table">
+        <thead><tr>
+          <th>Keyword</th>
+          <th style="text-align:center;color:#1A0A7A">Chatty</th>
+          ${competitors.map(c => `<th style="text-align:center">${c}</th>`).join('')}
+        </tr></thead>
+        <tbody>${compRows}</tbody>
+      </table></div>
+
+      <div class="rank-section-title" style="margin-top:24px">Ranking History</div>
       <table class="rank-history-table">
         <thead><tr><th>Keyword</th>${dates.map(d => `<th>${d}</th>`).join('')}</tr></thead>
         <tbody>${tableRows}</tbody>
