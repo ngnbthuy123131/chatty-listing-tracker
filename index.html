@@ -88,6 +88,30 @@
   .rank-pill.p10 { background: #fee2e2; color: #dc2626; }
   .rank-pill.pnone { background: #f0f0f0; color: #aaa; }
 
+  /* Reports */
+  .report-card { background: #fff; border-radius: 12px; border: 1px solid #e8e8e8; margin-bottom: 20px; overflow: hidden; }
+  .report-card-header { background: #1A0A7A; color: #fff; padding: 14px 20px; display: flex; align-items: center; gap: 12px; }
+  .report-card-header .date { font-size: 13px; font-weight: 700; }
+  .report-card-header .fields-changed { font-size: 11px; opacity: 0.7; margin-left: auto; }
+  .report-body { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+  @media (max-width: 700px) { .report-body { grid-template-columns: 1fr; } }
+  .report-section { padding: 16px 20px; border-right: 1px solid #f0f0f0; }
+  .report-section:last-child { border-right: none; }
+  .report-section-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: #888; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+  .report-row { display: flex; align-items: center; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #f8f8f8; font-size: 12.5px; }
+  .report-row:last-child { border-bottom: none; }
+  .report-row .label { color: #555; }
+  .report-row .values { display: flex; align-items: center; gap: 6px; font-weight: 600; }
+  .report-row .before { color: #aaa; font-weight: 400; }
+  .delta { font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 4px; }
+  .delta.up { background: #dcfce7; color: #16a34a; }
+  .delta.down { background: #fee2e2; color: #dc2626; }
+  .delta.flat { background: #f0f0f0; color: #888; }
+  .pending-badge { display: inline-flex; align-items: center; gap: 4px; background: #fef3c7; color: #92400e; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+  .report-changes-list { padding: 12px 20px; background: #f9f9fb; border-top: 1px solid #f0f0f0; }
+  .report-changes-list .change-item { font-size: 12px; color: #555; padding: 3px 0; }
+  .report-changes-list .change-item strong { color: #1A0A7A; }
+
   /* Current view */
   .section-group { background: #fff; border-radius: 10px; border: 1px solid #e8e8e8; margin-bottom: 16px; overflow: hidden; }
   .section-group-title { background: #f7f7f9; padding: 10px 16px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: #888; border-bottom: 1px solid #e8e8e8; }
@@ -116,6 +140,7 @@
   <div class="tab active" onclick="switchView('history')">History</div>
   <div class="tab" onclick="switchView('current')">Current Content</div>
   <div class="tab" onclick="switchView('rankings')">Rankings</div>
+  <div class="tab" onclick="switchView('reports')">Change Reports</div>
 </div>
 
 <div class="layout">
@@ -132,6 +157,9 @@
     </div>
     <div class="view" id="view-rankings">
       <div id="rankings-content"><div class="empty-state">Loading rankings...</div></div>
+    </div>
+    <div class="view" id="view-reports">
+      <div id="reports-content"></div>
     </div>
   </div>
 </div>
@@ -537,6 +565,124 @@ function toggleKw(idx, el) {
   chart.update();
 }
 
+async function renderReports() {
+  const el = document.getElementById('reports-content');
+  let rankLog = [];
+  try {
+    const res = await fetch('ranking-log.json');
+    rankLog = await res.json();
+  } catch {}
+
+  // Build a map of ranking snapshots by date
+  const rankByDate = {};
+  rankLog.filter(e => e.results.some(r => r.organicPosition !== undefined)).forEach(e => {
+    rankByDate[e.date] = e;
+  });
+  const rankDates = Object.keys(rankByDate).sort();
+
+  // Build change reports from history data (each unique change date)
+  const changeDates = [...new Set(history.map(h => h.id))].sort();
+
+  // For each change, find: rank before, rank 7d after, traffic (pending)
+  const reportCards = changeDates.map(changeId => {
+    const entry = history.find(h => h.id === changeId);
+    if (!entry || entry.changes.length === 0) return null;
+
+    // Rank snapshot closest BEFORE this change
+    const before = rankDates.filter(d => d < changeId).slice(-1)[0];
+    // Rank snapshot closest AFTER this change (7+ days later)
+    const afterDate = new Date(new Date(changeId).getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+    const after = rankDates.filter(d => d >= afterDate)[0];
+
+    const beforeRanks = before ? rankByDate[before] : null;
+    const afterRanks  = after  ? rankByDate[after]  : null;
+
+    // P0 keywords only for compact view
+    const p0 = ['live chat', 'AI chatbot', 'chatbot', 'chat', 'inbox', 'livechat', 'ai chat'];
+
+    const rankRows = p0.map(kw => {
+      const b = beforeRanks?.results.find(r => r.keyword === kw)?.organicPosition;
+      const a = afterRanks?.results.find(r => r.keyword === kw)?.organicPosition;
+      let deltaHtml = '';
+      if (b && a) {
+        const diff = b - a; // positive = improved
+        if (diff > 0) deltaHtml = `<span class="delta up">↑${diff}</span>`;
+        else if (diff < 0) deltaHtml = `<span class="delta down">↓${Math.abs(diff)}</span>`;
+        else deltaHtml = `<span class="delta flat">—</span>`;
+      } else if (!afterRanks) {
+        deltaHtml = `<span class="pending-badge">⏳ pending</span>`;
+      }
+      return `<div class="report-row">
+        <span class="label">${kw}</span>
+        <span class="values">
+          ${b ? `<span class="before">#${b}</span> →` : ''}
+          ${a ? `<strong>#${a}</strong>` : (b ? `<strong>#${b}</strong>` : '<span class="before">—</span>')}
+          ${deltaHtml}
+        </span>
+      </div>`;
+    }).join('');
+
+    // Traffic section (pending BigQuery)
+    const trafficRows = ['Shopify organic', 'chatbot keyword', 'chat keyword', 'ai chatbot keyword'].map(label =>
+      `<div class="report-row">
+        <span class="label">${label}</span>
+        <span class="values"><span class="pending-badge">⏳ BigQuery pending</span></span>
+      </div>`
+    ).join('');
+
+    // Install section (pending BigQuery)
+    const installRows = ['Traffic-to-install', 'Weekly installs'].map(label =>
+      `<div class="report-row">
+        <span class="label">${label}</span>
+        <span class="values"><span class="pending-badge">⏳ BigQuery pending</span></span>
+      </div>`
+    ).join('');
+
+    // Changed fields list
+    const textChanges = entry.changes.filter(c => c.chars).slice(0, 5);
+    const changesList = textChanges.map(c =>
+      `<div class="change-item"><strong>${c.field}:</strong> ${c.content.substring(0, 80)}${c.content.length > 80 ? '...' : ''}</div>`
+    ).join('');
+
+    const rankStatus = afterRanks
+      ? `<span style="font-size:11px;background:#dcfce7;color:#16a34a;padding:2px 8px;border-radius:4px">Rank data available</span>`
+      : `<span class="pending-badge">⏳ Rank data in ${Math.max(0, 7 - Math.floor((Date.now() - new Date(changeId)) / 86400000))}d</span>`;
+
+    return `
+      <div class="report-card">
+        <div class="report-card-header">
+          <div>
+            <div class="date">Change: ${entry.date} ${entry.proposed ? '· Proposed' : '· Applied'}</div>
+            <div style="font-size:11px;opacity:.7;margin-top:2px">${entry.changes.length} fields updated</div>
+          </div>
+          <div class="fields-changed">${rankStatus}</div>
+        </div>
+        <div class="report-body">
+          <div class="report-section">
+            <div class="report-section-title">📈 Rank Impact <small style="font-weight:400;text-transform:none">(7d after)</small></div>
+            ${rankRows}
+          </div>
+          <div class="report-section">
+            <div class="report-section-title">👥 Traffic Impact <small style="font-weight:400;text-transform:none">(+7d)</small></div>
+            ${trafficRows}
+          </div>
+          <div class="report-section">
+            <div class="report-section-title">📦 Install Impact <small style="font-weight:400;text-transform:none">(+14d)</small></div>
+            ${installRows}
+          </div>
+        </div>
+        <div class="report-changes-list">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:#888;margin-bottom:6px">What changed</div>
+          ${changesList}
+        </div>
+      </div>`;
+  }).filter(Boolean).reverse(); // newest first
+
+  el.innerHTML = reportCards.length
+    ? `<div style="font-size:12px;color:#888;margin-bottom:16px">One report card per content change. Traffic + install columns fill in once BigQuery is connected.</div>` + reportCards.join('')
+    : '<div class="empty-state">No change reports yet</div>';
+}
+
 function switchView(view) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
@@ -544,6 +690,7 @@ function switchView(view) {
   document.getElementById('view-' + view).classList.add('active');
   if (view === 'current') renderCurrent();
   if (view === 'rankings') renderRankings();
+  if (view === 'reports') renderReports();
 }
 
 // Init
