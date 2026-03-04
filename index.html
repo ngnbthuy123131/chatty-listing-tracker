@@ -64,6 +64,30 @@
   .note-card .field-name { font-size: 11px; font-weight: 700; text-transform: uppercase; color: #d97706; margin-bottom: 4px; }
   .empty-state { text-align: center; padding: 60px 20px; color: #aaa; font-size: 14px; }
 
+  /* Rankings */
+  .rank-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .rank-card { background: #fff; border-radius: 10px; border: 1px solid #e8e8e8; padding: 14px 16px; }
+  .rank-card .kw { font-size: 11px; font-weight: 700; text-transform: uppercase; color: #888; margin-bottom: 8px; }
+  .rank-card .pos { font-size: 28px; font-weight: 800; line-height: 1; }
+  .rank-card .pos.p1 { color: #16a34a; }
+  .rank-card .pos.p2 { color: #2563eb; }
+  .rank-card .pos.p5 { color: #d97706; }
+  .rank-card .pos.p10 { color: #dc2626; }
+  .rank-card .pos.pnone { color: #ccc; font-size: 18px; }
+  .rank-card .sub { font-size: 11px; color: #aaa; margin-top: 4px; }
+  .rank-section-title { font-size: 13px; font-weight: 700; color: #1A0A7A; margin-bottom: 12px; margin-top: 4px; }
+  .rank-updated { font-size: 11px; color: #aaa; margin-bottom: 16px; }
+  .rank-history-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; border: 1px solid #e8e8e8; font-size: 12.5px; }
+  .rank-history-table th { background: #f7f7f9; padding: 8px 12px; text-align: left; font-size: 11px; font-weight: 700; color: #888; text-transform: uppercase; border-bottom: 1px solid #e8e8e8; }
+  .rank-history-table td { padding: 9px 12px; border-bottom: 1px solid #f0f0f0; }
+  .rank-history-table tr:last-child td { border-bottom: none; }
+  .rank-pill { display: inline-block; padding: 2px 8px; border-radius: 10px; font-weight: 700; font-size: 11px; }
+  .rank-pill.p1 { background: #dcfce7; color: #16a34a; }
+  .rank-pill.p2 { background: #dbeafe; color: #2563eb; }
+  .rank-pill.p5 { background: #fef3c7; color: #d97706; }
+  .rank-pill.p10 { background: #fee2e2; color: #dc2626; }
+  .rank-pill.pnone { background: #f0f0f0; color: #aaa; }
+
   /* Current view */
   .section-group { background: #fff; border-radius: 10px; border: 1px solid #e8e8e8; margin-bottom: 16px; overflow: hidden; }
   .section-group-title { background: #f7f7f9; padding: 10px 16px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: #888; border-bottom: 1px solid #e8e8e8; }
@@ -85,6 +109,7 @@
 <div class="tabs">
   <div class="tab active" onclick="switchView('history')">History</div>
   <div class="tab" onclick="switchView('current')">Current Content</div>
+  <div class="tab" onclick="switchView('rankings')">Rankings</div>
 </div>
 
 <div class="layout">
@@ -98,6 +123,9 @@
     </div>
     <div class="view" id="view-current">
       <div id="current-content"></div>
+    </div>
+    <div class="view" id="view-rankings">
+      <div id="rankings-content"><div class="empty-state">Loading rankings...</div></div>
     </div>
   </div>
 </div>
@@ -336,12 +364,78 @@ function selectDate(id) {
   renderHistory(id);
 }
 
+function rankClass(pos) {
+  if (!pos) return 'pnone';
+  if (pos <= 3) return 'p1';
+  if (pos <= 6) return 'p2';
+  if (pos <= 10) return 'p5';
+  return 'p10';
+}
+
+async function renderRankings() {
+  const el = document.getElementById('rankings-content');
+  try {
+    const res = await fetch('ranking-log.json');
+    const log = await res.json();
+
+    // Get latest entry with real data
+    const latest = [...log].reverse().find(e => e.results.some(r => r.organicPosition !== undefined));
+    if (!latest) { el.innerHTML = '<div class="empty-state">No ranking data yet</div>'; return; }
+
+    const updated = new Date(latest.time).toLocaleString('en-GB', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
+
+    // Build keyword history (for history table)
+    const kwHistory = {};
+    log.filter(e => e.results.some(r => r.organicPosition !== undefined)).forEach(entry => {
+      entry.results.forEach(r => {
+        if (!kwHistory[r.keyword]) kwHistory[r.keyword] = [];
+        kwHistory[r.keyword].push({ date: entry.date, organic: r.organicPosition, overall: r.position });
+      });
+    });
+
+    // Current snapshot cards
+    const cards = latest.results.map(r => {
+      const pos = r.organicPosition;
+      const cls = rankClass(pos);
+      return `<div class="rank-card">
+        <div class="kw">${r.keyword}</div>
+        <div class="pos ${cls}">${pos ? '#' + pos : '—'}</div>
+        <div class="sub">${pos ? `#${r.position} overall` : 'Not in top results'}</div>
+      </div>`;
+    }).join('');
+
+    // History table
+    const dates = log.filter(e => e.results.some(r => r.organicPosition !== undefined)).map(e => e.date);
+    const tableRows = latest.results.map(r => {
+      const history = kwHistory[r.keyword] || [];
+      const historyCells = history.map(h => {
+        const cls = rankClass(h.organic);
+        return `<td><span class="rank-pill ${cls}">${h.organic ? '#' + h.organic : '—'}</span></td>`;
+      }).join('');
+      return `<tr><td style="font-weight:600">${r.keyword}</td>${historyCells}</tr>`;
+    }).join('');
+
+    el.innerHTML = `
+      <div class="rank-section-title">Current Organic Rankings</div>
+      <div class="rank-updated">Last checked: ${updated}</div>
+      <div class="rank-grid">${cards}</div>
+      <div class="rank-section-title">History</div>
+      <table class="rank-history-table">
+        <thead><tr><th>Keyword</th>${dates.map(d => `<th>${d}</th>`).join('')}</tr></thead>
+        <tbody>${tableRows}</tbody>
+      </table>`;
+  } catch (e) {
+    el.innerHTML = `<div class="empty-state">Could not load ranking data.<br><small>${e.message}</small></div>`;
+  }
+}
+
 function switchView(view) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   event.target.classList.add('active');
   document.getElementById('view-' + view).classList.add('active');
   if (view === 'current') renderCurrent();
+  if (view === 'rankings') renderRankings();
 }
 
 // Init
