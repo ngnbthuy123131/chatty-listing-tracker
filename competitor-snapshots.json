@@ -32,7 +32,7 @@
         }
       ],
       "pricingNote": "Free plan available + Free trial available",
-      "checkedAt": "2026-03-04T04:38:51.898Z",
+      "checkedAt": "2026-03-04T04:45:27.621Z",
       "handle": "tidio-chat"
     },
     "rep-ai-sales-associate": {
@@ -67,7 +67,7 @@
         }
       ],
       "pricingNote": "Free plan available + Free trial available",
-      "checkedAt": "2026-03-04T04:38:51.898Z",
+      "checkedAt": "2026-03-04T04:45:27.621Z",
       "handle": "rep-ai-sales-associate"
     },
     "moosedesk": {
@@ -102,7 +102,7 @@
         }
       ],
       "pricingNote": "Free plan available + Free trial available",
-      "checkedAt": "2026-03-04T04:38:51.898Z",
+      "checkedAt": "2026-03-04T04:45:27.621Z",
       "handle": "moosedesk"
     },
     "zipchat": {
@@ -137,7 +137,7 @@
         }
       ],
       "pricingNote": "Free trial available",
-      "checkedAt": "2026-03-04T04:38:51.898Z",
+      "checkedAt": "2026-03-04T04:45:27.621Z",
       "handle": "zipchat"
     },
     "livechat": {
@@ -168,7 +168,7 @@
         }
       ],
       "pricingNote": "Free trial available",
-      "checkedAt": "2026-03-04T04:38:51.898Z",
+      "checkedAt": "2026-03-04T04:45:27.621Z",
       "handle": "livechat"
     },
     "tawk-to": {
@@ -186,7 +186,7 @@
       ],
       "pricing": [],
       "pricingNote": "Free plan available",
-      "checkedAt": "2026-03-04T04:38:51.898Z",
+      "checkedAt": "2026-03-04T04:45:27.621Z",
       "handle": "tawk-to"
     },
     "vanchat": {
@@ -221,7 +221,7 @@
         }
       ],
       "pricingNote": "Free plan available + Free trial available",
-      "checkedAt": "2026-03-04T04:38:51.898Z",
+      "checkedAt": "2026-03-04T04:45:27.621Z",
       "handle": "vanchat"
     },
     "reamaze": {
@@ -256,10 +256,45 @@
         }
       ],
       "pricingNote": "Free plan available + Free trial available",
-      "checkedAt": "2026-03-04T04:38:51.898Z",
+      "checkedAt": "2026-03-04T04:45:27.621Z",
       "handle": "reamaze"
+    },
+    "helpdesk": {
+      "name": "Gorgias: AI, Helpdesk & Chat",
+      "rating": 4.3,
+      "reviewCount": 620,
+      "description": "Resolve repetitive support inquiries with automation & AI. One helpdesk for all your support channels, with live chat & FAQ. Start your free trial today!",
+      "tagline": "Leading AI-powered conversational commerce platform for brands",
+      "features": [
+        "Helpdesk built for scale: Manage all customer conversations in one unified inbox",
+        "Autonomous ticket resolution: AI Agent handles end-to-end support",
+        "AI Shopping Assistant: Recommend products and guide shoppers in real time",
+        "Unified commerce stack: 100+ integrations to power the full customer journey",
+        "Actionable analytics: Turn customer conversations into insights to drive revenue"
+      ],
+      "pricing": [
+        {
+          "plan": "Starter plan",
+          "price": ""
+        },
+        {
+          "plan": "Basic plan",
+          "price": ""
+        },
+        {
+          "plan": "Pro plan",
+          "price": ""
+        },
+        {
+          "plan": "Advanced plan",
+          "price": ""
+        }
+      ],
+      "pricingNote": "Free plan available + Free trial available",
+      "checkedAt": "2026-03-04T04:45:27.621Z",
+      "handle": "helpdesk"
     }
   },
   "history": [],
-  "lastChecked": "2026-03-04T04:38:51.898Z"
+  "lastChecked": "2026-03-04T04:45:27.621Z"
 }
