@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chatty Listing Tracker</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f7; color: #1a1a2e; }
+
+  /* Header */
+  .header { background: #1A0A7A; color: #fff; padding: 16px 24px; display: flex; align-items: center; gap: 12px; }
+  .header .logo { background: #FFD200; color: #1A0A7A; font-weight: 800; font-size: 13px; padding: 5px 10px; border-radius: 6px; }
+  .header h1 { font-size: 17px; font-weight: 600; }
+  .header span { font-size: 12px; opacity: 0.6; margin-left: auto; }
+
+  /* Tabs */
+  .tabs { display: flex; background: #fff; border-bottom: 1px solid #e5e5e5; padding: 0 24px; }
+  .tab { padding: 12px 20px; font-size: 13px; font-weight: 500; cursor: pointer; border-bottom: 2px solid transparent; color: #666; }
+  .tab.active { border-bottom-color: #1A0A7A; color: #1A0A7A; font-weight: 600; }
+
+  /* Layout */
+  .layout { display: flex; height: calc(100vh - 97px); overflow: hidden; }
+
+  /* Sidebar */
+  .sidebar { width: 200px; background: #fff; border-right: 1px solid #e5e5e5; overflow-y: auto; flex-shrink: 0; }
+  .sidebar-label { font-size: 10px; font-weight: 700; color: #999; text-transform: uppercase; letter-spacing: .5px; padding: 14px 16px 6px; }
+  .date-item { padding: 9px 16px; font-size: 12.5px; cursor: pointer; color: #555; border-left: 3px solid transparent; transition: all .15s; display: flex; align-items: center; justify-content: space-between; }
+  .date-item:hover { background: #f7f7f7; }
+  .date-item.active { background: #f0edff; border-left-color: #1A0A7A; color: #1A0A7A; font-weight: 600; }
+  .date-item .badge { background: #e5e5e5; color: #555; font-size: 10px; padding: 1px 6px; border-radius: 10px; }
+  .date-item.active .badge { background: #1A0A7A; color: #fff; }
+  .date-item.proposed { color: #7c3aed; }
+  .date-item.proposed.active { background: #f5f3ff; border-left-color: #7c3aed; }
+  .date-item.proposed .badge { background: #ede9fe; color: #7c3aed; }
+  .date-item.proposed.active .badge { background: #7c3aed; color: #fff; }
+
+  /* Main content */
+  .main { flex: 1; overflow-y: auto; padding: 24px; }
+  .view { display: none; }
+  .view.active { display: block; }
+
+  /* Date header */
+  .date-header { margin-bottom: 20px; }
+  .date-header h2 { font-size: 18px; font-weight: 700; color: #1A0A7A; }
+  .date-header p { font-size: 12px; color: #888; margin-top: 3px; }
+  .proposed-badge { display: inline-block; background: #ede9fe; color: #7c3aed; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; margin-left: 8px; vertical-align: middle; }
+
+  /* Change cards */
+  .change-card { background: #fff; border-radius: 10px; padding: 16px; margin-bottom: 12px; border: 1px solid #e8e8e8; }
+  .change-card .field-name { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: #888; margin-bottom: 8px; }
+  .change-card .content { font-size: 13.5px; color: #1a1a2e; line-height: 1.6; }
+  .change-card .meta { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+  .char-bar-wrap { flex: 1; background: #f0f0f0; border-radius: 4px; height: 5px; overflow: hidden; }
+  .char-bar { height: 100%; border-radius: 4px; transition: width .3s; }
+  .char-bar.ok { background: #22c55e; }
+  .char-bar.warn { background: #f59e0b; }
+  .char-bar.over { background: #ef4444; }
+  .char-label { font-size: 11px; font-weight: 600; white-space: nowrap; }
+  .char-label.ok { color: #22c55e; }
+  .char-label.warn { color: #f59e0b; }
+  .char-label.over { color: #ef4444; }
+  .note-card { background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 12px 16px; margin-bottom: 12px; font-size: 13px; color: #92400e; }
+  .note-card .field-name { font-size: 11px; font-weight: 700; text-transform: uppercase; color: #d97706; margin-bottom: 4px; }
+  .empty-state { text-align: center; padding: 60px 20px; color: #aaa; font-size: 14px; }
+
+  /* Current view */
+  .section-group { background: #fff; border-radius: 10px; border: 1px solid #e8e8e8; margin-bottom: 16px; overflow: hidden; }
+  .section-group-title { background: #f7f7f9; padding: 10px 16px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: #888; border-bottom: 1px solid #e8e8e8; }
+  .current-row { padding: 14px 16px; border-bottom: 1px solid #f0f0f0; display: flex; gap: 16px; align-items: flex-start; }
+  .current-row:last-child { border-bottom: none; }
+  .current-row .field { font-size: 11px; font-weight: 700; color: #888; width: 140px; flex-shrink: 0; padding-top: 2px; }
+  .current-row .value { font-size: 13.5px; color: #1a1a2e; line-height: 1.6; flex: 1; }
+  .current-row .chars { font-size: 11px; font-weight: 600; white-space: nowrap; padding-top: 2px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">chatty</div>
+  <h1>Shopify Listing Tracker</h1>
+  <span>Last updated: Mar 4, 2026</span>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchView('history')">History</div>
+  <div class="tab" onclick="switchView('current')">Current Content</div>
+</div>
+
+<div class="layout">
+  <div class="sidebar">
+    <div class="sidebar-label">Dates</div>
+    <div id="date-list"></div>
+  </div>
+  <div class="main">
+    <div class="view active" id="view-history">
+      <div id="history-content"></div>
+    </div>
+    <div class="view" id="view-current">
+      <div id="current-content"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const LIMITS = {
+  'App Name': 30, 'App Card Subtitle': 62, 'Intro': 100, 'App Details': 500,
+  'Feature 1': 80, 'Feature 2': 80, 'Feature 3': 80, 'Feature 4': 80, 'Feature 5': 80,
+  'Title Tag': 60, 'Meta Description': 155,
+  'Alt 1': 64, 'Alt 2': 64, 'Alt 3': 64, 'Alt 4': 64, 'Alt 5': 64, 'Alt 6': 64, 'Alt 7': 64,
+};
+
+const history = [
+  { date: 'May 7, 2024', id: '2024-05-07', proposed: false, changes: [
+    { field: 'App Name', content: 'Chatty: Livechat Helpdesk, FAQ', chars: 30 },
+    { field: 'App Card Subtitle', content: 'Boost customer support with livechat by AI chat bot, FAQs, inbox', chars: 64 },
+  ]},
+  { date: 'Jun 24, 2024', id: '2024-06-24', proposed: false, changes: [
+    { field: 'Intro', content: 'Make customers satisfied with instant support through FAQs hub and live chat', chars: 77 },
+    { field: 'Feature Image', content: 'Image updated', chars: null },
+  ]},
+  { date: 'Jul 18, 2024', id: '2024-07-18', proposed: false, changes: [
+    { field: 'App Card Subtitle', content: 'Help center support: Live chat, FAQs, Inbox, Chatbot, Whatsapp', chars: 62 },
+    { field: 'Intro', content: 'Happy customers, more sales: Chatty makes it easy with AI Live chat support & FAQs helpdesk', chars: 91 },
+    { field: 'App Details', content: 'Chatty is all you need to convert all customers into sales. With live chat powered by smart chatbot, you\'ll answer questions instantly and build stronger relationships with customers. Build FAQs hub for quick solutions and enable order tracking at ease. Customize your chat widget to match your brand and offer multiple contact methods like WhatsApp, Facebook Messenger, Email, Skype, and more. Plus, manage all conversation on the go with the Chatty mobile app.', chars: 462 },
+    { field: 'Feature 1', content: 'Live chat: Provide instant support to engage with customers by AI assistant', chars: 75 },
+    { field: 'Feature 2', content: 'FAQs hub: Create a FAQs hub to empower customers to find answers on their own', chars: 77 },
+    { field: 'Feature 3', content: 'Beautiful chat widget: Customize chat widget to match your brand in few clicks', chars: 78 },
+    { field: 'Feature 4', content: 'Order tracking: Let customers check order status on the go easily', chars: 65 },
+    { field: 'Feature 5', content: 'Mobile app: Keep track with conversations from your devices anywhere, anytime', chars: 77 },
+    { field: 'Title Tag', content: 'Live chat & customer support solution for Shopify', chars: 49 },
+    { field: 'Meta Description', content: 'Chatty is your all-in-one Shopify live chat solution to provide exceptional customer support and boost sales', chars: 107 },
+    { field: 'Alt 1', content: 'Live chat for exceptional and instant customer support', chars: 54 },
+  ]},
+  { date: 'Aug 28, 2024', id: '2024-08-28', proposed: false, changes: [
+    { field: 'App Card Subtitle', content: 'Boost customer support with live chat by AI chatbot and FAQs', chars: 60 },
+    { field: 'Intro', content: 'Happy customers, more sales: Chatty makes it easy with Live chat customer support & FAQs helpdesk', chars: 97 },
+    { field: 'App Details', content: 'Chatty is all you need to convert all customers into sales. With live chat powered by smart chatbot, you\'ll answer questions instantly and build stronger relationships with customers. Build FAQs hub for quick customer support and enable order tracking at ease. Customize your chat widget to match your brand and offer multiple contact methods like WhatsApp, Facebook Messenger, Email, Skype, and more. Plus, manage all conversation on the go with the Chatty mobile app.', chars: 469 },
+    { field: 'Feature 1', content: 'Live chat: Provide instant customer support to engage and boost sales', chars: 69 },
+    { field: 'Feature 4', content: 'Order tracking: Let customers check order status on the go easily in help center', chars: 80 },
+    { field: 'Title Tag', content: 'Chatty: Live chat & customer support solution for Shopify', chars: 57 },
+    { field: 'Feature Image', content: 'Live chat, FAQs, helpdesk customer support solution for Shopify', chars: 63 },
+  ]},
+  { date: 'Oct 23, 2024', id: '2024-10-23', proposed: false, changes: [
+    { field: 'App Card Subtitle', content: 'Build awesome help center with AI chatbot, live chat & email', chars: 60 },
+    { field: 'Intro', content: 'Chatty makes it easy with live chat, multiple email inbox, Messenger, Instagram, helpdesk', chars: 89 },
+    { field: 'App Details', content: 'Chatty is all you need to convert all customers into sales. With live chat powered by smart chatbot (ChatGPT v4), you\'ll answer questions instantly and build stronger customer relationship. Build FAQs hub for quick customer support, enable order tracking at ease and allow customers chat with us directly. Customize your chat widget to match your brand and offer contact methods: WhatsApp, Facebook Messenger, Email, Inbox and more. Plus, manage all conversation on the go with the Chatty mobile app.', chars: 500 },
+    { field: 'Feature 3', content: 'Beautiful chat widget: Customize chat widget to match your brand', chars: 64 },
+    { field: 'Feature Image', content: 'Chatty Live chat, FAQs, customer support solution for Shopify', chars: 61 },
+  ]},
+  { date: 'Dec 25, 2024', id: '2024-12-25', proposed: false, changes: [
+    { field: 'App Name', content: 'Chatty: Live chat Helpdesk FAQ', chars: 30 },
+    { field: 'App Card Subtitle', content: 'Boost customer support with live chat by AI chatbot and FAQs', chars: 60 },
+    { field: 'Intro', content: 'Smart live chat with AI bot, Messenger, FAQs, and help center for effortless customer support', chars: 93 },
+    { field: 'App Details', content: 'Chatty is all you need to convert all customers into sales. With live chat powered by smart chatbot (ChatGPT v4), you\'ll answer questions instantly and build stronger customer relationship. Build FAQs hub for quick customer support, enable order tracking at ease and allow customers chat with us directly. Customize your chat widget to match your brand and offer contact methods: WhatsApp, Facebook Messenger, Email, Inbox and more. Plus, manage all chat on the go with the Chatty mobile app.', chars: 492 },
+    { field: 'Feature 1', content: 'Live chat: Provide instant support to engage with customers by AI assistant', chars: 75 },
+    { field: 'Feature 2', content: 'FAQs hub: Create a FAQs hub to empower customers to find answers on their own', chars: 77 },
+    { field: 'Feature 4', content: 'Sales automation: Send proactive targeted messages based on visitor behavior', chars: 76 },
+  ]},
+  { date: 'Dec 31, 2024', id: '2024-12-31', proposed: false, changes: [
+    { field: 'App Name', content: 'Chatty: Live chat Helpdesk FAQ', chars: 30 },
+    { field: 'Intro', content: 'Support that grows with your business: Live chat, AI chatbot, Messenger chat, FAQs and help center', chars: 98 },
+    { field: 'App Details', content: 'Chatty is all you need to convert all customers into sales. With live chat powered by AI chatbot (ChatGPT v4), you\'ll answer questions instantly and build stronger customer relationship. Build FAQs hub for quick customer support, enable order tracking at ease and allow customers chat with us directly. Customize your chat widget to match your brand and offer contact methods: WhatsApp, Facebook Messenger, Email, Inbox and more. Plus, manage all conversation on the go with the Chatty mobile app.', chars: 497 },
+    { field: 'Feature 3', content: 'FAQ page: Create a FAQ helpdesk to empower customers to find answers on their own', chars: 79 },
+  ]},
+  { date: 'Jan 16, 2025', id: '2025-01-16', proposed: false, changes: [
+    { field: 'App Name', content: 'Chatty: AI Live chat & FAQs', chars: 27 },
+    { field: 'App Details', content: 'Chatty is all you need to convert all customers into sales. With live chat powered by AI chatbot (ChatGPT v4), you\'ll answer questions instantly and build stronger customer relationship. Build FAQs hub for quick customer support, enable order tracking at ease and allow customers chat with us directly. Customize your chat widget to match your brand and offer contact methods: WhatsApp, Facebook Messenger, Email, Inbox and more. Plus, manage all conversation on the go with the Chatty mobile app.', chars: 497 },
+    { field: 'Feature 1', content: 'Live chat: Provide instant support to engage with customers by AI chatbot', chars: 73 },
+  ]},
+  { date: 'Jan 27, 2025', id: '2025-01-27', proposed: false, changes: [
+    { field: 'App Name', content: 'Chatty AI Chatbot & Live Chat', chars: 29 },
+    { field: 'Intro', content: 'Shoppers have questions? AI chatbot has answers. Need sales support? Chatty delivers. 24/7 every day', chars: 100 },
+    { field: 'Feature 1', content: 'Live chat & AI chatbot: Provide instant support to engage with customers', chars: 72 },
+    { field: 'Feature 5', content: 'Mobile app: Keep track with all inbox from your devices anywhere, anytime', chars: 73 },
+  ]},
+  { date: 'May 7, 2025', id: '2025-05-07', proposed: false, changes: [
+    { field: 'App Details', content: 'No time to answer customer questions 24/7? Let Chatty AI chatbot handle it with live chat & helpdesk. Powered by ChatGPT 4o, it answers product questions, suggests products, and helps with order tracking - all while you\'re away. Then, you can manage conversations with your team from all channels in one inbox: WhatsApp, Facebook Messenger, Instagram, Email, and more. Build your FAQs help center for quick customer support, then let customers self-serve forever.', chars: 464 },
+    { field: 'Feature 1', content: 'Livechat & AI chatbot: Provide 24/7 support to sell more with AI sales assistant', chars: 80 },
+    { field: 'Feature 2', content: 'Inbox & Team: Manage conversations with your team from all channels in one inbox', chars: 79 },
+    { field: 'Feature 3', content: 'FAQ page: Create a FAQ helpdesk to empower customers to find answers on their own', chars: 79 },
+    { field: 'Feature 4', content: 'Sales automation: Send proactive targeted messages based on visitor behavior', chars: 76 },
+    { field: 'Feature 5', content: 'Mobile app: Keep track with all inbox from your devices anywhere, anytime', chars: 73 },
+  ]},
+  { date: 'Aug 6, 2025', id: '2025-08-06', proposed: false, changes: [
+    { field: 'App Card Subtitle', content: '24/7 AI supports answer faster & sales assistant sells more', chars: 59 },
+    { field: 'Intro', content: 'AI chatbot & live chat answer 24/7, recommend products, and keep shoppers moving to checkout.', chars: 93 },
+    { field: 'App Details', content: 'Always-on support with live chat & helpdesk. Always selling as AI sale assistant. Chatty\'s AI chatbot answers product questions, recommends products, and helps with order tracking 24/7. Then your team gets one shared inbox for WhatsApp, Messenger, Instagram, Email, and more. Plus an FAQs help center for self-serve support to improve consistency and reduce support workload.', chars: 375 },
+    { field: 'Feature 1', content: 'Livechat & AI chatbot: Provide 24/7 support to sell more with AI sales assistant', chars: 80 },
+    { field: 'Feature 2', content: 'Sales automation: Send proactive targeted messages based on visitor behavior', chars: 76 },
+    { field: 'Feature 3', content: 'FAQs page: Build a self-serve help center so customers find answers themselves.', chars: 79 },
+    { field: 'Feature 4', content: 'Team Inbox: Keep conversations across channels in one inbox, no more switching tabs.', chars: 84 },
+    { field: 'Alt 5', content: 'chatty live chat manage conversations in one inbox', chars: 50 },
+    { field: 'Alt 7', content: 'Enhance customer support with AI chatbot trained by store data', chars: 62 },
+  ]},
+  { date: 'Sep 25, 2025', id: '2025-09-25', proposed: false, changes: [
+    { field: 'App Details', content: 'Drowning in order questions & missing sales? AI chatbot answers and sells for you. 24/7 every day', chars: 97 },
+  ]},
+  { date: 'Jan 27, 2026', id: '2026-01-27', proposed: false, changes: [
+    { field: 'Intro', content: 'Drowning in questions & missing sales? AI chatbot answers and sells for you. 24/7 every day', chars: 91 },
+    { field: 'App Details', content: "Can't reply fast enough and keep missing sales? Let Chatty AI chatbot handle it with live chat & helpdesk. Powered by advanced AI model, it answers product questions, suggests products, and helps with order tracking - all while you're away. You can also manage conversations with your team from all channels in one inbox: WhatsApp, Facebook Messenger, Instagram, Email, and more. Build your FAQs help center for quick customer support, then let customers self-serve forever.", chars: 474 },
+    { field: 'Feature 3', content: 'FAQs page: Build a self-serve help center so customers find answers themselves.', chars: 79 },
+    { field: 'Alt 6', content: 'Mobile app helps you manage all conversation anywhere anytime on your phone', chars: 75 },
+  ]},
+  { date: 'Feb 11, 2026', id: '2026-02-11', proposed: false, changes: [
+    { field: 'App Name', content: 'Chatty AI Chatbot & Live Chat', chars: 29 },
+    { field: 'App Card Subtitle', content: 'Sell more: AI chatbot, livechat, inbox, help center & WhatsApp', chars: 62 },
+    { field: 'Feature 5', content: 'Mobile app: Handle conversations, assignments, and replies wherever you are.', chars: 76 },
+  ]},
+  { date: 'Mar 4, 2026', id: '2026-03-04', proposed: true, changes: [
+    { field: 'App Name', content: 'Chatty: AI Chatbot & Live Chat', chars: 30 },
+    { field: 'App Card Subtitle', content: 'Sell more: AI chatbot, livechat, inbox, help center & WhatsApp', chars: 62 },
+    { field: 'Intro', content: 'AI chatbot for Shopify: answer questions, recommend products, close sales 24/7.', chars: 79 },
+    { field: 'App Details', content: "Chatty's AI chatbot, powered by ChatGPT 4o, answers product questions, recommends items and tracks orders 24/7. It sells while your team sleeps. Manage all channels in one inbox: live chat, WhatsApp, Facebook Messenger, Instagram and email. Build a self-service FAQ and help center so customers find answers on their own. Over 2,000 Shopify stores. 4.9 stars. Avg $29,586/mo in AI-assisted revenue.", chars: 418 },
+    { field: 'Feature 1', content: 'AI chatbot & live chat: 24/7 sales support with smart product recommendations', chars: 77 },
+    { field: 'Feature 2', content: 'Inbox & team: Manage WhatsApp, Instagram, Messenger & live chat in one place', chars: 76 },
+    { field: 'Feature 3', content: 'Help center & FAQ: Let shoppers self-serve and reduce support load instantly', chars: 76 },
+    { field: 'Feature 4', content: 'Sales automation: Trigger proactive chat to recover carts and boost conversions', chars: 79 },
+    { field: 'Feature 5', content: 'Mobile app: Reply to shoppers from your phone. Never miss a chat anywhere', chars: 72 },
+    { field: 'Title Tag', content: 'Chatty: AI Chatbot, Live Chat & WhatsApp for Shopify', chars: 52 },
+    { field: 'Meta Description', content: 'Chatty AI chatbot for Shopify: live chat, WhatsApp, FAQ & help center. 4.9 stars, 2,000+ stores. Boost sales with AI support. Free plan available.', chars: 147 },
+  ]},
+];
+
+// Build current state from latest non-null value per field
+function buildCurrentState() {
+  const state = {};
+  history.filter(h => !h.proposed).forEach(entry => {
+    entry.changes.forEach(c => {
+      if (c.chars !== null) state[c.field] = { content: c.content, chars: c.chars, date: entry.date };
+    });
+  });
+  return state;
+}
+
+function charStatus(chars, field) {
+  const limit = LIMITS[field];
+  if (!limit || chars === null) return 'ok';
+  const pct = chars / limit;
+  if (pct > 1) return 'over';
+  if (pct > 0.85) return 'warn';
+  return 'ok';
+}
+
+function charBarWidth(chars, field) {
+  const limit = LIMITS[field];
+  if (!limit || chars === null) return 0;
+  return Math.min(100, Math.round(chars / limit * 100));
+}
+
+// Render sidebar
+function renderSidebar(activeId) {
+  const el = document.getElementById('date-list');
+  el.innerHTML = history.map(h => `
+    <div class="date-item ${h.proposed ? 'proposed' : ''} ${h.id === activeId ? 'active' : ''}"
+         onclick="selectDate('${h.id}')">
+      ${h.date}
+      <span class="badge">${h.changes.length}</span>
+    </div>
+  `).join('');
+}
+
+// Render history detail
+function renderHistory(id) {
+  const entry = history.find(h => h.id === id);
+  const el = document.getElementById('history-content');
+  if (!entry) { el.innerHTML = '<div class="empty-state">Select a date to view changes</div>'; return; }
+
+  const changes = entry.changes.filter(c => c.content && !c.content.startsWith('http'));
+  const links = entry.changes.filter(c => c.content && c.content.startsWith('http'));
+
+  el.innerHTML = `
+    <div class="date-header">
+      <h2>${entry.date} ${entry.proposed ? '<span class="proposed-badge">Proposed</span>' : ''}</h2>
+      <p>${entry.changes.length} field${entry.changes.length !== 1 ? 's' : ''} changed</p>
+    </div>
+    ${changes.length === 0 ? '<div class="empty-state">No text changes on this date</div>' : ''}
+    ${changes.map(c => {
+      const st = charStatus(c.chars, c.field);
+      const limit = LIMITS[c.field];
+      return `
+        <div class="change-card">
+          <div class="field-name">${c.field}</div>
+          <div class="content">${c.content}</div>
+          ${c.chars !== null && limit ? `
+          <div class="meta">
+            <div class="char-bar-wrap">
+              <div class="char-bar ${st}" style="width:${charBarWidth(c.chars, c.field)}%"></div>
+            </div>
+            <span class="char-label ${st}">${c.chars}/${limit}</span>
+          </div>` : ''}
+        </div>`;
+    }).join('')}
+    ${links.map(c => `
+      <div class="note-card">
+        <div class="field-name">${c.field}</div>
+        Feature images updated — <a href="${c.content}" target="_blank" style="color:#1A0A7A">View folder</a>
+      </div>`).join('')}
+  `;
+}
+
+// Render current content
+function renderCurrent() {
+  const state = buildCurrentState();
+  const groups = [
+    { label: 'App Store Copy', fields: ['App Name', 'App Card Subtitle', 'Intro', 'App Details'] },
+    { label: 'Features', fields: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4', 'Feature 5'] },
+    { label: 'SEO', fields: ['Title Tag', 'Meta Description'] },
+    { label: 'Alt Texts', fields: ['Alt 1', 'Alt 2', 'Alt 3', 'Alt 4', 'Alt 5', 'Alt 6', 'Alt 7'] },
+  ];
+
+  const el = document.getElementById('current-content');
+  el.innerHTML = groups.map(g => {
+    const rows = g.fields.map(f => {
+      const s = state[f];
+      if (!s) return `<div class="current-row"><div class="field">${f}</div><div class="value" style="color:#bbb">No data</div></div>`;
+      const st = charStatus(s.chars, f);
+      const limit = LIMITS[f];
+      return `
+        <div class="current-row">
+          <div class="field">${f}</div>
+          <div class="value">${s.content}</div>
+          ${limit ? `<div class="chars char-label ${st}">${s.chars}/${limit}</div>` : ''}
+        </div>`;
+    }).join('');
+    return `<div class="section-group"><div class="section-group-title">${g.label}</div>${rows}</div>`;
+  }).join('');
+}
+
+// Navigation
+let currentDateId = history[history.length - 2].id; // default to Feb 11
+
+function selectDate(id) {
+  currentDateId = id;
+  renderSidebar(id);
+  renderHistory(id);
+}
+
+function switchView(view) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('view-' + view).classList.add('active');
+  if (view === 'current') renderCurrent();
+}
+
+// Init
+renderSidebar(currentDateId);
+renderHistory(currentDateId);
+</script>
+</body>
+</html>
