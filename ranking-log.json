@@ -1,0 +1,242 @@
+[
+  {
+    "date": "2026-03-04",
+    "time": "2026-03-04T03:08:39.154Z",
+    "results": [
+      {
+        "keyword": "live chat",
+        "position": null,
+        "topApps": [],
+        "checkedAt": "2026-03-04T03:07:39.219Z"
+      },
+      {
+        "keyword": "AI chatbot",
+        "position": null,
+        "topApps": [],
+        "checkedAt": "2026-03-04T03:07:44.458Z"
+      },
+      {
+        "keyword": "chatbot",
+        "position": null,
+        "topApps": [],
+        "checkedAt": "2026-03-04T03:07:49.882Z"
+      },
+      {
+        "keyword": "inbox",
+        "position": null,
+        "topApps": [],
+        "checkedAt": "2026-03-04T03:07:55.173Z"
+      },
+      {
+        "keyword": "chat",
+        "position": null,
+        "topApps": [],
+        "checkedAt": "2026-03-04T03:08:00.385Z"
+      },
+      {
+        "keyword": "help center",
+        "position": null,
+        "topApps": [],
+        "checkedAt": "2026-03-04T03:08:05.596Z"
+      },
+      {
+        "keyword": "FAQ",
+        "position": null,
+        "topApps": [],
+        "checkedAt": "2026-03-04T03:08:10.965Z"
+      },
+      {
+        "keyword": "livechat",
+        "position": null,
+        "topApps": [],
+        "checkedAt": "2026-03-04T03:08:16.471Z"
+      },
+      {
+        "keyword": "WhatsApp chat",
+        "position": null,
+        "topApps": [],
+        "checkedAt": "2026-03-04T03:08:21.867Z"
+      },
+      {
+        "keyword": "helpdesk",
+        "position": null,
+        "topApps": [],
+        "checkedAt": "2026-03-04T03:08:27.142Z"
+      },
+      {
+        "keyword": "customer support",
+        "position": null,
+        "topApps": [],
+        "checkedAt": "2026-03-04T03:08:32.386Z"
+      },
+      {
+        "keyword": "ai chat",
+        "position": null,
+        "topApps": [],
+        "checkedAt": "2026-03-04T03:08:37.584Z"
+      }
+    ]
+  },
+  {
+    "date": "2026-03-04",
+    "time": "2026-03-04T03:10:48.762Z",
+    "results": [
+      {
+        "keyword": "live chat",
+        "position": 5,
+        "organicPosition": 1,
+        "top5": [
+          "livechat(ad)",
+          "reamaze(ad)",
+          "vitals(ad)",
+          "tenchaty(ad)",
+          "chatty(org)"
+        ],
+        "checkedAt": "2026-03-04T03:09:52.403Z"
+      },
+      {
+        "keyword": "AI chatbot",
+        "position": 5,
+        "organicPosition": 1,
+        "top5": [
+          "jotform-ai-chatbot(ad)",
+          "promify-1(ad)",
+          "melingoai(ad)",
+          "reamaze(ad)",
+          "chatty(org)"
+        ],
+        "checkedAt": "2026-03-04T03:09:57.286Z"
+      },
+      {
+        "keyword": "chatbot",
+        "position": 5,
+        "organicPosition": 1,
+        "top5": [
+          "reamaze(ad)",
+          "jotform-ai-chatbot(ad)",
+          "melingoai(ad)",
+          "back-in-stock-whatsapp-alerts(ad)",
+          "chatty(org)"
+        ],
+        "checkedAt": "2026-03-04T03:10:02.293Z"
+      },
+      {
+        "keyword": "inbox",
+        "position": 6,
+        "organicPosition": 2,
+        "top5": [
+          "inbox(org)",
+          "reamaze(ad)",
+          "smartreplyai(ad)",
+          "channelwill-chat(ad)",
+          "shopney-mobile-app(ad)"
+        ],
+        "checkedAt": "2026-03-04T03:10:07.202Z"
+      },
+      {
+        "keyword": "chat",
+        "position": 6,
+        "organicPosition": 2,
+        "top5": [
+          "reamaze(ad)",
+          "salesmartly-chat(ad)",
+          "melingoai(ad)",
+          "channelwill-chat(ad)",
+          "tidio-chat(org)"
+        ],
+        "checkedAt": "2026-03-04T03:10:12.059Z"
+      },
+      {
+        "keyword": "help center",
+        "position": 7,
+        "organicPosition": 3,
+        "top5": [
+          "helpcenter(ad)",
+          "reamaze(ad)",
+          "rozio-ai-live-chat(ad)",
+          "helpdesk(ad)",
+          "faqapp(org)"
+        ],
+        "checkedAt": "2026-03-04T03:10:17.171Z"
+      },
+      {
+        "keyword": "FAQ",
+        "position": 9,
+        "organicPosition": 5,
+        "top5": [
+          "storefaq(ad)",
+          "reamaze(ad)",
+          "betterdocs-knowledgebase(ad)",
+          "pagefly(ad)",
+          "storefaq(org)"
+        ],
+        "checkedAt": "2026-03-04T03:10:22.144Z"
+      },
+      {
+        "keyword": "livechat",
+        "position": 6,
+        "organicPosition": 2,
+        "top5": [
+          "livechat(ad)",
+          "jotform-ai-chatbot(ad)",
+          "channelwill-chat(ad)",
+          "trueprofit(ad)",
+          "livechat(org)"
+        ],
+        "checkedAt": "2026-03-04T03:10:27.294Z"
+      },
+      {
+        "keyword": "WhatsApp chat",
+        "position": null,
+        "organicPosition": null,
+        "top5": [
+          "reamaze(ad)",
+          "salesmartly-chat(ad)",
+          "channelwill-chat(ad)",
+          "bitchat-whatsapp-chatgpt-ai-omnichannel-inbox(ad)",
+          "musbu-social-chat-button(org)"
+        ],
+        "checkedAt": "2026-03-04T03:10:32.302Z"
+      },
+      {
+        "keyword": "helpdesk",
+        "position": 15,
+        "organicPosition": 11,
+        "top5": [
+          "helpdesk(ad)",
+          "reamaze(ad)",
+          "helpcenter(ad)",
+          "wukongchat(ad)",
+          "helpdesk(org)"
+        ],
+        "checkedAt": "2026-03-04T03:10:37.391Z"
+      },
+      {
+        "keyword": "customer support",
+        "position": 12,
+        "organicPosition": 8,
+        "top5": [
+          "reamaze(ad)",
+          "flexibar(ad)",
+          "remind-stock-notification(ad)",
+          "aitrillion(ad)",
+          "moosedesk(org)"
+        ],
+        "checkedAt": "2026-03-04T03:10:42.569Z"
+      },
+      {
+        "keyword": "ai chat",
+        "position": 5,
+        "organicPosition": 1,
+        "top5": [
+          "livechat(ad)",
+          "jotform-ai-chatbot(ad)",
+          "octane-ai-quiz-personalization(ad)",
+          "ai-ultimate-optimizer-pro(ad)",
+          "chatty(org)"
+        ],
+        "checkedAt": "2026-03-04T03:10:47.479Z"
+      }
+    ]
+  }
+]
