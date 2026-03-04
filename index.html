@@ -529,6 +529,7 @@ const CHART_COLORS = [
 ];
 
 let rankChart = null;
+window._rankMap = {}; // global cache: keyword → organic rank
 
 async function renderRankings() {
   const el = document.getElementById('rankings-content');
@@ -541,6 +542,10 @@ async function renderRankings() {
     if (!latest) { el.innerHTML = '<div class="empty-state">No ranking data yet</div>'; return; }
 
     const updated = new Date(latest.time).toLocaleString('en-GB', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
+
+    // Cache for Optimizer tab
+    window._rankMap = {};
+    latest.results.forEach(r => { window._rankMap[r.keyword] = r.organicPosition || null; });
 
     // Build per-keyword history across all dates
     const allDates = [...new Set(realEntries.map(e => e.date))].sort();
@@ -1199,9 +1204,40 @@ function renderAso() {
 }
 
 // ── Optimizer tab ─────────────────────────────────────────────────────────────
-function renderOptimizer() {
+// CTR model based on organic rank position (Shopify App Store approximation)
+function estimateCtr(rank) {
+  if (!rank) return null;
+  const table = {1:35,2:20,3:12,4:8,5:6,6:4,7:3,8:2.5,9:2,10:1.5};
+  return table[rank] !== undefined ? table[rank] : (rank <= 15 ? 1 : 0.5);
+}
+
+// Translate score delta % into human-readable rank impact
+function rankImpactLabel(scorePct, currentRank) {
+  if (scorePct >= 40)  return { label: 'Strong signal boost — likely rank up', color: '#16a34a', arrow: '↑↑' };
+  if (scorePct >= 15)  return { label: 'Moderate signal gain — may improve', color: '#2563eb', arrow: '↑' };
+  if (scorePct >= 5)   return { label: 'Small signal gain — marginal impact', color: '#6366f1', arrow: '↑' };
+  if (scorePct > -5)   return { label: 'No significant change', color: '#aaa', arrow: '—' };
+  if (scorePct >= -15) return { label: 'Small signal loss — watch closely', color: '#f59e0b', arrow: '↓' };
+  return { label: 'Signal weakened — rank may drop', color: '#dc2626', arrow: '↓↓' };
+}
+
+async function renderOptimizer() {
   const el = document.getElementById('optimizer-content');
   const state = buildCurrentState();
+
+  // Load ranking data if not already cached
+  if (!window._rankMap || Object.keys(window._rankMap).length === 0) {
+    try {
+      const res  = await fetch('ranking-log.json');
+      const log  = await res.json();
+      const real = log.filter(e => e.results.some(r => r.organicPosition !== undefined));
+      const latest = [...real].reverse()[0];
+      if (latest) {
+        window._rankMap = {};
+        latest.results.forEach(r => { window._rankMap[r.keyword] = r.organicPosition || null; });
+      }
+    } catch(e) { window._rankMap = {}; }
+  }
 
   // Field definitions with weights
   const FIELDS = [
@@ -1401,33 +1437,42 @@ function optUpdate() {
   // Max possible per keyword (all fields present, all prominent)
   const maxKw = FIELDS.reduce((s, f) => s + Math.round(f.weight * 1.2), 0);
 
-  // Render keyword rows
+  // Render keyword rows — rank-first design
+  const rankMap = window._rankMap || {};
   const kwEl = document.getElementById('opt-kw-results');
   if (kwEl) {
     kwEl.innerHTML = KEYWORDS.map(kw => {
-      const b    = baseline[kw] || 0;
-      const p    = proposed[kw] || 0;
-      const delta = p - b;
-      const isP0  = P0.has(kw);
-      const bPct  = Math.min(100, Math.round(b / maxKw * 100));
-      const pPct  = Math.min(100, Math.round(p / maxKw * 100));
-      const dClass = delta > 0 ? 'up' : delta < 0 ? 'down' : 'flat';
-      const dLabel = delta > 0 ? `+${delta}` : delta < 0 ? `${delta}` : '—';
-      return `<div class="opt-kw-row">
-        <div class="opt-kw-name">${isP0 ? '<strong>' : ''}${kw}${isP0 ? '</strong>' : ''}</div>
-        <div class="opt-kw-bars">
-          <div class="opt-kw-bar-row">
-            <span style="width:42px">Before</span>
-            <div class="opt-kw-bar-track"><div class="opt-kw-bar-fill" style="width:${bPct}%;background:#d1d5db"></div></div>
-            <span style="width:28px;text-align:right">${b}</span>
-          </div>
-          <div class="opt-kw-bar-row">
-            <span style="width:42px">After</span>
-            <div class="opt-kw-bar-track"><div class="opt-kw-bar-fill" style="width:${pPct}%;background:${delta>0?'#16a34a':delta<0?'#ef4444':'#94a3b8'}"></div></div>
-            <span style="width:28px;text-align:right">${p}</span>
-          </div>
+      const b       = baseline[kw] || 0;
+      const p       = proposed[kw] || 0;
+      const delta   = p - b;
+      const isP0    = P0.has(kw);
+      const rank    = rankMap[kw] || null;
+      const ctr     = estimateCtr(rank);
+      const scorePct = b > 0 ? Math.round((p - b) / b * 100) : (p > 0 ? 100 : 0);
+      const impact  = rankImpactLabel(scorePct, rank);
+      const pPct    = Math.min(100, Math.round(p / maxKw * 100));
+
+      // Rank badge color
+      const rankBg = !rank ? '#f0f0f0' : rank <= 3 ? '#dcfce7' : rank <= 6 ? '#dbeafe' : rank <= 10 ? '#fef3c7' : '#fee2e2';
+      const rankFg = !rank ? '#aaa'    : rank <= 3 ? '#16a34a' : rank <= 6 ? '#2563eb' : rank <= 10 ? '#d97706' : '#dc2626';
+      const rankLabel = rank ? `#${rank}` : 'Not ranking';
+
+      return `<div class="opt-kw-row" style="${isP0 ? 'background:#fffbeb;' : ''}">
+        <div style="width:110px;flex-shrink:0">
+          <div style="font-size:12px;font-weight:${isP0?'700':'500'};margin-bottom:3px">${kw}${isP0?' <span style="color:#d97706;font-size:9px">P0</span>':''}</div>
+          <span style="display:inline-block;background:${rankBg};color:${rankFg};font-size:11px;font-weight:700;padding:1px 7px;border-radius:8px">${rankLabel}</span>
         </div>
-        <div class="opt-kw-delta ${dClass}">${dLabel}</div>
+        <div style="flex:1;padding:0 8px">
+          <div style="font-size:11px;font-weight:700;color:${impact.color};margin-bottom:4px">${impact.arrow} ${impact.label}</div>
+          <div style="display:flex;align-items:center;gap:6px">
+            <div class="opt-kw-bar-track" style="flex:1"><div class="opt-kw-bar-fill" style="width:${pPct}%;background:${delta>0?'#16a34a':delta<0?'#ef4444':'#94a3b8'}"></div></div>
+            <span style="font-size:10px;color:#aaa;white-space:nowrap">signal ${Math.round(pPct)}%</span>
+          </div>
+          ${ctr !== null ? `<div style="font-size:10px;color:#888;margin-top:3px">Est. click share: ~${ctr}% of searchers</div>` : ''}
+        </div>
+        <div style="width:44px;text-align:right;font-size:12px;font-weight:800;color:${delta>0?'#16a34a':delta<0?'#ef4444':'#aaa'};flex-shrink:0">
+          ${scorePct !== 0 ? (scorePct > 0 ? `+${scorePct}%` : `${scorePct}%`) : '—'}
+        </div>
       </div>`;
     }).join('');
   }
@@ -1444,18 +1489,35 @@ function optUpdate() {
   const p0Lost   = lost.filter(kw => P0.has(kw));
 
   const sumEl = document.getElementById('opt-summary');
+  const rankMap2 = window._rankMap || {};
   if (sumEl) {
+    // Traffic impact estimate: sum of CTR changes for affected keywords
+    let ctrGained = 0, ctrLost = 0;
+    gained.forEach(kw => {
+      const r = rankMap2[kw];
+      if (r && r > 1) ctrGained += (estimateCtr(r - 1) - estimateCtr(r)) || 0;
+    });
+    lost.forEach(kw => {
+      const r = rankMap2[kw];
+      if (r) ctrLost += estimateCtr(r) || 0;
+    });
+    const trafficNote = ctrGained > 0
+      ? `Est. traffic uplift: up to +${ctrGained.toFixed(1)}% additional click share on improved keywords`
+      : '';
+
     sumEl.innerHTML = `
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap">
         <span class="opt-impact-badge ${impClass}">${overall > 0 ? '↑' : overall < 0 ? '↓' : '—'} ${impLabel}</span>
+        ${trafficNote ? `<span style="font-size:11px;color:#16a34a;font-weight:600">${trafficNote}</span>` : ''}
       </div>
       <div style="font-size:12px;color:#555;line-height:1.8">
-        ${gained.length > 0 ? `<div>✅ Gained signal: <strong>${gained.join(', ')}</strong></div>` : ''}
-        ${lost.length   > 0 ? `<div>❌ Lost signal: <strong>${lost.join(', ')}</strong></div>` : ''}
-        ${p0Gained.length > 0 ? `<div style="color:#16a34a">⭐ P0 keywords improved: ${p0Gained.join(', ')}</div>` : ''}
-        ${p0Lost.length   > 0 ? `<div style="color:#dc2626">⚠️ P0 keywords hurt: ${p0Lost.join(', ')}</div>` : ''}
-        ${gained.length === 0 && lost.length === 0 ? '<div style="color:#aaa">No keyword signal changes detected.</div>' : ''}
-      </div>`;
+        ${p0Gained.length > 0 ? `<div style="color:#16a34a">⭐ P0 ranking signal improved: <strong>${p0Gained.join(', ')}</strong></div>` : ''}
+        ${p0Lost.length   > 0 ? `<div style="color:#dc2626">⚠️ P0 ranking signal weakened: <strong>${p0Lost.join(', ')}</strong></div>` : ''}
+        ${gained.filter(k=>!P0.has(k)).length > 0 ? `<div>↑ Other keywords gained: ${gained.filter(k=>!P0.has(k)).join(', ')}</div>` : ''}
+        ${lost.filter(k=>!P0.has(k)).length   > 0 ? `<div>↓ Other keywords lost: ${lost.filter(k=>!P0.has(k)).join(', ')}</div>` : ''}
+        ${gained.length === 0 && lost.length === 0 ? '<div style="color:#aaa">No keyword signal changes — edit a field above to test.</div>' : ''}
+      </div>
+      <div style="margin-top:10px;font-size:10.5px;color:#aaa;line-height:1.5">Rank impacts are directional estimates based on keyword coverage × field weight. Actual rankings also depend on install velocity, competitor changes, and review velocity.</div>`;
   }
 
   // Coverage matrix (compact — just main fields)
