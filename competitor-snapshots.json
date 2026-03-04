@@ -1,0 +1,265 @@
+{
+  "snapshots": {
+    "tidio-chat": {
+      "name": "Tidio ‑ Live Chat & AI Chatbot",
+      "rating": 4.7,
+      "reviewCount": 1161,
+      "description": "Engage customers with live chat, chatbot, and AI agent apps from one help desk. Manage tickets and offer recommendations in real time. Provide instant support.",
+      "tagline": "Improve customer experience with a chatbot, AI agent, and live chat in one help desk for your store.",
+      "features": [
+        "Live chat app—provide live support, resolve issues, and sell via chat and video",
+        "Chatbot integration—create chatbot automation flows and feed your funnel 24/7",
+        "AI chatbot—resolve most customer support issues with Lyro the AI sales assistant",
+        "Help desk software—manage everything from one, easy-to-use, centralized panel",
+        "Real-time omni-channel support—Preview carts, past orders and recommend products"
+      ],
+      "pricing": [
+        {
+          "plan": "Free",
+          "price": "Free"
+        },
+        {
+          "plan": "Customer Service",
+          "price": ""
+        },
+        {
+          "plan": "Flows",
+          "price": ""
+        },
+        {
+          "plan": "Lyro AI Chatbot",
+          "price": ""
+        }
+      ],
+      "pricingNote": "Free plan available + Free trial available",
+      "checkedAt": "2026-03-04T04:35:18.803Z",
+      "handle": "tidio-chat"
+    },
+    "rep-ai-sales-associate": {
+      "name": "Rep AI: AI Chat & Live Chat",
+      "rating": 4.7,
+      "reviewCount": 108,
+      "description": "The AI chatbot that's guaranteed to boost traffic conversions (CVR), get more sales (AOV), and reduce support tickets. Powered by advanced AI and ChatGPT.",
+      "tagline": "AI Chatbot for Sales. Boost conversion with ChatGPT AI Chat, Live Chat &amp; AI Shopping Assistant",
+      "features": [
+        "Drive conversion with a proactive AI Chat Bot acting as an AI Sales Agent",
+        "Automate tickets with a ChatGPT powered AI Chatbot that acts as a 24/7 AI Agent",
+        "Train the Chat AI Bot to match your brand voice in every Chat Bot reply",
+        "Sync real-time stock for accurate Chat GPT &amp; AI Shopping Assistant response",
+        "Hand over ChatGPT AI chat to live chat or sell via an AI bot with chatbot AI"
+      ],
+      "pricing": [
+        {
+          "plan": "Pay-as-you-Grow",
+          "price": "Free to install"
+        },
+        {
+          "plan": "Starter plan",
+          "price": ""
+        },
+        {
+          "plan": "Basic Plan",
+          "price": ""
+        },
+        {
+          "plan": "Standard Plan",
+          "price": ""
+        }
+      ],
+      "pricingNote": "Free plan available + Free trial available",
+      "checkedAt": "2026-03-04T04:35:18.803Z",
+      "handle": "rep-ai-sales-associate"
+    },
+    "moosedesk": {
+      "name": "Moose: AI Chatbot & Live Chat",
+      "rating": 5,
+      "reviewCount": 476,
+      "description": "Centralize tickets from various channels into one easy-to-use helpdesk with essential features: Live chat, AI chatbot, Widget, Whatsapp, FAQ builder,...",
+      "tagline": "Turn customer support into a growth engine with an AI chatbot that works while you sleep.",
+      "features": [
+        "AI Learning: Build a smarter chatbot using your FAQs, Q&amp;A, and products",
+        "24/7 automation: Automate routine support and route complex cases to agents",
+        "Omnichannel inbox: Manage chat, email, and social messages in one place",
+        "Self-service support: Let customers track orders and find answers instantly",
+        "Product FAQs: Manage product-specific FAQs displayed on each product page"
+      ],
+      "pricing": [
+        {
+          "plan": "Free Forever",
+          "price": "Free"
+        },
+        {
+          "plan": "Starter",
+          "price": ""
+        },
+        {
+          "plan": "Growth",
+          "price": ""
+        },
+        {
+          "plan": "Business",
+          "price": ""
+        }
+      ],
+      "pricingNote": "Free plan available + Free trial available",
+      "checkedAt": "2026-03-04T04:35:18.803Z",
+      "handle": "moosedesk"
+    },
+    "zipchat": {
+      "name": "Zipchat AI Chatbot & Live Chat",
+      "rating": 4.7,
+      "reviewCount": 147,
+      "description": "Zipchat, the AI Chatbot + AI Chat designed for your DTC store. Deploy it on your store, on socials and on emails. The AI sells more & automates your support.",
+      "tagline": "Conversational AI Agent for Sales &amp; Support deployable in AI Chat/Chatbot, Support Email &amp; WhatsApp",
+      "features": [
+        "Sales AI Chatbot: product recommendations, AI chat, COD, upsells &amp; cross-sells",
+        "AI Chat automation for abandoned cart recovery, collect reviews and answer FAQs",
+        "AI Chat for powerful social marketing campaigns that increase conversion rates",
+        "AI Chatbot + Livechat for Sales Automation to increase conversion rates",
+        "AI Support Chat to automate customer support 24/7, in any language"
+      ],
+      "pricing": [
+        {
+          "plan": "Starter",
+          "price": ""
+        },
+        {
+          "plan": "Growth",
+          "price": ""
+        },
+        {
+          "plan": "Pro",
+          "price": ""
+        },
+        {
+          "plan": "Scale",
+          "price": ""
+        }
+      ],
+      "pricingNote": "Free trial available",
+      "checkedAt": "2026-03-04T04:35:18.803Z",
+      "handle": "zipchat"
+    },
+    "livechat": {
+      "name": "LiveChat: AI live chat by Text",
+      "rating": 4.9,
+      "reviewCount": 48,
+      "description": "AI-powered LiveChat helps you grow sales, support customers, and offer shopping advice. See what’s in a shopper’s cart while they browse your store. ",
+      "tagline": "Convert chats into sales: AI live chat with built-in helpdesk, chatbots &amp; knowledge base.",
+      "features": [
+        "AI Copilot assistant: Get instant AI-powered replies that speed up support.",
+        "200+ integrations: Chat with customers via Messenger, WhatsApp, and more.",
+        "Proactive customer engagement: Reach shoppers with timely deals and updates.",
+        "Product recommendations: Suggest items that link directly to product pages.",
+        "Checkout chat support: Assist buyers during checkout to reduce abandoned carts"
+      ],
+      "pricing": [
+        {
+          "plan": "Starter",
+          "price": ""
+        },
+        {
+          "plan": "Team",
+          "price": ""
+        },
+        {
+          "plan": "Business",
+          "price": ""
+        }
+      ],
+      "pricingNote": "Free trial available",
+      "checkedAt": "2026-03-04T04:35:18.803Z",
+      "handle": "livechat"
+    },
+    "tawk-to": {
+      "name": "tawk.to Live Chat",
+      "rating": 3.1,
+      "reviewCount": 87,
+      "description": "Monitor and chat with visitors on your Shopify site with the tawk.to Live Chat app. Be there when they need you with unlimited messaging, ticketing, and agents.",
+      "tagline": "tawk.to’s messaging and CRM software makes it easy to monitor and chat with customers in real time.",
+      "features": [
+        "View and manage Shopify orders directly from chats and tickets.",
+        "Personalize greetings with triggers based on location, past visits, and more.",
+        "Provide fast, accurate responses with canned “shortcut” message templates.",
+        "Manage unlimited customers and organizations in your CRM.",
+        "Need help? Reach out to our support team 24x7 for live assistance."
+      ],
+      "pricing": [],
+      "pricingNote": "Free plan available",
+      "checkedAt": "2026-03-04T04:35:18.803Z",
+      "handle": "tawk-to"
+    },
+    "vanchat": {
+      "name": "VanChat AI Chatbot & Live Chat",
+      "rating": 5,
+      "reviewCount": 114,
+      "description": "Turn visitors into buyers with an AI chatbot app for your store. VanChat provides live support, proactive sales, and automates customer service. Install today!",
+      "tagline": "AI Chatbot &amp; AI Chat that acts as Chat AI agent, provides live support &amp; automates customer service",
+      "features": [
+        "Build a branded shopping assistant; train the AI chatbot for proactive sales",
+        "Provide accurate AI chat replies using real-time SKU inventory and product data",
+        "Automate live support for post-sale issues with chat AI agent handover",
+        "Activate a chat box, AI live chat support &amp; customer service with no-code setup",
+        "Instantly take over any Van Chat bot conversation with a human drop-in feature"
+      ],
+      "pricing": [
+        {
+          "plan": "Free",
+          "price": "Free"
+        },
+        {
+          "plan": "Starter",
+          "price": ""
+        },
+        {
+          "plan": "Advanced",
+          "price": ""
+        },
+        {
+          "plan": "Growth",
+          "price": ""
+        }
+      ],
+      "pricingNote": "Free plan available + Free trial available",
+      "checkedAt": "2026-03-04T04:35:18.803Z",
+      "handle": "vanchat"
+    },
+    "reamaze": {
+      "name": "Re:amaze AI Helpdesk & Chat",
+      "rating": 4.4,
+      "reviewCount": 175,
+      "description": "Top rated AI-powered customer support platform for Shopify and Shopify Plus merchants. Chat, social, email, voice, sms, FAQ all in one place.",
+      "tagline": "Deliver smarter support with our AI Agent, chatbot and live chat—built into a support helpdesk.",
+      "features": [
+        "Unify email, social, SMS, voice conversations for all stores in a single inbox",
+        "Manage, modify, and create Shopify orders directly in customer support and chats",
+        "Use AI to write replies, build chatbots, summarize, and create FAQ articles",
+        "Automate common tasks and patterns with data and rules to save time",
+        "Satisfaction surveys, status pages, push notifications to keep customers engaged"
+      ],
+      "pricing": [
+        {
+          "plan": "Re:amaze Basic",
+          "price": ""
+        },
+        {
+          "plan": "Re:amaze Pro",
+          "price": ""
+        },
+        {
+          "plan": "Re:amaze Plus",
+          "price": ""
+        },
+        {
+          "plan": "Enterprise Custom",
+          "price": ""
+        }
+      ],
+      "pricingNote": "Free plan available + Free trial available",
+      "checkedAt": "2026-03-04T04:35:18.803Z",
+      "handle": "reamaze"
+    }
+  },
+  "history": [],
+  "lastChecked": "2026-03-04T04:35:18.803Z"
+}
