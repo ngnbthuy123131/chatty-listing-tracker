@@ -163,6 +163,48 @@
   .comp-compare-table .chatty-row td { background: #fffbeb; font-weight: 600; color: #1A0A7A; }
   .no-snapshot { text-align: center; padding: 40px; color: #bbb; font-size: 13px; line-height: 1.8; }
 
+  /* Optimizer tab */
+  .opt-layout { display: grid; grid-template-columns: 1fr 380px; gap: 20px; align-items: start; }
+  @media (max-width: 900px) { .opt-layout { grid-template-columns: 1fr; } }
+  .opt-panel { background: #fff; border: 1px solid #e8e8e8; border-radius: 12px; overflow: hidden; }
+  .opt-panel-title { background: #f7f7f9; padding: 12px 16px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: #888; border-bottom: 1px solid #e8e8e8; display: flex; align-items: center; justify-content: space-between; }
+  .opt-field-row { padding: 14px 16px; border-bottom: 1px solid #f4f4f4; }
+  .opt-field-row:last-child { border-bottom: none; }
+  .opt-field-label { font-size: 11px; font-weight: 700; color: #888; text-transform: uppercase; margin-bottom: 6px; display: flex; justify-content: space-between; }
+  .opt-field-label .counter { font-weight: 600; }
+  .opt-field-label .counter.ok   { color: #22c55e; }
+  .opt-field-label .counter.warn { color: #f59e0b; }
+  .opt-field-label .counter.over { color: #ef4444; }
+  .opt-textarea { width: 100%; border: 1px solid #e0e0e0; border-radius: 6px; padding: 8px 10px; font-size: 13px; font-family: inherit; resize: vertical; line-height: 1.5; color: #1a1a2e; outline: none; transition: border-color .15s; }
+  .opt-textarea:focus { border-color: #1A0A7A; }
+  .opt-btn { display: inline-block; padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer; border: none; }
+  .opt-btn-primary { background: #1A0A7A; color: #fff; }
+  .opt-btn-secondary { background: #f0f0f0; color: #555; }
+  .opt-btn:hover { opacity: .85; }
+
+  /* Results panel */
+  .opt-kw-row { padding: 9px 14px; border-bottom: 1px solid #f4f4f4; display: flex; align-items: center; gap: 10px; }
+  .opt-kw-row:last-child { border-bottom: none; }
+  .opt-kw-name { font-size: 12px; font-weight: 600; width: 110px; flex-shrink: 0; }
+  .opt-kw-bars { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+  .opt-kw-bar-row { display: flex; align-items: center; gap: 6px; font-size: 10px; color: #aaa; }
+  .opt-kw-bar-track { flex: 1; background: #f0f0f0; border-radius: 3px; height: 6px; overflow: hidden; }
+  .opt-kw-bar-fill { height: 100%; border-radius: 3px; transition: width .3s; }
+  .opt-kw-delta { font-size: 11px; font-weight: 800; width: 52px; text-align: right; white-space: nowrap; }
+  .opt-kw-delta.up   { color: #16a34a; }
+  .opt-kw-delta.down { color: #ef4444; }
+  .opt-kw-delta.flat { color: #aaa; }
+  .opt-summary { padding: 14px 16px; border-top: 1px solid #e8e8e8; background: #f9f9fb; }
+  .opt-coverage-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; padding: 12px 16px; }
+  .opt-cov-cell { font-size: 10px; text-align: center; padding: 4px 2px; border-radius: 4px; }
+  .opt-cov-cell.hit  { background: #dcfce7; color: #16a34a; font-weight: 700; }
+  .opt-cov-cell.miss { background: #f5f5f5; color: #ccc; }
+  .opt-cov-header { font-size: 9px; font-weight: 700; text-align: center; color: #aaa; text-transform: uppercase; }
+  .opt-impact-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 6px; }
+  .opt-impact-badge.positive { background: #dcfce7; color: #16a34a; }
+  .opt-impact-badge.negative { background: #fee2e2; color: #dc2626; }
+  .opt-impact-badge.neutral  { background: #f0f0f0; color: #888; }
+
   /* ASO Factors tab */
   .aso-factor-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; border: 1px solid #e8e8e8; margin-bottom: 28px; font-size: 13px; }
   .aso-factor-table th { background: #f7f7f9; padding: 10px 16px; text-align: left; font-size: 11px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: .4px; border-bottom: 1px solid #e8e8e8; }
@@ -206,6 +248,7 @@
   <div class="tab" onclick="switchView('reports')">Change Reports</div>
   <div class="tab" onclick="switchView('competitors')">Competitor Intel</div>
   <div class="tab" onclick="switchView('aso')">ASO Factors</div>
+  <div class="tab" onclick="switchView('optimizer')">⚡ Optimizer</div>
 </div>
 
 <div class="layout">
@@ -231,6 +274,9 @@
     </div>
     <div class="view" id="view-aso">
       <div id="aso-content"></div>
+    </div>
+    <div class="view" id="view-optimizer">
+      <div id="optimizer-content"></div>
     </div>
   </div>
 </div>
@@ -1152,16 +1198,333 @@ function renderAso() {
     </div>`;
 }
 
+// ── Optimizer tab ─────────────────────────────────────────────────────────────
+function renderOptimizer() {
+  const el = document.getElementById('optimizer-content');
+  const state = buildCurrentState();
+
+  // Field definitions with weights
+  const FIELDS = [
+    { key: 'title',    label: 'App Name / Title',  limit: 30,  weight: 80,  stateKey: 'App Name' },
+    { key: 'subtitle', label: 'App Card Subtitle',  limit: 62,  weight: 65,  stateKey: 'App Card Subtitle' },
+    { key: 'intro',    label: 'Intro (first ~100)', limit: 100, weight: 40,  stateKey: 'Intro' },
+    { key: 'details',  label: 'App Details',        limit: 500, weight: 35,  stateKey: 'App Details' },
+    { key: 'feat1',    label: 'Feature 1',          limit: 80,  weight: 30,  stateKey: 'Feature 1' },
+    { key: 'feat2',    label: 'Feature 2',          limit: 80,  weight: 30,  stateKey: 'Feature 2' },
+    { key: 'feat3',    label: 'Feature 3',          limit: 80,  weight: 30,  stateKey: 'Feature 3' },
+    { key: 'feat4',    label: 'Feature 4',          limit: 80,  weight: 30,  stateKey: 'Feature 4' },
+    { key: 'feat5',    label: 'Feature 5',          limit: 80,  weight: 30,  stateKey: 'Feature 5' },
+    { key: 'alt1',     label: 'Alt Text 1',         limit: 64,  weight: 20,  stateKey: 'Alt 1' },
+    { key: 'alt2',     label: 'Alt Text 2',         limit: 64,  weight: 20,  stateKey: 'Alt 2' },
+    { key: 'alt3',     label: 'Alt Text 3',         limit: 64,  weight: 20,  stateKey: 'Alt 3' },
+    { key: 'alt4',     label: 'Alt Text 4',         limit: 64,  weight: 20,  stateKey: 'Alt 4' },
+    { key: 'alt5',     label: 'Alt Text 5',         limit: 64,  weight: 20,  stateKey: 'Alt 5' },
+    { key: 'alt6',     label: 'Alt Text 6',         limit: 64,  weight: 20,  stateKey: 'Alt 6' },
+    { key: 'alt7',     label: 'Alt Text 7',         limit: 64,  weight: 20,  stateKey: 'Alt 7' },
+  ];
+
+  // Keywords to score against (12 tracked keywords)
+  const KEYWORDS = [
+    'live chat', 'AI chatbot', 'chatbot', 'inbox', 'chat',
+    'help center', 'FAQ', 'livechat', 'WhatsApp', 'helpdesk',
+    'customer support', 'ai chat',
+  ];
+
+  // P0 keywords (higher weight in summary)
+  const P0 = new Set(['live chat', 'AI chatbot', 'chatbot', 'chat', 'inbox', 'livechat', 'ai chat']);
+
+  // Max possible total score across all fields
+  const MAX_SCORE = FIELDS.reduce((s, f) => s + f.weight, 0);
+
+  // ── Scoring engine ────────────────────────────────────────────────────────
+  function scoreKeywordInField(keyword, text, fieldWeight) {
+    if (!text) return 0;
+    const lower = text.toLowerCase();
+    const kw    = keyword.toLowerCase();
+    if (!lower.includes(kw)) return 0;
+    // Prominence bonus: keyword in first 30% of text = 1.2x
+    const firstThird = lower.slice(0, Math.max(1, Math.floor(lower.length * 0.3)));
+    const prominence  = firstThird.includes(kw) ? 1.2 : 1.0;
+    return Math.round(fieldWeight * prominence);
+  }
+
+  function scoreAll(values) {
+    // values = { key: text, ... }
+    const kwScores = {};
+    KEYWORDS.forEach(kw => {
+      let total = 0;
+      FIELDS.forEach(f => {
+        total += scoreKeywordInField(kw, values[f.key] || '', f.weight);
+      });
+      kwScores[kw] = total;
+    });
+    return kwScores;
+  }
+
+  function coverageMatrix(values) {
+    // Returns { kw: { fieldKey: bool } }
+    const matrix = {};
+    KEYWORDS.forEach(kw => {
+      matrix[kw] = {};
+      FIELDS.forEach(f => {
+        const text = (values[f.key] || '').toLowerCase();
+        matrix[kw][f.key] = text.includes(kw.toLowerCase());
+      });
+    });
+    return matrix;
+  }
+
+  // ── Load current values ───────────────────────────────────────────────────
+  const currentValues = {};
+  FIELDS.forEach(f => {
+    currentValues[f.key] = state[f.stateKey] ? state[f.stateKey].content : '';
+  });
+
+  // ── Build editor HTML ─────────────────────────────────────────────────────
+  // Group: primary fields vs alt texts
+  const mainFields = FIELDS.filter(f => !f.key.startsWith('alt'));
+  const altFields  = FIELDS.filter(f => f.key.startsWith('alt'));
+
+  function fieldRow(f) {
+    const val = currentValues[f.key] || '';
+    const rows = f.limit > 100 ? 4 : 2;
+    return `<div class="opt-field-row">
+      <div class="opt-field-label">
+        <span>${f.label} <span style="color:#bbb;font-weight:400">(${f.weight}% weight)</span></span>
+        <span class="counter ok" id="ctr-${f.key}">${val.length}/${f.limit}</span>
+      </div>
+      <textarea class="opt-textarea" id="opt-${f.key}" rows="${rows}"
+        maxlength="${f.limit + 20}"
+        oninput="optUpdate()"
+      >${val}</textarea>
+    </div>`;
+  }
+
+  el.innerHTML = `
+    <div style="font-size:13px;color:#666;margin-bottom:16px;line-height:1.6">
+      Edit any field below. The <strong>Keyword Score</strong> panel updates live — showing how the change affects your estimated ranking signal per keyword, based on field weights and keyword prominence.
+      <br><span style="font-size:11px;color:#aaa">Scores are estimated signals, not guaranteed rank positions. They reflect keyword coverage × field weight in the Shopify algorithm.</span>
+    </div>
+
+    <div class="opt-layout">
+      <!-- Left: editor -->
+      <div>
+        <div class="opt-panel" style="margin-bottom:16px">
+          <div class="opt-panel-title">
+            Content Fields
+            <div style="display:flex;gap:8px">
+              <button class="opt-btn opt-btn-secondary" onclick="optReset()">Reset to current</button>
+            </div>
+          </div>
+          ${mainFields.map(f => fieldRow(f)).join('')}
+        </div>
+        <details style="margin-bottom:16px">
+          <summary style="cursor:pointer;font-size:12px;font-weight:700;color:#888;padding:8px 0;list-style:none">
+            ▶ Alt Texts (screenshot captions — ${altFields[0].weight}% weight each)
+          </summary>
+          <div class="opt-panel" style="margin-top:8px">
+            <div class="opt-panel-title">Alt Texts</div>
+            ${altFields.map(f => fieldRow(f)).join('')}
+          </div>
+        </details>
+      </div>
+
+      <!-- Right: live results -->
+      <div style="position:sticky;top:20px">
+        <div class="opt-panel" style="margin-bottom:14px">
+          <div class="opt-panel-title">Keyword Score Impact</div>
+          <div id="opt-kw-results"></div>
+          <div class="opt-summary" id="opt-summary"></div>
+        </div>
+        <div class="opt-panel">
+          <div class="opt-panel-title">Keyword Coverage Matrix</div>
+          <div id="opt-coverage"></div>
+        </div>
+      </div>
+    </div>`;
+
+  // Store baseline
+  window._optBaseline  = scoreAll(currentValues);
+  window._optCurrent   = currentValues;
+  window._optFields    = FIELDS;
+  window._optKeywords  = KEYWORDS;
+  window._optP0        = P0;
+  window._optMaxScore  = MAX_SCORE;
+
+  optUpdate(); // Initial render
+}
+
+function optGetValues() {
+  const values = {};
+  window._optFields.forEach(f => {
+    const el = document.getElementById('opt-' + f.key);
+    values[f.key] = el ? el.value : '';
+  });
+  return values;
+}
+
+function optUpdate() {
+  const FIELDS   = window._optFields;
+  const KEYWORDS = window._optKeywords;
+  const P0       = window._optP0;
+  const baseline = window._optBaseline;
+  const MAX      = window._optMaxScore;
+
+  const values   = optGetValues();
+
+  // Update char counters
+  FIELDS.forEach(f => {
+    const el  = document.getElementById('opt-' + f.key);
+    const ctr = document.getElementById('ctr-' + f.key);
+    if (!el || !ctr) return;
+    const len = el.value.length;
+    const pct = len / f.limit;
+    ctr.textContent  = `${len}/${f.limit}`;
+    ctr.className    = 'counter ' + (pct > 1 ? 'over' : pct > 0.85 ? 'warn' : 'ok');
+  });
+
+  // Score proposed
+  const proposed = {};
+  KEYWORDS.forEach(kw => {
+    let total = 0;
+    FIELDS.forEach(f => {
+      const text  = (values[f.key] || '').toLowerCase();
+      const kwl   = kw.toLowerCase();
+      if (!text.includes(kwl)) return;
+      const firstThird = text.slice(0, Math.max(1, Math.floor(text.length * 0.3)));
+      const prom  = firstThird.includes(kwl) ? 1.2 : 1.0;
+      total      += Math.round(f.weight * prom);
+    });
+    proposed[kw] = total;
+  });
+
+  // Max possible per keyword (all fields present, all prominent)
+  const maxKw = FIELDS.reduce((s, f) => s + Math.round(f.weight * 1.2), 0);
+
+  // Render keyword rows
+  const kwEl = document.getElementById('opt-kw-results');
+  if (kwEl) {
+    kwEl.innerHTML = KEYWORDS.map(kw => {
+      const b    = baseline[kw] || 0;
+      const p    = proposed[kw] || 0;
+      const delta = p - b;
+      const isP0  = P0.has(kw);
+      const bPct  = Math.min(100, Math.round(b / maxKw * 100));
+      const pPct  = Math.min(100, Math.round(p / maxKw * 100));
+      const dClass = delta > 0 ? 'up' : delta < 0 ? 'down' : 'flat';
+      const dLabel = delta > 0 ? `+${delta}` : delta < 0 ? `${delta}` : '—';
+      return `<div class="opt-kw-row">
+        <div class="opt-kw-name">${isP0 ? '<strong>' : ''}${kw}${isP0 ? '</strong>' : ''}</div>
+        <div class="opt-kw-bars">
+          <div class="opt-kw-bar-row">
+            <span style="width:42px">Before</span>
+            <div class="opt-kw-bar-track"><div class="opt-kw-bar-fill" style="width:${bPct}%;background:#d1d5db"></div></div>
+            <span style="width:28px;text-align:right">${b}</span>
+          </div>
+          <div class="opt-kw-bar-row">
+            <span style="width:42px">After</span>
+            <div class="opt-kw-bar-track"><div class="opt-kw-bar-fill" style="width:${pPct}%;background:${delta>0?'#16a34a':delta<0?'#ef4444':'#94a3b8'}"></div></div>
+            <span style="width:28px;text-align:right">${p}</span>
+          </div>
+        </div>
+        <div class="opt-kw-delta ${dClass}">${dLabel}</div>
+      </div>`;
+    }).join('');
+  }
+
+  // Summary
+  const gained  = KEYWORDS.filter(kw => proposed[kw] > (baseline[kw] || 0));
+  const lost    = KEYWORDS.filter(kw => proposed[kw] < (baseline[kw] || 0));
+  const totalB  = KEYWORDS.reduce((s, kw) => s + (baseline[kw] || 0), 0);
+  const totalP  = KEYWORDS.reduce((s, kw) => s + proposed[kw], 0);
+  const overall = totalP - totalB;
+  const impClass = overall > 0 ? 'positive' : overall < 0 ? 'negative' : 'neutral';
+  const impLabel = overall > 0 ? `+${overall} overall signal gain` : overall < 0 ? `${overall} overall signal loss` : 'No change';
+  const p0Gained = gained.filter(kw => P0.has(kw));
+  const p0Lost   = lost.filter(kw => P0.has(kw));
+
+  const sumEl = document.getElementById('opt-summary');
+  if (sumEl) {
+    sumEl.innerHTML = `
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <span class="opt-impact-badge ${impClass}">${overall > 0 ? '↑' : overall < 0 ? '↓' : '—'} ${impLabel}</span>
+      </div>
+      <div style="font-size:12px;color:#555;line-height:1.8">
+        ${gained.length > 0 ? `<div>✅ Gained signal: <strong>${gained.join(', ')}</strong></div>` : ''}
+        ${lost.length   > 0 ? `<div>❌ Lost signal: <strong>${lost.join(', ')}</strong></div>` : ''}
+        ${p0Gained.length > 0 ? `<div style="color:#16a34a">⭐ P0 keywords improved: ${p0Gained.join(', ')}</div>` : ''}
+        ${p0Lost.length   > 0 ? `<div style="color:#dc2626">⚠️ P0 keywords hurt: ${p0Lost.join(', ')}</div>` : ''}
+        ${gained.length === 0 && lost.length === 0 ? '<div style="color:#aaa">No keyword signal changes detected.</div>' : ''}
+      </div>`;
+  }
+
+  // Coverage matrix (compact — just main fields)
+  const mainFields = FIELDS.filter(f => !f.key.startsWith('alt'));
+  const covEl = document.getElementById('opt-coverage');
+  if (covEl) {
+    const headerCells = mainFields.map(f =>
+      `<div class="opt-cov-header" title="${f.label}">${f.label.replace('App ', '').replace(' / Title','').slice(0,6)}</div>`
+    ).join('');
+    const rows = KEYWORDS.map(kw => {
+      const cells = mainFields.map(f => {
+        const text = (values[f.key] || '').toLowerCase();
+        const hit  = text.includes(kw.toLowerCase());
+        return `<div class="opt-cov-cell ${hit ? 'hit' : 'miss'}" title="${f.label}">${hit ? '✓' : '·'}</div>`;
+      }).join('');
+      return `<div style="display:contents">
+        <div style="font-size:11px;font-weight:600;padding:4px 8px 4px 0;grid-column:1">${kw}</div>
+        ${cells}
+      </div>`;
+    }).join('');
+
+    covEl.innerHTML = `
+      <div style="padding:12px 16px 4px;font-size:11px;color:#aaa">Green = keyword present in that field &nbsp;·&nbsp; Bold keywords = P0 (highest priority)</div>
+      <div style="overflow-x:auto;padding:8px 16px 16px">
+        <table style="border-collapse:collapse;font-size:11px;width:100%">
+          <thead><tr>
+            <th style="text-align:left;padding:4px 8px 4px 0;color:#888;font-size:10px;white-space:nowrap">Keyword</th>
+            ${mainFields.map(f => `<th style="text-align:center;padding:4px 6px;color:#888;font-size:10px;white-space:nowrap" title="${f.label}">${f.label.slice(0,8)}</th>`).join('')}
+          </thead>
+          <tbody>
+          ${KEYWORDS.map(kw => {
+            const isP0 = P0.has(kw);
+            const cells = mainFields.map(f => {
+              const text = (values[f.key] || '').toLowerCase();
+              const hit  = text.includes(kw.toLowerCase());
+              return `<td style="text-align:center;padding:3px 6px">
+                <span style="display:inline-block;width:18px;height:18px;line-height:18px;border-radius:4px;font-size:10px;font-weight:700;background:${hit?'#dcfce7':'#f5f5f5'};color:${hit?'#16a34a':'#ccc'}">${hit?'✓':'·'}</span>
+              </td>`;
+            }).join('');
+            return `<tr style="border-bottom:1px solid #f8f8f8">
+              <td style="padding:4px 8px 4px 0;white-space:nowrap;font-weight:${isP0?'700':'400'}">${kw}${isP0?' ⭐':''}</td>
+              ${cells}
+            </tr>`;
+          }).join('')}
+          </tbody>
+        </table>
+      </div>`;
+  }
+}
+
+function optReset() {
+  window._optFields.forEach(f => {
+    const el = document.getElementById('opt-' + f.key);
+    if (el) el.value = window._optCurrent[f.key] || '';
+  });
+  optUpdate();
+}
+
 function switchView(view) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   event.target.classList.add('active');
   document.getElementById('view-' + view).classList.add('active');
-  if (view === 'current')     renderCurrent();
-  if (view === 'rankings')    renderRankings();
-  if (view === 'reports')     renderReports();
+  if (view === 'current')   renderCurrent();
+  if (view === 'rankings')  renderRankings();
+  if (view === 'reports')   renderReports();
   if (view === 'competitors') renderCompetitors();
-  if (view === 'aso')         renderAso();
+  if (view === 'aso')       renderAso();
+  if (view === 'optimizer') renderOptimizer();
 }
 
 // Init
