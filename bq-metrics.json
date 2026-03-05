@@ -1,0 +1,481 @@
+{
+  "generatedAt": "2026-03-05T02:46:51.294Z",
+  "kpis": {
+    "total_installs": 66884,
+    "installs_30d": 2238,
+    "installs_7d": 589,
+    "installs_today": 21,
+    "installs_mtd": 350,
+    "installs_last_month": 2048,
+    "total_paid_conversions": 2818,
+    "total_trialed": 6953,
+    "total_passed_trial": 4160,
+    "mom_change_pct": -83
+  },
+  "daily": [
+    {
+      "date": "2026-01-04",
+      "installs": 80
+    },
+    {
+      "date": "2026-01-05",
+      "installs": 94
+    },
+    {
+      "date": "2026-01-06",
+      "installs": 89
+    },
+    {
+      "date": "2026-01-07",
+      "installs": 94
+    },
+    {
+      "date": "2026-01-08",
+      "installs": 88
+    },
+    {
+      "date": "2026-01-09",
+      "installs": 82
+    },
+    {
+      "date": "2026-01-10",
+      "installs": 82
+    },
+    {
+      "date": "2026-01-11",
+      "installs": 69
+    },
+    {
+      "date": "2026-01-12",
+      "installs": 87
+    },
+    {
+      "date": "2026-01-13",
+      "installs": 111
+    },
+    {
+      "date": "2026-01-14",
+      "installs": 108
+    },
+    {
+      "date": "2026-01-15",
+      "installs": 112
+    },
+    {
+      "date": "2026-01-16",
+      "installs": 107
+    },
+    {
+      "date": "2026-01-17",
+      "installs": 70
+    },
+    {
+      "date": "2026-01-18",
+      "installs": 70
+    },
+    {
+      "date": "2026-01-19",
+      "installs": 100
+    },
+    {
+      "date": "2026-01-20",
+      "installs": 100
+    },
+    {
+      "date": "2026-01-21",
+      "installs": 88
+    },
+    {
+      "date": "2026-01-22",
+      "installs": 95
+    },
+    {
+      "date": "2026-01-23",
+      "installs": 104
+    },
+    {
+      "date": "2026-01-24",
+      "installs": 76
+    },
+    {
+      "date": "2026-01-25",
+      "installs": 70
+    },
+    {
+      "date": "2026-01-26",
+      "installs": 79
+    },
+    {
+      "date": "2026-01-27",
+      "installs": 99
+    },
+    {
+      "date": "2026-01-28",
+      "installs": 104
+    },
+    {
+      "date": "2026-01-29",
+      "installs": 131
+    },
+    {
+      "date": "2026-01-30",
+      "installs": 88
+    },
+    {
+      "date": "2026-01-31",
+      "installs": 81
+    },
+    {
+      "date": "2026-02-01",
+      "installs": 70
+    },
+    {
+      "date": "2026-02-02",
+      "installs": 90
+    },
+    {
+      "date": "2026-02-03",
+      "installs": 101
+    },
+    {
+      "date": "2026-02-04",
+      "installs": 102
+    },
+    {
+      "date": "2026-02-05",
+      "installs": 126
+    },
+    {
+      "date": "2026-02-06",
+      "installs": 85
+    },
+    {
+      "date": "2026-02-07",
+      "installs": 68
+    },
+    {
+      "date": "2026-02-08",
+      "installs": 70
+    },
+    {
+      "date": "2026-02-09",
+      "installs": 73
+    },
+    {
+      "date": "2026-02-10",
+      "installs": 103
+    },
+    {
+      "date": "2026-02-11",
+      "installs": 83
+    },
+    {
+      "date": "2026-02-12",
+      "installs": 76
+    },
+    {
+      "date": "2026-02-13",
+      "installs": 72
+    },
+    {
+      "date": "2026-02-14",
+      "installs": 7
+    },
+    {
+      "date": "2026-02-17",
+      "installs": 70
+    },
+    {
+      "date": "2026-02-18",
+      "installs": 38
+    },
+    {
+      "date": "2026-02-19",
+      "installs": 65
+    },
+    {
+      "date": "2026-02-20",
+      "installs": 81
+    },
+    {
+      "date": "2026-02-21",
+      "installs": 57
+    },
+    {
+      "date": "2026-02-22",
+      "installs": 120
+    },
+    {
+      "date": "2026-02-23",
+      "installs": 79
+    },
+    {
+      "date": "2026-02-24",
+      "installs": 85
+    },
+    {
+      "date": "2026-02-25",
+      "installs": 88
+    },
+    {
+      "date": "2026-02-26",
+      "installs": 85
+    },
+    {
+      "date": "2026-02-27",
+      "installs": 84
+    },
+    {
+      "date": "2026-02-28",
+      "installs": 70
+    },
+    {
+      "date": "2026-03-01",
+      "installs": 68
+    },
+    {
+      "date": "2026-03-02",
+      "installs": 82
+    },
+    {
+      "date": "2026-03-03",
+      "installs": 98
+    },
+    {
+      "date": "2026-03-04",
+      "installs": 81
+    },
+    {
+      "date": "2026-03-05",
+      "installs": 21
+    }
+  ],
+  "monthly": [
+    {
+      "month": "2024-09",
+      "installs": 2506
+    },
+    {
+      "month": "2024-10",
+      "installs": 2554
+    },
+    {
+      "month": "2024-11",
+      "installs": 2416
+    },
+    {
+      "month": "2024-12",
+      "installs": 2165
+    },
+    {
+      "month": "2025-01",
+      "installs": 2928
+    },
+    {
+      "month": "2025-02",
+      "installs": 3148
+    },
+    {
+      "month": "2025-03",
+      "installs": 3518
+    },
+    {
+      "month": "2025-04",
+      "installs": 2826
+    },
+    {
+      "month": "2025-05",
+      "installs": 2733
+    },
+    {
+      "month": "2025-06",
+      "installs": 2316
+    },
+    {
+      "month": "2025-07",
+      "installs": 2271
+    },
+    {
+      "month": "2025-08",
+      "installs": 2464
+    },
+    {
+      "month": "2025-09",
+      "installs": 2488
+    },
+    {
+      "month": "2025-10",
+      "installs": 2601
+    },
+    {
+      "month": "2025-11",
+      "installs": 2687
+    },
+    {
+      "month": "2025-12",
+      "installs": 2317
+    },
+    {
+      "month": "2026-01",
+      "installs": 2725
+    },
+    {
+      "month": "2026-02",
+      "installs": 2048
+    },
+    {
+      "month": "2026-03",
+      "installs": 350
+    }
+  ],
+  "monthlyPaid": [
+    {
+      "month": "2025-07",
+      "new_paid": 979
+    },
+    {
+      "month": "2025-08",
+      "new_paid": 307
+    },
+    {
+      "month": "2025-09",
+      "new_paid": 249
+    },
+    {
+      "month": "2025-10",
+      "new_paid": 269
+    },
+    {
+      "month": "2025-11",
+      "new_paid": 294
+    },
+    {
+      "month": "2025-12",
+      "new_paid": 248
+    },
+    {
+      "month": "2026-01",
+      "new_paid": 232
+    },
+    {
+      "month": "2026-02",
+      "new_paid": 216
+    },
+    {
+      "month": "2026-03",
+      "new_paid": 24
+    }
+  ],
+  "trialPlans": [
+    {
+      "plan": "Basic",
+      "count": 4488
+    },
+    {
+      "plan": "Pro",
+      "count": 2277
+    },
+    {
+      "plan": "Plus",
+      "count": 188
+    }
+  ],
+  "trialConversion": {
+    "total": 6953,
+    "passed": 4160,
+    "failed": 2793,
+    "rate": 60
+  },
+  "countries": [
+    {
+      "country": "US",
+      "count": 15233
+    },
+    {
+      "country": "IN",
+      "count": 5691
+    },
+    {
+      "country": "GB",
+      "count": 4705
+    },
+    {
+      "country": "FR",
+      "count": 3577
+    },
+    {
+      "country": "NL",
+      "count": 2910
+    },
+    {
+      "country": "CA",
+      "count": 2664
+    },
+    {
+      "country": "AU",
+      "count": 2192
+    },
+    {
+      "country": "DE",
+      "count": 2145
+    },
+    {
+      "country": "PK",
+      "count": 1808
+    },
+    {
+      "country": "IT",
+      "count": 1608
+    },
+    {
+      "country": "VN",
+      "count": 1314
+    },
+    {
+      "country": "CN",
+      "count": 1232
+    }
+  ],
+  "shopifyPlans": [
+    {
+      "plan": "basic",
+      "count": 28477
+    },
+    {
+      "plan": "frozen",
+      "count": 9464
+    },
+    {
+      "plan": "cancelled",
+      "count": 8304
+    },
+    {
+      "plan": "professional",
+      "count": 6991
+    },
+    {
+      "plan": "affiliate",
+      "count": 3606
+    },
+    {
+      "plan": "unlimited",
+      "count": 1881
+    },
+    {
+      "plan": "partner_test",
+      "count": 1392
+    },
+    {
+      "plan": "fraudulent",
+      "count": 1125
+    },
+    {
+      "plan": "shopify_plus",
+      "count": 1120
+    },
+    {
+      "plan": "trial",
+      "count": 985
+    }
+  ]
+}
