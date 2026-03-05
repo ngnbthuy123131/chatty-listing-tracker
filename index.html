@@ -876,9 +876,12 @@ async function renderCompetitors() {
     return history.filter(h => h.handle === handle).length;
   }
 
+  const SCREENSHOT_BASE = 'https://ngnbthuy123131.github.io/chatty-listing-tracker/screenshots/';
+
   const cards = Object.entries(snapshots).map(([handle, snap]) => {
     const name = snap.name || COMP_NAMES[handle] || handle;
     const chCount = changesForComp(handle);
+    const screenshotUrl = `${SCREENSHOT_BASE}${handle}.jpg`;
     return `
       <div class="comp-card">
         <div class="comp-card-head">
@@ -915,6 +918,16 @@ async function renderCompetitors() {
             ${chCount > 0 ? `<span class="comp-changed-badge">⚡ ${chCount} change${chCount > 1 ? 's' : ''}</span>` : ''}
           </div>
           <div class="comp-last-check">Last checked: ${lastCheck}</div>
+        </div>
+        <div style="border-top:1px solid #f0f0f0;position:relative;overflow:hidden;cursor:zoom-in" onclick="window.open('${screenshotUrl}','_blank')" title="Click to view full screenshot">
+          <img src="${screenshotUrl}" alt="${name} listing screenshot"
+            style="width:100%;height:180px;object-fit:cover;object-position:top;display:block;transition:transform .2s"
+            onmouseover="this.style.transform='scale(1.03)'"
+            onmouseout="this.style.transform='scale(1)'"
+            onerror="this.parentElement.style.display='none'">
+          <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.45));padding:8px 10px;font-size:10px;color:#fff;font-weight:600">
+            📸 Listing screenshot — click to expand
+          </div>
         </div>
       </div>`;
   }).join('');
