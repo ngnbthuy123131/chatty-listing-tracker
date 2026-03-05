@@ -744,24 +744,57 @@ async function renderRankings() {
     // Store for toggle
     window._rankChartRef = rankChart;
 
-    // ── Keyword Install Attribution (BigQuery) ────────────────────
+    // ── Keyword Traffic + Install Attribution (BigQuery) ─────────
     try {
       const bqRes  = await fetch('bq-metrics.json');
       const bqData = await bqRes.json();
-      const kwMap  = {};
+
+      // Install map (from chatty_daily_growth_metric_add_keyword_lv3)
+      const kwMap = {};
       (bqData.keywordInstalls || []).forEach(r => { kwMap[r.keyword.toLowerCase()] = r; });
+
+      // Traffic map (from chatty_traffic_to_subs, app_string=chatty)
+      const trafficMap = {};
+      (bqData.keywordTraffic || []).forEach(r => { trafficMap[r.keyword.toLowerCase()] = r; });
+
+      // Overall CVR KPI badge
+      const tkpi = bqData.trafficKpis || {};
+      const kpiBadge = tkpi.total_visits ? `
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin:12px 0 18px">
+          <div style="background:#f0f7ff;border-radius:8px;padding:10px 16px;min-width:130px">
+            <div style="font-size:11px;color:#888;margin-bottom:2px">Total Visits (all-time)</div>
+            <div style="font-size:20px;font-weight:800;color:#1A0A7A">${tkpi.total_visits.toLocaleString()}</div>
+          </div>
+          <div style="background:#f0fdf4;border-radius:8px;padding:10px 16px;min-width:130px">
+            <div style="font-size:11px;color:#888;margin-bottom:2px">Overall CVR</div>
+            <div style="font-size:20px;font-weight:800;color:#16a34a">${tkpi.cvr_overall}%</div>
+          </div>
+          <div style="background:#fff7ed;border-radius:8px;padding:10px 16px;min-width:130px">
+            <div style="font-size:11px;color:#888;margin-bottom:2px">Visits (30d)</div>
+            <div style="font-size:20px;font-weight:800;color:#d97706">${(tkpi.visits_30d||0).toLocaleString()}</div>
+          </div>
+          <div style="background:#fdf4ff;border-radius:8px;padding:10px 16px;min-width:130px">
+            <div style="font-size:11px;color:#888;margin-bottom:2px">CVR (30d)</div>
+            <div style="font-size:20px;font-weight:800;color:#7c3aed">${tkpi.cvr_30d}%</div>
+          </div>
+        </div>` : '';
 
       const instRows = latest.results.map(r => {
         const kw   = r.keyword;
         const rank = r.organicPosition;
         const d    = kwMap[kw.toLowerCase()] || null;
-        const i30  = d ? d.installs_30d   : null;
-        const i7   = d ? d.installs_7d    : null;
-        const p30  = d ? d.installs_prev30d : null;
-        const rankBg = !rank ? '#f0f0f0' : rank<=3?'#dcfce7':rank<=6?'#dbeafe':rank<=10?'#fef3c7':'#fee2e2';
-        const rankFg = !rank ? '#aaa'    : rank<=3?'#16a34a':rank<=6?'#2563eb':rank<=10?'#d97706':'#dc2626';
+        const t    = trafficMap[kw.toLowerCase()] || null;
 
-        // 30d trend vs prior 30d
+        const i30  = d ? d.installs_30d    : null;
+        const i7   = d ? d.installs_7d     : null;
+        const p30  = d ? d.installs_prev30d : null;
+
+        const v30     = t ? t.visits_30d    : null;
+        const vTotal  = t ? t.visits_total  : null;
+        const cvr30   = t ? t.cvr_30d       : null;
+        const cvrAll  = t ? t.cvr_total     : null;
+
+        // 30d install trend vs prior 30d
         let trendHtml = '<span style="color:#aaa">—</span>';
         if (i30 !== null && p30 !== null && p30 > 0) {
           const pct = Math.round((i30 - p30) / p30 * 100);
@@ -772,9 +805,16 @@ async function renderRankings() {
               : `<span style="color:#aaa">—</span>`;
         }
 
+        // CVR colour
+        const cvrColor = !cvr30 ? '#aaa' : cvr30 >= 25 ? '#16a34a' : cvr30 >= 15 ? '#d97706' : '#dc2626';
+
         return `<tr>
           <td style="font-weight:600">${kw}</td>
           <td style="text-align:center"><span class="rank-pill ${rankClass(rank)}">${rank?'#'+rank:'—'}</span></td>
+          <td style="text-align:right">${v30 !== null ? v30.toLocaleString() : '—'}</td>
+          <td style="text-align:right">${vTotal !== null ? vTotal.toLocaleString() : '—'}</td>
+          <td style="text-align:center;font-weight:700;color:${cvrColor}">${cvr30 !== null ? cvr30+'%' : '—'}</td>
+          <td style="text-align:center;color:#888;font-size:12px">${cvrAll !== null ? cvrAll+'%' : '—'}</td>
           <td style="text-align:right;font-weight:700">${i30 !== null ? i30 : '—'}</td>
           <td style="text-align:right">${i7  !== null ? i7  : '—'}</td>
           <td style="text-align:right">${trendHtml}</td>
@@ -783,13 +823,18 @@ async function renderRankings() {
 
       const tbl = document.createElement('div');
       tbl.innerHTML = `
-        <div class="rank-section-title" style="margin-top:24px">Keyword Install Attribution</div>
-        <div class="rank-updated">Organic search installs per keyword (last 30d &amp; 7d) · Source: BigQuery · surface_type=search only</div>
+        <div class="rank-section-title" style="margin-top:24px">Keyword Traffic &amp; Install Attribution</div>
+        <div class="rank-updated">Source: BigQuery · chatty_traffic_to_subs (visits/CVR) + chatty_daily_growth_metric_add_keyword_lv3 (installs) · organic search only</div>
+        ${kpiBadge}
         <div style="overflow-x:auto">
         <table class="rank-history-table">
           <thead><tr>
             <th>Keyword</th>
-            <th style="text-align:center">Organic Rank</th>
+            <th style="text-align:center">Rank</th>
+            <th style="text-align:right">Visits (30d)</th>
+            <th style="text-align:right">Visits (all-time)</th>
+            <th style="text-align:center">CVR (30d)</th>
+            <th style="text-align:center">CVR (all-time)</th>
             <th style="text-align:right">Installs (30d)</th>
             <th style="text-align:right">Installs (7d)</th>
             <th style="text-align:right">30d Trend</th>
