@@ -714,6 +714,63 @@ async function renderRankings() {
 
     // Store for toggle
     window._rankChartRef = rankChart;
+
+    // ── Keyword Install Attribution (BigQuery) ────────────────────
+    try {
+      const bqRes  = await fetch('bq-metrics.json');
+      const bqData = await bqRes.json();
+      const kwMap  = {};
+      (bqData.keywordInstalls || []).forEach(r => { kwMap[r.keyword.toLowerCase()] = r; });
+
+      const instRows = latest.results.map(r => {
+        const kw   = r.keyword;
+        const rank = r.organicPosition;
+        const d    = kwMap[kw.toLowerCase()] || null;
+        const i30  = d ? d.installs_30d   : null;
+        const i7   = d ? d.installs_7d    : null;
+        const p30  = d ? d.installs_prev30d : null;
+        const rankBg = !rank ? '#f0f0f0' : rank<=3?'#dcfce7':rank<=6?'#dbeafe':rank<=10?'#fef3c7':'#fee2e2';
+        const rankFg = !rank ? '#aaa'    : rank<=3?'#16a34a':rank<=6?'#2563eb':rank<=10?'#d97706':'#dc2626';
+
+        // 30d trend vs prior 30d
+        let trendHtml = '<span style="color:#aaa">—</span>';
+        if (i30 !== null && p30 !== null && p30 > 0) {
+          const pct = Math.round((i30 - p30) / p30 * 100);
+          trendHtml = pct > 0
+            ? `<span style="color:#16a34a;font-weight:700">▲ ${pct}%</span>`
+            : pct < 0
+              ? `<span style="color:#dc2626;font-weight:700">▼ ${Math.abs(pct)}%</span>`
+              : `<span style="color:#aaa">—</span>`;
+        }
+
+        return `<tr>
+          <td style="font-weight:600">${kw}</td>
+          <td style="text-align:center"><span class="rank-pill ${rankClass(rank)}">${rank?'#'+rank:'—'}</span></td>
+          <td style="text-align:right;font-weight:700">${i30 !== null ? i30 : '—'}</td>
+          <td style="text-align:right">${i7  !== null ? i7  : '—'}</td>
+          <td style="text-align:right">${trendHtml}</td>
+        </tr>`;
+      }).join('');
+
+      const tbl = document.createElement('div');
+      tbl.innerHTML = `
+        <div class="rank-section-title" style="margin-top:24px">Keyword Install Attribution</div>
+        <div class="rank-updated">Organic search installs per keyword (last 30d &amp; 7d) · Source: BigQuery · surface_type=search only</div>
+        <div style="overflow-x:auto">
+        <table class="rank-history-table">
+          <thead><tr>
+            <th>Keyword</th>
+            <th style="text-align:center">Organic Rank</th>
+            <th style="text-align:right">Installs (30d)</th>
+            <th style="text-align:right">Installs (7d)</th>
+            <th style="text-align:right">30d Trend</th>
+          </tr></thead>
+          <tbody>${instRows}</tbody>
+        </table></div>`;
+      el.appendChild(tbl);
+    } catch(e) { /* BQ data not available */ }
+    // ─────────────────────────────────────────────────────────────
+
   } catch (e) {
     el.innerHTML = `<div class="empty-state">Could not load ranking data.<br><small>${e.message}</small></div>`;
   }
@@ -735,6 +792,20 @@ async function renderReports() {
     const res = await fetch('ranking-log.json');
     rankLog = await res.json();
   } catch {}
+
+  // Load BQ keyword install data for before/after comparison
+  let kwInstallMap = {}; // keyword(lc) → {installs_30d, installs_7d, installs_prev30d}
+  let kwDailyMap   = {}; // "YYYY-MM-DD|keyword" → installs
+  try {
+    const bqRes  = await fetch('bq-metrics.json');
+    const bqData = await bqRes.json();
+    (bqData.keywordInstalls || []).forEach(r => {
+      kwInstallMap[r.keyword.toLowerCase()] = r;
+    });
+    (bqData.keywordDaily || []).forEach(r => {
+      kwDailyMap[`${r.date}|${r.keyword.toLowerCase()}`] = r.installs;
+    });
+  } catch(e) {}
 
   // Build a map of ranking snapshots by date
   const rankByDate = {};
@@ -793,13 +864,47 @@ async function renderReports() {
       </div>`
     ).join('');
 
-    // Install section (pending BigQuery)
-    const installRows = ['Traffic-to-install', 'Weekly installs'].map(label =>
-      `<div class="report-row">
-        <span class="label">${label}</span>
-        <span class="values"><span class="pending-badge">⏳ BigQuery pending</span></span>
-      </div>`
-    ).join('');
+    // Install section — BigQuery keyword attribution
+    const p0kws = ['live chat', 'chatbot', 'chat', 'ai chatbot', 'inbox', 'livechat', 'ai chat'];
+    const changeMs   = new Date(changeId).getTime();
+    const daysSince  = Math.floor((Date.now() - changeMs) / 86400000);
+
+    // Sum installs for each keyword in the 30d BEFORE vs SINCE the change
+    const installRows = p0kws.map(kw => {
+      const d = kwInstallMap[kw] || null;
+      if (!d) return `<div class="report-row">
+        <span class="label">${kw}</span>
+        <span class="values"><span style="font-size:11px;color:#aaa">no data</span></span>
+      </div>`;
+
+      // Before: prev30d field (30d ending day before change — approximation)
+      const before30 = d.installs_prev30d || 0;
+      // After: actual since change date (using 30d or 7d depending on daysSince)
+      const afterInstalls = daysSince >= 14 ? d.installs_30d : d.installs_7d;
+      const afterLabel    = daysSince >= 14 ? '30d' : `${daysSince}d`;
+      const afterRate     = daysSince > 0 ? Math.round(afterInstalls / daysSince * 30) : null; // projected monthly
+
+      // Trend direction
+      let trendHtml = '';
+      if (afterRate !== null && before30 > 0) {
+        const pct = Math.round((afterRate - before30) / before30 * 100);
+        if (pct > 5)       trendHtml = `<span class="delta up">▲ ${pct}%</span>`;
+        else if (pct < -5) trendHtml = `<span class="delta down">▼ ${Math.abs(pct)}%</span>`;
+        else               trendHtml = `<span class="delta flat">≈ flat</span>`;
+      } else if (daysSince < 7) {
+        trendHtml = `<span class="pending-badge">⏳ ${7 - daysSince}d more data needed</span>`;
+      }
+
+      return `<div class="report-row">
+        <span class="label">${kw}</span>
+        <span class="values">
+          <span class="before">${before30}/mo before</span> →
+          <strong>${afterInstalls} (${afterLabel})</strong>
+          ${afterRate !== null ? `<span style="font-size:10px;color:#888"> ~${afterRate}/mo pace</span>` : ''}
+          ${trendHtml}
+        </span>
+      </div>`;
+    }).join('');
 
     // Changed fields list
     const textChanges = entry.changes.filter(c => c.chars).slice(0, 5);
@@ -842,7 +947,7 @@ async function renderReports() {
   }).filter(Boolean).reverse(); // newest first
 
   el.innerHTML = reportCards.length
-    ? `<div style="font-size:12px;color:#888;margin-bottom:16px">One report card per content change. Traffic + install columns fill in once BigQuery is connected.</div>` + reportCards.join('')
+    ? `<div style="font-size:12px;color:#888;margin-bottom:16px">One report card per content change. Installs = organic search attribution (BigQuery). More data accumulates as days pass after each change.</div>` + reportCards.join('')
     : '<div class="empty-state">No change reports yet</div>';
 }
 
@@ -1265,6 +1370,25 @@ function estimateCtr(rank) {
   return table[rank] !== undefined ? table[rank] : (rank <= 15 ? 1 : 0.5);
 }
 
+// Raw CTR fraction by organic rank (for install impact maths)
+function getCtrRaw(rank) {
+  if (!rank) return 0.005;
+  const t = {1:0.28,2:0.15,3:0.11,4:0.08,5:0.07,6:0.05,7:0.04,8:0.03,9:0.025,10:0.02};
+  return t[rank] !== undefined ? t[rank] : (rank <= 15 ? 0.01 : 0.005);
+}
+
+// Score delta % → estimated organic rank positions gained (positive = up)
+function scorePctToRankGain(scorePct) {
+  if (scorePct >= 100) return 4;
+  if (scorePct >= 50)  return 3;
+  if (scorePct >= 25)  return 2;
+  if (scorePct >= 10)  return 1;
+  if (scorePct <= -50) return -3;
+  if (scorePct <= -25) return -2;
+  if (scorePct <= -10) return -1;
+  return 0;
+}
+
 // Translate score delta % into human-readable rank impact
 function rankImpactLabel(scorePct, currentRank) {
   if (scorePct >= 40)  return { label: 'Strong signal boost — likely rank up', color: '#16a34a', arrow: '↑↑' };
@@ -1291,6 +1415,18 @@ async function renderOptimizer() {
         latest.results.forEach(r => { window._rankMap[r.keyword] = r.organicPosition || null; });
       }
     } catch(e) { window._rankMap = {}; }
+  }
+
+  // Load BQ keyword install data
+  if (!window._kwInstallMap) {
+    window._kwInstallMap = {};
+    try {
+      const bqRes  = await fetch('bq-metrics.json');
+      const bqData = await bqRes.json();
+      (bqData.keywordInstalls || []).forEach(r => {
+        window._kwInstallMap[r.keyword.toLowerCase()] = r;
+      });
+    } catch(e) {}
   }
 
   // Field definitions with weights
@@ -1423,6 +1559,12 @@ async function renderOptimizer() {
       <div style="position:sticky;top:20px">
         <div class="opt-panel" style="margin-bottom:14px">
           <div class="opt-panel-title">Keyword Score Impact</div>
+          <div style="display:flex;align-items:center;padding:4px 14px 6px;border-bottom:1px solid #f0f0f0">
+            <div style="width:110px;flex-shrink:0;font-size:10px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.4px">Keyword</div>
+            <div style="flex:1;padding:0 8px;font-size:10px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.4px">Score Impact</div>
+            <div style="width:44px;text-align:right;font-size:10px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.4px">Score</div>
+            <div style="width:72px;flex-shrink:0;padding-left:8px;border-left:1px solid #f0f0f0;font-size:10px;font-weight:700;color:#1A0A7A;text-transform:uppercase;letter-spacing:.4px">Installs</div>
+          </div>
           <div id="opt-kw-results"></div>
           <div class="opt-summary" id="opt-summary"></div>
         </div>
@@ -1511,6 +1653,32 @@ function optUpdate() {
       const rankFg = !rank ? '#aaa'    : rank <= 3 ? '#16a34a' : rank <= 6 ? '#2563eb' : rank <= 10 ? '#d97706' : '#dc2626';
       const rankLabel = rank ? `#${rank}` : 'Not ranking';
 
+      // ── Install Impact ────────────────────────────────────────────
+      const installMap  = window._kwInstallMap || {};
+      const kwData      = installMap[kw.toLowerCase()] || null;
+      const installs30d = kwData ? (kwData.installs_30d || 0) : 0;
+      const rankGain    = scorePctToRankGain(scorePct);
+      const newRank     = rank ? Math.max(1, rank - rankGain) : (rankGain >= 2 ? 15 : null);
+      const ctrCur      = getCtrRaw(rank);
+      const ctrNew      = getCtrRaw(newRank);
+      const impressions = ctrCur > 0 ? installs30d / ctrCur : 0;
+      const newInstalls = Math.round(impressions * ctrNew);
+      const instDelta   = Math.round(newInstalls - installs30d);
+
+      let installCol;
+      if (!kwData || installs30d === 0) {
+        installCol = `<div style="font-size:11px;color:#ccc;text-align:center">—</div>`;
+      } else if (rankGain === 0) {
+        installCol = `<div style="font-size:12px;font-weight:700;color:#888;text-align:right">${installs30d}</div>
+                      <div style="font-size:10px;color:#aaa;text-align:right">no change</div>`;
+      } else {
+        const sign = instDelta > 0 ? '+' : '';
+        const clr  = instDelta > 0 ? '#16a34a' : instDelta < 0 ? '#dc2626' : '#888';
+        installCol = `<div style="font-size:12px;font-weight:700;color:#444;text-align:right">${installs30d}</div>
+                      <div style="font-size:12px;font-weight:800;color:${clr};text-align:right">${sign}${instDelta}</div>`;
+      }
+      // ─────────────────────────────────────────────────────────────
+
       return `<div class="opt-kw-row" style="${isP0 ? 'background:#fffbeb;' : ''}">
         <div style="width:110px;flex-shrink:0">
           <div style="font-size:12px;font-weight:${isP0?'700':'500'};margin-bottom:3px">${kw}${isP0?' <span style="color:#d97706;font-size:9px">P0</span>':''}</div>
@@ -1526,6 +1694,10 @@ function optUpdate() {
         </div>
         <div style="width:44px;text-align:right;font-size:12px;font-weight:800;color:${delta>0?'#16a34a':delta<0?'#ef4444':'#aaa'};flex-shrink:0">
           ${scorePct !== 0 ? (scorePct > 0 ? `+${scorePct}%` : `${scorePct}%`) : '—'}
+        </div>
+        <div style="width:72px;flex-shrink:0;padding-left:8px;border-left:1px solid #f0f0f0">
+          ${installCol}
+          <div style="font-size:9px;color:#ccc;text-align:right;margin-top:2px">installs/mo</div>
         </div>
       </div>`;
     }).join('');
