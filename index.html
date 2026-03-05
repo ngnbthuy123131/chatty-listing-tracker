@@ -233,6 +233,22 @@
   .aso-score-detail h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
   .aso-score-detail p  { font-size: 13px; color: #666; line-height: 1.5; }
 
+  /* Auth overlay */
+  #auth-overlay { position: fixed; inset: 0; background: #1A0A7A; display: flex; align-items: center; justify-content: center; z-index: 9999; }
+  #auth-box { background: #fff; border-radius: 16px; padding: 48px 40px; text-align: center; width: 360px; box-shadow: 0 24px 64px rgba(0,0,0,.3); }
+  #auth-box .auth-logo { background: #FFD200; color: #1A0A7A; font-weight: 900; font-size: 15px; padding: 7px 14px; border-radius: 8px; display: inline-block; margin-bottom: 20px; }
+  #auth-box h2 { font-size: 20px; font-weight: 700; color: #1A0A7A; margin-bottom: 8px; }
+  #auth-box p  { font-size: 13px; color: #888; margin-bottom: 28px; line-height: 1.5; }
+  #auth-error  { margin-top: 16px; font-size: 12px; color: #dc2626; background: #fee2e2; padding: 8px 12px; border-radius: 6px; display: none; }
+  #google-btn  { display: flex; justify-content: center; }
+
+  /* User info in header */
+  #user-info { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+  #user-info img { width: 26px; height: 26px; border-radius: 50%; border: 2px solid rgba(255,255,255,.4); }
+  #user-info span { font-size: 12px; opacity: .85; }
+  #user-info button { background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3); color: #fff; font-size: 11px; padding: 4px 10px; border-radius: 5px; cursor: pointer; }
+  #user-info button:hover { background: rgba(255,255,255,.25); }
+
   /* ── Content tab two-panel layout ─────────────────────────── */
   .content-layout { display: flex; height: 100%; overflow: hidden; }
 
@@ -247,13 +263,28 @@
 
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://accounts.google.com/gsi/client" async></script>
 </head>
 <body>
+
+<!-- Auth overlay — shown until Google sign-in verified -->
+<div id="auth-overlay">
+  <div id="auth-box">
+    <div class="auth-logo">chatty</div>
+    <h2>Listing Tracker</h2>
+    <p>Sign in with your Avada Google account<br>to access this dashboard</p>
+    <div id="google-btn"></div>
+    <div id="auth-error">Access denied. Please use your @avadagroup.com or @avada.io account.</div>
+  </div>
+</div>
+
+<!-- App — hidden until authenticated -->
+<div id="app" style="display:none">
 
 <div class="header">
   <div class="logo">chatty</div>
   <h1>Shopify Listing Tracker</h1>
-  <span>Last updated: Mar 5, 2026</span>
+  <div id="user-info"></div>
 </div>
 
 <div class="tabs">
@@ -314,6 +345,8 @@
 
   </div>
 </div>
+
+</div><!-- /app -->
 
 <script>
 const LIMITS = {
@@ -1810,10 +1843,74 @@ function switchView(view) {
   if (view === 'optimizer')   renderOptimizer();
 }
 
+// ─── Google Auth ─────────────────────────────────────────────
+const GOOGLE_CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID'; // replace with real ID
+const ALLOWED_DOMAINS  = ['avadagroup.com', 'avada.io'];
+
+function initAuth() {
+  // Already authenticated this session?
+  const saved = sessionStorage.getItem('gauth_user');
+  if (saved) { showApp(JSON.parse(saved)); return; }
+
+  // Wait for Google GIS to load
+  if (typeof google === 'undefined' || !google.accounts) {
+    setTimeout(initAuth, 100); return;
+  }
+
+  google.accounts.id.initialize({
+    client_id: GOOGLE_CLIENT_ID,
+    callback: handleGoogleCredential,
+  });
+
+  google.accounts.id.renderButton(
+    document.getElementById('google-btn'),
+    { theme: 'outline', size: 'large', text: 'signin_with', shape: 'rectangular', width: 260 }
+  );
+
+  google.accounts.id.prompt(); // show One Tap if available
+}
+
+function handleGoogleCredential(response) {
+  // Decode JWT payload (no verification needed — Google already verified it)
+  const payload = JSON.parse(atob(response.credential.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));
+  const emailDomain = (payload.email || '').split('@')[1] || '';
+
+  if (!ALLOWED_DOMAINS.includes(emailDomain)) {
+    document.getElementById('auth-error').style.display = 'block';
+    return;
+  }
+
+  const user = { name: payload.name, email: payload.email, picture: payload.picture };
+  sessionStorage.setItem('gauth_user', JSON.stringify(user));
+  showApp(user);
+}
+
+function showApp(user) {
+  document.getElementById('auth-overlay').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+
+  // Show user avatar + name + sign-out in header
+  document.getElementById('user-info').innerHTML = `
+    ${user.picture ? `<img src="${user.picture}" alt="">` : ''}
+    <span>${user.name || user.email}</span>
+    <button onclick="signOut()">Sign out</button>
+  `;
+
+  // Init dashboard
+  renderCurrent();
+  renderSidebar(currentDateId);
+  selectDate(currentDateId);
+}
+
+function signOut() {
+  sessionStorage.removeItem('gauth_user');
+  if (typeof google !== 'undefined') google.accounts.id.disableAutoSelect();
+  location.reload();
+}
+// ─────────────────────────────────────────────────────────────
+
 // Init
-renderCurrent();
-renderSidebar(currentDateId);
-selectDate(currentDateId);
+initAuth();
 </script>
 </body>
 </html>
