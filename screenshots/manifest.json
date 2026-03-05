@@ -1,0 +1,55 @@
+{
+  "lastUpdated": "2026-03-05T02:14:58.572Z",
+  "screenshots": {
+    "chatty": {
+      "name": "Chatty",
+      "url": "https://raw.githubusercontent.com/ngnbthuy123131/chatty-listing-tracker/main/screenshots/chatty.jpg",
+      "status": "OK"
+    },
+    "tidio-chat": {
+      "name": "Tidio",
+      "url": "https://raw.githubusercontent.com/ngnbthuy123131/chatty-listing-tracker/main/screenshots/tidio-chat.jpg",
+      "status": "error"
+    },
+    "rep-ai-sales-associate": {
+      "name": "Rep AI",
+      "url": "https://raw.githubusercontent.com/ngnbthuy123131/chatty-listing-tracker/main/screenshots/rep-ai-sales-associate.jpg",
+      "status": "OK"
+    },
+    "moosedesk": {
+      "name": "Moosedesk",
+      "url": "https://raw.githubusercontent.com/ngnbthuy123131/chatty-listing-tracker/main/screenshots/moosedesk.jpg",
+      "status": "OK"
+    },
+    "zipchat": {
+      "name": "Zipchat",
+      "url": "https://raw.githubusercontent.com/ngnbthuy123131/chatty-listing-tracker/main/screenshots/zipchat.jpg",
+      "status": "OK"
+    },
+    "livechat": {
+      "name": "LiveChat",
+      "url": "https://raw.githubusercontent.com/ngnbthuy123131/chatty-listing-tracker/main/screenshots/livechat.jpg",
+      "status": "OK"
+    },
+    "tawk-to": {
+      "name": "tawk.to",
+      "url": "https://raw.githubusercontent.com/ngnbthuy123131/chatty-listing-tracker/main/screenshots/tawk-to.jpg",
+      "status": "OK"
+    },
+    "helpdesk": {
+      "name": "Gorgias",
+      "url": "https://raw.githubusercontent.com/ngnbthuy123131/chatty-listing-tracker/main/screenshots/helpdesk.jpg",
+      "status": "OK"
+    },
+    "vanchat": {
+      "name": "Vanchat",
+      "url": "https://raw.githubusercontent.com/ngnbthuy123131/chatty-listing-tracker/main/screenshots/vanchat.jpg",
+      "status": "OK"
+    },
+    "reamaze": {
+      "name": "Reamaze",
+      "url": "https://raw.githubusercontent.com/ngnbthuy123131/chatty-listing-tracker/main/screenshots/reamaze.jpg",
+      "status": "OK"
+    }
+  }
+}
