@@ -238,7 +238,7 @@
 <div class="header">
   <div class="logo">chatty</div>
   <h1>Shopify Listing Tracker</h1>
-  <span>Last updated: Mar 4, 2026</span>
+  <span>Last updated: Mar 5, 2026</span>
 </div>
 
 <div class="tabs">
@@ -399,6 +399,9 @@ const history = [
     { field: 'Title Tag', content: 'Chatty: AI Chatbot, Live Chat & WhatsApp for Shopify', chars: 52 },
     { field: 'Meta Description', content: 'Chatty AI chatbot for Shopify: live chat, WhatsApp, FAQ & help center. 4.9 stars, 2,000+ stores. Boost sales with AI support. Free plan available.', chars: 147 },
   ]},
+  { date: 'Mar 5, 2026', id: '2026-03-05', proposed: false, changes: [
+    { field: 'App Card Subtitle', content: 'Sell more: AI chatbot, livechat, inbox, help center & WhatsApp', chars: 62 },
+  ]},
 ];
 
 // Build current state from latest non-null value per field
@@ -507,7 +510,7 @@ function renderCurrent() {
 }
 
 // Navigation
-let currentDateId = history[history.length - 2].id; // default to Feb 11
+let currentDateId = history[history.length - 1].id; // default to latest
 
 function selectDate(id) {
   currentDateId = id;
