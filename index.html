@@ -1892,6 +1892,9 @@ function switchView(view) {
   const target = document.getElementById('view-' + view);
   if (target) target.classList.add('active');
   window.scrollTo(0, 0);
+  // Hide/show div.layout — new tabs (ads/kw-intel/ads-report) live outside it
+  var layout = document.querySelector('.layout');
+  if (layout) layout.style.display = ['ads','kw-intel','ads-report'].includes(view) ? 'none' : '';
   // Render callbacks
   if (view === 'rankings')    renderRankings && renderRankings();
   if (view === 'reports')     renderReports && renderReports();
