@@ -293,6 +293,10 @@
   <div class="tab" onclick="switchView('reports')">Change Reports</div>
   <div class="tab" onclick="switchView('competitors')">Competitor Intel</div>
   <div class="tab" onclick="switchView('aso')">ASO Factors</div>
+  
+  <div class="tab" onclick="switchView('ads')">💰 Ads Overview</div>
+  <div class="tab" onclick="switchView('kw-intel')">🎯 Keywords</div>
+  <div class="tab" onclick="switchView('ads-report')">📋 Ads Report</div>
   <div class="tab" onclick="switchView('optimizer')">⚡ Optimizer</div>
 </div>
 
@@ -1877,10 +1881,16 @@ function optReset() {
 }
 
 function switchView(view) {
+  // new views added dynamically
+  ['ads','kw-intel','ads-report'].forEach(v => {
+    const el = document.getElementById('view-'+v);
+    if (el) el.style.display = 'none';
+  });
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   event.target.classList.add('active');
-  document.getElementById('view-' + view).classList.add('active');
+  const target = document.getElementById('view-' + view);
+  if (target) { target.style.display = 'block'; target.classList.add('active'); }
   if (view === 'rankings')    renderRankings();
   if (view === 'reports')     renderReports();
   if (view === 'competitors') renderCompetitors();
@@ -1956,6 +1966,815 @@ function signOut() {
 
 // Init
 initAuth();
+</script>
+
+<div id="view-ads" class="view" style="display:none">
+  <div style="padding:24px">
+    <h2 style="font-size:18px;font-weight:700;color:#1A0A7A;margin-bottom:6px">💰 Ads Overview</h2>
+    <p style="color:#888;font-size:13px;margin-bottom:24px">Sep 2025 – Feb 2026 · 4 Campaigns</p>
+
+    <!-- KPI Cards -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px">
+      <div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:16px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:#888;margin-bottom:8px">Competitor</div>
+          <div style="font-size:22px;font-weight:700;color:#1A0A7A">$475</div>
+          <div style="font-size:12px;color:#555;margin:4px 0">140 installs</div>
+          <div style="font-size:13px;font-weight:600;color:#2e7d32">CPI $3.39 <span style="font-size:11px;color:#888">/ target $4.1</span></div>
+        </div><div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:16px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:#888;margin-bottom:8px">Broad 4 Countries</div>
+          <div style="font-size:22px;font-weight:700;color:#1A0A7A">$941</div>
+          <div style="font-size:12px;color:#555;margin:4px 0">139 installs</div>
+          <div style="font-size:13px;font-weight:600;color:#2e7d32">CPI $6.77 <span style="font-size:11px;color:#888">/ target $8</span></div>
+        </div><div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:16px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:#888;margin-bottom:8px">Exact Other Countries</div>
+          <div style="font-size:22px;font-weight:700;color:#1A0A7A">$3263</div>
+          <div style="font-size:12px;color:#555;margin:4px 0">426 installs</div>
+          <div style="font-size:13px;font-weight:600;color:#c62828">CPI $7.66 <span style="font-size:11px;color:#888">/ target $7</span></div>
+        </div>
+    </div>
+
+    <!-- Monthly Spend Chart -->
+    <div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:20px;margin-bottom:24px">
+      <div style="font-size:13px;font-weight:700;color:#1A0A7A;margin-bottom:16px">Monthly Spend by Campaign</div>
+      <canvas id="adsSpendChart" height="80"></canvas>
+    </div>
+
+    <!-- Monthly Installs Chart -->
+    <div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:20px;margin-bottom:24px">
+      <div style="font-size:13px;font-weight:700;color:#1A0A7A;margin-bottom:16px">Monthly Installs by Campaign</div>
+      <canvas id="adsInstallsChart" height="80"></canvas>
+    </div>
+
+    <!-- Campaign Detail Table -->
+    <div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;overflow:hidden">
+      <div style="background:#f7f7f9;padding:10px 16px;font-size:11px;font-weight:700;text-transform:uppercase;color:#888;border-bottom:1px solid #e8e8e8">Campaign Breakdown</div>
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead><tr style="background:#f7f7f9">
+          <th style="padding:10px 14px;text-align:left;color:#888;font-size:11px;font-weight:700;text-transform:uppercase">Campaign</th>
+          <th style="padding:10px 14px;text-align:right;color:#888;font-size:11px;font-weight:700">Spend</th>
+          <th style="padding:10px 14px;text-align:right;color:#888;font-size:11px;font-weight:700">Installs</th>
+          <th style="padding:10px 14px;text-align:right;color:#888;font-size:11px;font-weight:700">Impressions</th>
+          <th style="padding:10px 14px;text-align:right;color:#888;font-size:11px;font-weight:700">CPI</th>
+          <th style="padding:10px 14px;text-align:right;color:#888;font-size:11px;font-weight:700">Target</th>
+          <th style="padding:10px 14px;text-align:left;color:#888;font-size:11px;font-weight:700">Status</th>
+        </tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #f4f4f4">
+              <td style="padding:11px 14px;font-weight:600;color:#1A0A7A">VN</td>
+              <td style="padding:11px 14px;text-align:right">$22.73</td>
+              <td style="padding:11px 14px;text-align:right">7</td>
+              <td style="padding:11px 14px;text-align:right">187</td>
+              <td style="padding:11px 14px;text-align:right;font-weight:600;color:#2e7d32">$3.25</td>
+              <td style="padding:11px 14px;text-align:right;color:#888">$4.25</td>
+              <td style="padding:11px 14px">✅ Under budget</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4">
+              <td style="padding:11px 14px;font-weight:600;color:#1A0A7A">Competitor</td>
+              <td style="padding:11px 14px;text-align:right">$474.70</td>
+              <td style="padding:11px 14px;text-align:right">140</td>
+              <td style="padding:11px 14px;text-align:right">10,192</td>
+              <td style="padding:11px 14px;text-align:right;font-weight:600;color:#2e7d32">$3.39</td>
+              <td style="padding:11px 14px;text-align:right;color:#888">$4.1</td>
+              <td style="padding:11px 14px">✅ Under budget</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4">
+              <td style="padding:11px 14px;font-weight:600;color:#1A0A7A">Broad 4 Countries</td>
+              <td style="padding:11px 14px;text-align:right">$941.40</td>
+              <td style="padding:11px 14px;text-align:right">139</td>
+              <td style="padding:11px 14px;text-align:right">10,605</td>
+              <td style="padding:11px 14px;text-align:right;font-weight:600;color:#2e7d32">$6.77</td>
+              <td style="padding:11px 14px;text-align:right;color:#888">$8</td>
+              <td style="padding:11px 14px">✅ Under budget</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4">
+              <td style="padding:11px 14px;font-weight:600;color:#1A0A7A">Exact Other Countries</td>
+              <td style="padding:11px 14px;text-align:right">$3262.71</td>
+              <td style="padding:11px 14px;text-align:right">426</td>
+              <td style="padding:11px 14px;text-align:right">38,003</td>
+              <td style="padding:11px 14px;text-align:right;font-weight:600;color:#c62828">$7.66</td>
+              <td style="padding:11px 14px;text-align:right;color:#888">$7</td>
+              <td style="padding:11px 14px">🔴 Over budget</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div id="view-kw-intel" class="view" style="display:none">
+  <div style="padding:24px">
+    <h2 style="font-size:18px;font-weight:700;color:#1A0A7A;margin-bottom:6px">🎯 Keywords Intelligence</h2>
+    <p style="color:#888;font-size:13px;margin-bottom:8px">Organic rank + Ad spend + Traffic CVR — all in one view</p>
+
+    <!-- Legend -->
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px">
+      <span style="font-size:11px;background:#e8f5e9;color:#2e7d32;padding:3px 8px;border-radius:4px">✅ Organic wins (rank 1-3, low spend)</span>
+      <span style="font-size:11px;background:#fce4ec;color:#c62828;padding:3px 8px;border-radius:4px">🔴 Stop bidding (rank 1-3, high spend)</span>
+      <span style="font-size:11px;background:#e3f2fd;color:#1565c0;padding:3px 8px;border-radius:4px">🟢 Sweet spot (rank 4-10)</span>
+      <span style="font-size:11px;background:#fff3e0;color:#e65100;padding:3px 8px;border-radius:4px">🟡 Opportunity (rank 11-15)</span>
+      <span style="font-size:11px;background:#f3e5f5;color:#6a1b9a;padding:3px 8px;border-radius:4px">🚀 High opp (rank 15+)</span>
+    </div>
+
+    <div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;overflow:hidden">
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead><tr style="background:#1A0A7A;color:#fff">
+          <th style="padding:11px 14px;text-align:left;font-size:11px;font-weight:700">Keyword</th>
+          <th style="padding:11px 14px;text-align:center;font-size:11px;font-weight:700">Organic Rank</th>
+          <th style="padding:11px 14px;text-align:right;font-size:11px;font-weight:700">Impressions<br><span style="font-weight:400;opacity:.7">(vol proxy)</span></th>
+          <th style="padding:11px 14px;text-align:right;font-size:11px;font-weight:700">Ad Spend</th>
+          <th style="padding:11px 14px;text-align:right;font-size:11px;font-weight:700">Installs</th>
+          <th style="padding:11px 14px;text-align:right;font-size:11px;font-weight:700">CPI</th>
+          <th style="padding:11px 14px;text-align:right;font-size:11px;font-weight:700">Traffic CVR<br><span style="font-weight:400;opacity:.7">(30d)</span></th>
+          <th style="padding:11px 14px;text-align:left;font-size:11px;font-weight:700">Signal</th>
+        </tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">ai chat</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#1565c0">#5</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">12,511</td>
+              <td style="padding:10px 14px;text-align:right">$1167</td>
+              <td style="padding:10px 14px;text-align:right">121</td>
+              <td style="padding:10px 14px;text-align:right;color:#c62828">$9.65</td>
+              <td style="padding:10px 14px;text-align:right">16.7%</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#1565c0">🟢 Sweet spot</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">whatsapp ai chat</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">10,579</td>
+              <td style="padding:10px 14px;text-align:right">$177</td>
+              <td style="padding:10px 14px;text-align:right">23</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">$7.70</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#f57f17">⚠️ Not ranking</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">inbox</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#1565c0">#6</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">7,179</td>
+              <td style="padding:10px 14px;text-align:right">$228</td>
+              <td style="padding:10px 14px;text-align:right">39</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">$5.84</td>
+              <td style="padding:10px 14px;text-align:right">10.5%</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#1565c0">🟢 Sweet spot</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">tidio</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">3,575</td>
+              <td style="padding:10px 14px;text-align:right">$94</td>
+              <td style="padding:10px 14px;text-align:right">34</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">$2.76</td>
+              <td style="padding:10px 14px;text-align:right">26.8%</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#f57f17">⚠️ Not ranking</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">chat</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#1565c0">#6</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">2,951</td>
+              <td style="padding:10px 14px;text-align:right">$481</td>
+              <td style="padding:10px 14px;text-align:right">83</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">$5.79</td>
+              <td style="padding:10px 14px;text-align:right">19.4%</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#1565c0">🟢 Sweet spot</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">chatbot</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#1565c0">#5</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">2,417</td>
+              <td style="padding:10px 14px;text-align:right">$699</td>
+              <td style="padding:10px 14px;text-align:right">88</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">$7.94</td>
+              <td style="padding:10px 14px;text-align:right">15.1%</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#1565c0">🟢 Sweet spot</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">luna chat</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">2,216</td>
+              <td style="padding:10px 14px;text-align:right">$156</td>
+              <td style="padding:10px 14px;text-align:right">31</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">$5.02</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#f57f17">⚠️ Not ranking</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">whatsapp chatbot</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">2,174</td>
+              <td style="padding:10px 14px;text-align:right">$81</td>
+              <td style="padding:10px 14px;text-align:right">11</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">$7.36</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#f57f17">⚠️ Not ranking</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">live chat</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#1565c0">#5</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">2,077</td>
+              <td style="padding:10px 14px;text-align:right">$512</td>
+              <td style="padding:10px 14px;text-align:right">63</td>
+              <td style="padding:10px 14px;text-align:right;color:#c62828">$8.13</td>
+              <td style="padding:10px 14px;text-align:right">24%</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#1565c0">🟢 Sweet spot</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">ai chatbot</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#1565c0">#5</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">1,923</td>
+              <td style="padding:10px 14px;text-align:right">$339</td>
+              <td style="padding:10px 14px;text-align:right">26</td>
+              <td style="padding:10px 14px;text-align:right;color:#c62828">$13.03</td>
+              <td style="padding:10px 14px;text-align:right">12.5%</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#1565c0">🟢 Sweet spot</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">gorgias</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">1,508</td>
+              <td style="padding:10px 14px;text-align:right">$85</td>
+              <td style="padding:10px 14px;text-align:right">12</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">$7.05</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#f57f17">⚠️ Not ranking</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">chaty</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">1,316</td>
+              <td style="padding:10px 14px;text-align:right">$95</td>
+              <td style="padding:10px 14px;text-align:right">42</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">$2.26</td>
+              <td style="padding:10px 14px;text-align:right">4.2%</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#f57f17">⚠️ Not ranking</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">chatgpt</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">736</td>
+              <td style="padding:10px 14px;text-align:right">$39</td>
+              <td style="padding:10px 14px;text-align:right">3</td>
+              <td style="padding:10px 14px;text-align:right;color:#c62828">$13.00</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">livechat</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#1565c0">#6</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">718</td>
+              <td style="padding:10px 14px;text-align:right">$107</td>
+              <td style="padding:10px 14px;text-align:right">40</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">$2.66</td>
+              <td style="padding:10px 14px;text-align:right">16.3%</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#1565c0">🟢 Sweet spot</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">whatsapp chat button</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">695</td>
+              <td style="padding:10px 14px;text-align:right">$6</td>
+              <td style="padding:10px 14px;text-align:right">2</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">$2.90</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">customer support</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#c62828">#12</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">486</td>
+              <td style="padding:10px 14px;text-align:right">$4</td>
+              <td style="padding:10px 14px;text-align:right">1</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">$3.60</td>
+              <td style="padding:10px 14px;text-align:right">2.7%</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#e65100">🟡 Opportunity</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">chat support</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">444</td>
+              <td style="padding:10px 14px;text-align:right">$94</td>
+              <td style="padding:10px 14px;text-align:right">13</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">$7.26</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">chat box</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">436</td>
+              <td style="padding:10px 14px;text-align:right">$118</td>
+              <td style="padding:10px 14px;text-align:right">22</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">$5.36</td>
+              <td style="padding:10px 14px;text-align:right">23.5%</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">chatbox</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">411</td>
+              <td style="padding:10px 14px;text-align:right">$88</td>
+              <td style="padding:10px 14px;text-align:right">22</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">$3.98</td>
+              <td style="padding:10px 14px;text-align:right">14.3%</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">zipchat</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">403</td>
+              <td style="padding:10px 14px;text-align:right">$21</td>
+              <td style="padding:10px 14px;text-align:right">5</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">$4.28</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">ai agent</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">387</td>
+              <td style="padding:10px 14px;text-align:right">$13</td>
+              <td style="padding:10px 14px;text-align:right">1</td>
+              <td style="padding:10px 14px;text-align:right;color:#c62828">$12.70</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">chat ia</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">343</td>
+              <td style="padding:10px 14px;text-align:right">$27</td>
+              <td style="padding:10px 14px;text-align:right">4</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">$6.72</td>
+              <td style="padding:10px 14px;text-align:right">29.4%</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">moosedesk</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">268</td>
+              <td style="padding:10px 14px;text-align:right">$6</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">faq page</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">257</td>
+              <td style="padding:10px 14px;text-align:right">$5</td>
+              <td style="padding:10px 14px;text-align:right">1</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">$4.80</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">faq</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#1565c0">#9</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">252</td>
+              <td style="padding:10px 14px;text-align:right">$12</td>
+              <td style="padding:10px 14px;text-align:right">2</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">$6.00</td>
+              <td style="padding:10px 14px;text-align:right">14.6%</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#1565c0">🟢 Sweet spot</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">crisp</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">241</td>
+              <td style="padding:10px 14px;text-align:right">$6</td>
+              <td style="padding:10px 14px;text-align:right">5</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">$1.12</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">open ai</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">233</td>
+              <td style="padding:10px 14px;text-align:right">$1</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">messenger chatbot</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">213</td>
+              <td style="padding:10px 14px;text-align:right">$13</td>
+              <td style="padding:10px 14px;text-align:right">4</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">$3.30</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">help center</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#1565c0">#7</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">200</td>
+              <td style="padding:10px 14px;text-align:right">$2</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#1565c0">🟢 Sweet spot</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">chat bots</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">183</td>
+              <td style="padding:10px 14px;text-align:right">$3</td>
+              <td style="padding:10px 14px;text-align:right">1</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">$2.50</td>
+              <td style="padding:10px 14px;text-align:right">33.3%</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">lunachat</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">179</td>
+              <td style="padding:10px 14px;text-align:right">$10</td>
+              <td style="padding:10px 14px;text-align:right">9</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">$1.07</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">zen desk chat</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">132</td>
+              <td style="padding:10px 14px;text-align:right">$1</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">ai live chat</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">123</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">16.7%</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">help desk</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">121</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">25%</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">messenger</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">104</td>
+              <td style="padding:10px 14px;text-align:right">$2</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">ai model</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">102</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">chit chat</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">94</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">vanchat</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">91</td>
+              <td style="padding:10px 14px;text-align:right">$1</td>
+              <td style="padding:10px 14px;text-align:right">1</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">$1.00</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">zip chat</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">89</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">jivo</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">77</td>
+              <td style="padding:10px 14px;text-align:right">$2</td>
+              <td style="padding:10px 14px;text-align:right">1</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">$1.50</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">faqs</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">75</td>
+              <td style="padding:10px 14px;text-align:right">$2</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">faq hub</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">75</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">chat gpt</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">63</td>
+              <td style="padding:10px 14px;text-align:right">$3</td>
+              <td style="padding:10px 14px;text-align:right">2</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">$1.70</td>
+              <td style="padding:10px 14px;text-align:right">33.3%</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">live chat support</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">52</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">chat ai</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">51</td>
+              <td style="padding:10px 14px;text-align:right">$6</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">11.1%</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">chat with us</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">47</td>
+              <td style="padding:10px 14px;text-align:right">$1</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">33.3%</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">van chat</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">45</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">chatty</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">33</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">10.4%</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">faqs page</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">27</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">zendesk</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">19</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">chatbot deutsch</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">17</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">ai live support</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">16</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">chat button</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">11</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">messenge chatbot</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">9</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">ib</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">1</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">livesupport</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">1</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">reply</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">1</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">helpdesk</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#c62828">#18</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">5.3%</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#6a1b9a">🚀 High opp</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">live support</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fafafa">
+              <td style="padding:10px 14px;font-weight:600;color:#222">ai livechat</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr><tr style="border-bottom:1px solid #f4f4f4;background:#fff">
+              <td style="padding:10px 14px;font-weight:600;color:#222">email chat</td>
+              <td style="padding:10px 14px;text-align:center;font-weight:700;color:#aaa">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;text-align:right;color:#555">—</td>
+              <td style="padding:10px 14px;text-align:right">—</td>
+              <td style="padding:10px 14px;font-size:12px;font-weight:600;color:#888">⚪ No signal</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div id="view-ads-report" class="view" style="display:none">
+  <div style="padding:24px">
+    <h2 style="font-size:18px;font-weight:700;color:#1A0A7A;margin-bottom:6px">📋 Ads Report & Suggestions</h2>
+    <p style="color:#888;font-size:13px;margin-bottom:24px">Based on 6-month historical data (Sep 2025 – Feb 2026)</p>
+
+    <!-- CPI Health -->
+    <div style="background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:20px;margin-bottom:20px">
+      <div style="font-size:13px;font-weight:700;color:#1A0A7A;margin-bottom:16px">CPI Health Check</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+        <div style="padding:14px;background:#f9f9fc;border-radius:8px;border:1px solid #ebebf5">
+            <div style="font-size:11px;color:#888;font-weight:700;margin-bottom:6px">VN</div>
+            <div style="font-size:20px;font-weight:700;color:#2e7d32">$3.25</div>
+            <div style="height:4px;background:#eee;border-radius:2px;margin:8px 0">
+              <div style="height:4px;width:76.40336134453783%;background:#2e7d32;border-radius:2px"></div>
+            </div>
+            <div style="font-size:11px;color:#2e7d32">Under budget ✅</div>
+            <div style="font-size:11px;color:#aaa;margin-top:2px">target $4.25</div>
+          </div><div style="padding:14px;background:#f9f9fc;border-radius:8px;border:1px solid #ebebf5">
+            <div style="font-size:11px;color:#888;font-weight:700;margin-bottom:6px">Competitor</div>
+            <div style="font-size:20px;font-weight:700;color:#2e7d32">$3.39</div>
+            <div style="height:4px;background:#eee;border-radius:2px;margin:8px 0">
+              <div style="height:4px;width:82.70034843205575%;background:#2e7d32;border-radius:2px"></div>
+            </div>
+            <div style="font-size:11px;color:#2e7d32">Under budget ✅</div>
+            <div style="font-size:11px;color:#aaa;margin-top:2px">target $4.1</div>
+          </div><div style="padding:14px;background:#f9f9fc;border-radius:8px;border:1px solid #ebebf5">
+            <div style="font-size:11px;color:#888;font-weight:700;margin-bottom:6px">Broad 4 Countries</div>
+            <div style="font-size:20px;font-weight:700;color:#2e7d32">$6.77</div>
+            <div style="height:4px;background:#eee;border-radius:2px;margin:8px 0">
+              <div style="height:4px;width:84.65827338129498%;background:#2e7d32;border-radius:2px"></div>
+            </div>
+            <div style="font-size:11px;color:#2e7d32">Under budget ✅</div>
+            <div style="font-size:11px;color:#aaa;margin-top:2px">target $8</div>
+          </div><div style="padding:14px;background:#f9f9fc;border-radius:8px;border:1px solid #ebebf5">
+            <div style="font-size:11px;color:#888;font-weight:700;margin-bottom:6px">Exact Other Countries</div>
+            <div style="font-size:20px;font-weight:700;color:#c62828">$7.66</div>
+            <div style="height:4px;background:#eee;border-radius:2px;margin:8px 0">
+              <div style="height:4px;width:100%;background:#c62828;border-radius:2px"></div>
+            </div>
+            <div style="font-size:11px;color:#c62828">OVER budget 🔴</div>
+            <div style="font-size:11px;color:#aaa;margin-top:2px">target $7</div>
+          </div>
+      </div>
+    </div>
+
+    <!-- Wasted Spend -->
+    
+
+    <!-- Sweet Spot -->
+    <div style="background:#f0f7ff;border:1px solid #bbdefb;border-radius:10px;padding:18px;margin-bottom:20px">
+      <div style="font-size:13px;font-weight:700;color:#1565c0;margin-bottom:12px">🟢 Sweet Spot Keywords (rank 4-10 — keep bidding)</div>
+      <div style="font-size:13px;padding:6px 0;border-bottom:1px solid #e3f2fd;color:#444">
+        <strong>ai chat</strong> — rank #5, 12,511 impressions, $1167 spent
+        <span style="color:#1565c0;font-weight:600"> @ $9.65 CPI</span>
+      </div><div style="font-size:13px;padding:6px 0;border-bottom:1px solid #e3f2fd;color:#444">
+        <strong>inbox</strong> — rank #6, 7,179 impressions, $228 spent
+        <span style="color:#1565c0;font-weight:600"> @ $5.84 CPI</span>
+      </div><div style="font-size:13px;padding:6px 0;border-bottom:1px solid #e3f2fd;color:#444">
+        <strong>chat</strong> — rank #6, 2,951 impressions, $481 spent
+        <span style="color:#1565c0;font-weight:600"> @ $5.79 CPI</span>
+      </div><div style="font-size:13px;padding:6px 0;border-bottom:1px solid #e3f2fd;color:#444">
+        <strong>chatbot</strong> — rank #5, 2,417 impressions, $699 spent
+        <span style="color:#1565c0;font-weight:600"> @ $7.94 CPI</span>
+      </div><div style="font-size:13px;padding:6px 0;border-bottom:1px solid #e3f2fd;color:#444">
+        <strong>live chat</strong> — rank #5, 2,077 impressions, $512 spent
+        <span style="color:#1565c0;font-weight:600"> @ $8.13 CPI</span>
+      </div><div style="font-size:13px;padding:6px 0;border-bottom:1px solid #e3f2fd;color:#444">
+        <strong>ai chatbot</strong> — rank #5, 1,923 impressions, $339 spent
+        <span style="color:#1565c0;font-weight:600"> @ $13.03 CPI</span>
+      </div><div style="font-size:13px;padding:6px 0;border-bottom:1px solid #e3f2fd;color:#444">
+        <strong>livechat</strong> — rank #6, 718 impressions, $107 spent
+        <span style="color:#1565c0;font-weight:600"> @ $2.66 CPI</span>
+      </div><div style="font-size:13px;padding:6px 0;border-bottom:1px solid #e3f2fd;color:#444">
+        <strong>faq</strong> — rank #9, 252 impressions, $12 spent
+        <span style="color:#1565c0;font-weight:600"> @ $6.00 CPI</span>
+      </div>
+    </div>
+
+    <!-- Opportunities -->
+    <div style="background:#fff8f0;border:1px solid #ffe0b2;border-radius:10px;padding:18px;margin-bottom:20px">
+      <div style="font-size:13px;font-weight:700;color:#e65100;margin-bottom:12px">🟡 Opportunities (rank 11+ but high impressions)</div>
+      <div style="font-size:13px;padding:6px 0;border-bottom:1px solid #fff3e0;color:#444">
+        <strong>customer support</strong> — rank #12, 486 impressions
+        $4 spent
+      </div><div style="font-size:13px;padding:6px 0;border-bottom:1px solid #fff3e0;color:#444">
+        <strong>helpdesk</strong> — rank #18, 0 impressions
+        <span style="color:#e65100">not bidding yet</span>
+      </div>
+    </div>
+
+    <!-- Not Ranking -->
+    <div style="background:#fafafa;border:1px solid #e8e8e8;border-radius:10px;padding:18px">
+      <div style="font-size:13px;font-weight:700;color:#888;margin-bottom:12px">⚠️ High impressions but not in organic rankings</div>
+      <div style="font-size:13px;padding:6px 0;border-bottom:1px solid #f0f0f0;color:#444">
+        <strong>whatsapp ai chat</strong> — 10,579 impressions, $177 spent — ads only, no organic presence
+      </div><div style="font-size:13px;padding:6px 0;border-bottom:1px solid #f0f0f0;color:#444">
+        <strong>tidio</strong> — 3,575 impressions, $94 spent — ads only, no organic presence
+      </div><div style="font-size:13px;padding:6px 0;border-bottom:1px solid #f0f0f0;color:#444">
+        <strong>luna chat</strong> — 2,216 impressions, $156 spent — ads only, no organic presence
+      </div><div style="font-size:13px;padding:6px 0;border-bottom:1px solid #f0f0f0;color:#444">
+        <strong>whatsapp chatbot</strong> — 2,174 impressions, $81 spent — ads only, no organic presence
+      </div><div style="font-size:13px;padding:6px 0;border-bottom:1px solid #f0f0f0;color:#444">
+        <strong>gorgias</strong> — 1,508 impressions, $85 spent — ads only, no organic presence
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+function initAdsCharts() {
+  const MONTHS = ["Sep 25","Oct 25","Nov 25","Dec 25","Jan 26","Feb 26"];
+  const CAMPS  = {"camp1":{"spend":["6.90","5.60","3.70","2.33","4.20","0.00"],"installs":[2,2,1,1,1,0]},"camp2":{"spend":["47.20","65.20","113.30","87.80","100.50","60.70"],"installs":[19,23,30,31,25,12]},"camp3":{"spend":["123.20","220.50","143.70","132.10","152.50","169.40"],"installs":[29,37,19,19,16,19]},"camp4":{"spend":["545.15","588.30","528.27","484.24","566.57","550.18"],"installs":[89,67,75,56,76,63]}};
+  const COLORS = { camp2: '#6C5CE7', camp3: '#1A0A7A', camp4: '#FFD200' };
+
+  function makeChart(id, type, datasets, label) {
+    const ctx = document.getElementById(id);
+    if (!ctx) return;
+    new Chart(ctx, { type, data: { labels: MONTHS, datasets }, options: {
+      responsive: true, plugins: { legend: { position: 'top' } },
+      scales: { y: { beginAtZero: true, ticks: { callback: v => type==='bar'&&label==='spend' ? '
+</html>
++v : v } } }
+    }});
+  }
+
+  makeChart('adsSpendChart', 'bar', [
+    { label: 'Competitor', data: CAMPS.camp2.spend.map(Number), backgroundColor: '#6C5CE733', borderColor: '#6C5CE7', borderWidth: 2 },
+    { label: 'Broad 4 Countries', data: CAMPS.camp3.spend.map(Number), backgroundColor: '#1A0A7A33', borderColor: '#1A0A7A', borderWidth: 2 },
+    { label: 'Exact Other Countries', data: CAMPS.camp4.spend.map(Number), backgroundColor: '#FFD20033', borderColor: '#b8960a', borderWidth: 2 },
+  ], 'spend');
+
+  makeChart('adsInstallsChart', 'bar', [
+    { label: 'Competitor', data: CAMPS.camp2.installs, backgroundColor: '#6C5CE766', borderColor: '#6C5CE7', borderWidth: 2 },
+    { label: 'Broad 4 Countries', data: CAMPS.camp3.installs, backgroundColor: '#1A0A7A66', borderColor: '#1A0A7A', borderWidth: 2 },
+    { label: 'Exact Other Countries', data: CAMPS.camp4.installs, backgroundColor: '#FFD20099', borderColor: '#b8960a', borderWidth: 2 },
+  ], 'installs');
+}
 </script>
 </body>
 </html>
