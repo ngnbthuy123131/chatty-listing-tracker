@@ -1910,7 +1910,7 @@ function switchView(view) {
 
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  event.target.classList.add('active');
+  var activeTab = document.querySelector('.tab[onclick*="' + view + '"]'); if (activeTab) activeTab.classList.add('active');
   const target = document.getElementById('view-' + view);
   if (target) target.classList.add('active');
   window.scrollTo(0, 0);
