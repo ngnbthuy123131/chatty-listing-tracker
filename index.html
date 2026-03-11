@@ -2755,36 +2755,60 @@ initAuth();
   </div>
 </div>
 <script>
-function initAdsCharts() {
+// Ads charts — auto-init when Chart.js is ready and Ads tab is shown
+(function() {
   const MONTHS = ["Sep 25","Oct 25","Nov 25","Dec 25","Jan 26","Feb 26"];
-  const CAMPS  = {"camp1":{"spend":["6.90","5.60","3.70","2.33","4.20","0.00"],"installs":[2,2,1,1,1,0]},"camp2":{"spend":["47.20","65.20","113.30","87.80","100.50","60.70"],"installs":[19,23,30,31,25,12]},"camp3":{"spend":["123.20","220.50","143.70","132.10","152.50","169.40"],"installs":[29,37,19,19,16,19]},"camp4":{"spend":["545.15","588.30","528.27","484.24","566.57","550.18"],"installs":[89,67,75,56,76,63]}};
+  const CAMPS = {
+    camp2: { label: 'Competitor',            spend: [47.20,65.20,113.30,87.80,100.50,60.70], installs: [19,23,30,31,25,12], color: '#6C5CE7' },
+    camp3: { label: 'Broad 4 Countries',     spend: [123.20,220.50,143.70,132.10,152.50,169.40], installs: [29,37,19,19,16,19], color: '#1A0A7A' },
+    camp4: { label: 'Exact Other Countries', spend: [545.15,588.30,528.27,484.24,566.57,550.18], installs: [89,67,75,56,76,63], color: '#b8960a' }
+  };
 
-  function makeChart(id, type, datasets) {
-    const ctx = document.getElementById(id);
-    if (!ctx) return;
-    new Chart(ctx, {
-      type: type,
-      data: { labels: MONTHS, datasets: datasets },
-      options: {
-        responsive: true,
-        plugins: { legend: { position: 'top' } },
-        scales: { y: { beginAtZero: true } }
-      }
+  function renderCharts() {
+    if (typeof Chart === 'undefined') { setTimeout(renderCharts, 200); return; }
+    var ids = ['adsSpendChart', 'adsInstallsChart'];
+    ids.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      if (el._chartInited) return;
+      el._chartInited = true;
+      var isSpend = id === 'adsSpendChart';
+      new Chart(el, {
+        type: 'bar',
+        data: {
+          labels: MONTHS,
+          datasets: Object.entries(CAMPS).map(function(e) {
+            return {
+              label: e[1].label,
+              data: isSpend ? e[1].spend : e[1].installs,
+              backgroundColor: e[1].color + '44',
+              borderColor: e[1].color,
+              borderWidth: 2
+            };
+          })
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { position: 'top' } },
+          scales: { y: { beginAtZero: true } }
+        }
+      });
     });
   }
 
-  makeChart('adsSpendChart', 'bar', [
-    { label: 'Competitor',           data: CAMPS.camp2.spend.map(Number), backgroundColor: '#6C5CE733', borderColor: '#6C5CE7', borderWidth: 2 },
-    { label: 'Broad 4 Countries',    data: CAMPS.camp3.spend.map(Number), backgroundColor: '#1A0A7A33', borderColor: '#1A0A7A', borderWidth: 2 },
-    { label: 'Exact Other Countries',data: CAMPS.camp4.spend.map(Number), backgroundColor: '#FFD20033', borderColor: '#b8960a', borderWidth: 2 },
-  ]);
+  // Expose for switchView to call
+  window.initAdsCharts = renderCharts;
 
-  makeChart('adsInstallsChart', 'bar', [
-    { label: 'Competitor',           data: CAMPS.camp2.installs, backgroundColor: '#6C5CE766', borderColor: '#6C5CE7', borderWidth: 2 },
-    { label: 'Broad 4 Countries',    data: CAMPS.camp3.installs, backgroundColor: '#1A0A7A66', borderColor: '#1A0A7A', borderWidth: 2 },
-    { label: 'Exact Other Countries',data: CAMPS.camp4.installs, backgroundColor: '#FFD20099', borderColor: '#b8960a', borderWidth: 2 },
-  ]);
-}
+  // Also auto-init if Ads tab is already visible on load
+  document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+      var adsView = document.getElementById('view-ads');
+      if (adsView && window.getComputedStyle(adsView).display !== 'none') {
+        renderCharts();
+      }
+    }, 500);
+  });
+})();
 </script>
 
 </body>
