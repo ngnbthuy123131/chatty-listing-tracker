@@ -273,7 +273,17 @@
 <body>
 
 <!-- Auth overlay — shown until Google sign-in verified -->
-<div id="auth-overlay">
+
+<!-- Ads Lock — restricted to thuyntt@avadagroup.com -->
+<div id="ads-lock" style="display:none;position:fixed;inset:0;background:rgba(26,10,122,.93);z-index:9000;align-items:center;justify-content:center;flex-direction:column;text-align:center;color:#fff;padding:40px">
+  <div style="font-size:52px;margin-bottom:16px">&#128274;</div>
+  <h2 style="font-size:22px;font-weight:700;margin-bottom:8px">Ads Data — Private</h2>
+  <p style="font-size:14px;opacity:.75;margin-bottom:28px;line-height:1.6">This section contains confidential ad spend data.<br>Sign in with <b>thuyntt@avadagroup.com</b> to access it.</p>
+  <div id="ads-lock-btn"></div>
+  <div id="ads-lock-err" style="color:#FFD200;font-size:13px;margin-top:14px;display:none">Wrong account. Use thuyntt@avadagroup.com only.</div>
+  <div style="margin-top:24px"><button onclick="document.getElementById('ads-lock').style.display='none';switchView('content')" style="background:transparent;border:1px solid rgba(255,255,255,.35);color:#fff;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:13px">&#8592; Back to Rankings</button></div>
+</div>
+<div id="auth-overlay" style="display:none">
   <div id="auth-box">
     <div class="auth-logo">chatty</div>
     <h2>Listing Tracker</h2>
@@ -284,7 +294,7 @@
 </div>
 
 <!-- App — hidden until authenticated -->
-<div id="app" style="display:none">
+<div id="app">
 
 <div class="header">
   <div class="logo">chatty</div>
@@ -1887,6 +1897,17 @@ function optReset() {
 }
 
 function switchView(view) {
+  // Ads tabs are restricted to thuyntt@avadagroup.com
+  if (isAdsTab(view) && (!_adsUser || _adsUser.email !== ADS_ONLY_EMAIL)) {
+    window._pendingAdsView = view;
+    var lock = document.getElementById('ads-lock');
+    lock.style.display = 'flex';
+    waitForGoogle(function() {
+      google.accounts.id.renderButton(document.getElementById('ads-lock-btn'), { theme: 'outline', size: 'large' });
+    });
+    return;
+  }
+
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   event.target.classList.add('active');
@@ -1910,64 +1931,45 @@ function switchView(view) {
   }
 }
 
-// ─── Google Auth ─────────────────────────────────────────────
+// ─── Auth ─────────────────────────────────────────────────────
 const GOOGLE_CLIENT_ID = '937812081235-bdgmmnms2j71gsu47ivgm56jr15eogv3.apps.googleusercontent.com';
-const ALLOWED_DOMAINS  = ['avadagroup.com', 'avada.io'];
+const ADS_ONLY_EMAIL   = 'thuyntt@avadagroup.com';
+const ADS_TABS_LOCKED  = ['ads', 'kw-intel', 'ads-report', 'kw-advisor'];
 
-function initAuth() {
-  // Already authenticated this session?
-  const saved = sessionStorage.getItem('gauth_user');
-  if (saved) { showApp(JSON.parse(saved)); return; }
+var _adsUser = null;
+try { var _s = sessionStorage.getItem('ads_auth'); if (_s) _adsUser = JSON.parse(_s); } catch(e) {}
 
-  // Wait for Google GIS to load
-  if (typeof google === 'undefined' || !google.accounts) {
-    setTimeout(initAuth, 100); return;
-  }
+function isAdsTab(v) { return ADS_TABS_LOCKED.indexOf(v) > -1; }
 
-  google.accounts.id.initialize({
-    client_id: GOOGLE_CLIENT_ID,
-    callback: handleGoogleCredential,
-  });
-
-  google.accounts.id.renderButton(
-    document.getElementById('google-btn'),
-    { theme: 'outline', size: 'large', text: 'signin_with', shape: 'rectangular', width: 260 }
-  );
-
-  google.accounts.id.prompt(); // show One Tap if available
+function waitForGoogle(cb) {
+  if (typeof google !== 'undefined' && google.accounts) { cb(); return; }
+  setTimeout(function() { waitForGoogle(cb); }, 100);
 }
 
-function handleGoogleCredential(response) {
-  // Decode JWT payload (no verification needed — Google already verified it)
-  const payload = JSON.parse(atob(response.credential.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));
-  const emailDomain = (payload.email || '').split('@')[1] || '';
+function initAuth() {
+  // No page-level auth — public tabs are open to anyone.
+  // Just render the ads-lock sign-in button.
+  waitForGoogle(function() {
+    google.accounts.id.initialize({ client_id: GOOGLE_CLIENT_ID, callback: handleAdsCredential });
+    google.accounts.id.renderButton(document.getElementById('ads-lock-btn'), { theme: 'outline', size: 'large' });
+  });
+}
 
-  if (!ALLOWED_DOMAINS.includes(emailDomain)) {
-    document.getElementById('auth-error').style.display = 'block';
+function handleAdsCredential(response) {
+  var payload = JSON.parse(atob(response.credential.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));
+  if (payload.email !== ADS_ONLY_EMAIL) {
+    document.getElementById('ads-lock-err').style.display = 'block';
     return;
   }
-
-  const user = { name: payload.name, email: payload.email, picture: payload.picture };
-  sessionStorage.setItem('gauth_user', JSON.stringify(user));
-  showApp(user);
+  _adsUser = { name: payload.name, email: payload.email };
+  sessionStorage.setItem('ads_auth', JSON.stringify(_adsUser));
+  document.getElementById('ads-lock').style.display = 'none';
+  if (window._pendingAdsView) { switchView(window._pendingAdsView); window._pendingAdsView = null; }
 }
 
 function showApp(user) {
   document.getElementById('auth-overlay').style.display = 'none';
   document.getElementById('app').style.display = 'block';
-
-  // Show user avatar + name + sign-out in header
-  document.getElementById('user-info').innerHTML = `
-    ${user.picture ? `<img src="${user.picture}" alt="">` : ''}
-    <span>${user.name || user.email}</span>
-    <button onclick="signOut()">Sign out</button>
-  `;
-
-  // Init dashboard
-  renderCurrent();
-  renderSidebar(currentDateId);
-  selectDate(currentDateId);
-}
 
 function signOut() {
   sessionStorage.removeItem('gauth_user');
