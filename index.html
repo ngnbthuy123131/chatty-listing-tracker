@@ -261,6 +261,11 @@
   .cr-detail { flex: 1; overflow-y: auto; padding: 20px; background: #fff; }
   /* ─────────────────────────────────────────────────────────── */
 
+
+  /* View show/hide — all hidden by default, active one shows */
+  .view { display: none !important; }
+  .view.active { display: block !important; }
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://accounts.google.com/gsi/client" async></script>
@@ -1882,19 +1887,15 @@ function optReset() {
 
 function switchView(view) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  // Hide ALL views — both old class-based and new inline-style ones
-  document.querySelectorAll('.view').forEach(v => {
-    v.classList.remove('active');
-    v.style.display = 'none';
-  });
-  // Show target
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   event.target.classList.add('active');
   const target = document.getElementById('view-' + view);
-  if (target) { target.style.display = 'block'; }
-  // Render callbacks for tabs that need dynamic content
-  if (view === 'rankings')    renderRankings();
-  if (view === 'reports')     renderReports();
-  if (view === 'competitors') renderCompetitors();
+  if (target) target.classList.add('active');
+  window.scrollTo(0, 0);
+  // Render callbacks
+  if (view === 'rankings')    renderRankings && renderRankings();
+  if (view === 'reports')     renderReports && renderReports();
+  if (view === 'competitors') renderCompetitors && renderCompetitors();
   if (view === 'aso')         renderASO && renderASO();
   if (view === 'growth')      renderGrowth && renderGrowth();
   if (view === 'optimizer')   renderOptimizer && renderOptimizer();
@@ -1975,7 +1976,7 @@ function signOut() {
 initAuth();
 </script>
 
-<div id="view-ads" class="view" style="display:none">
+<div id="view-ads" class="view">
   <div style="padding:24px">
     <h2 style="font-size:18px;font-weight:700;color:#1A0A7A;margin-bottom:6px">💰 Ads Overview</h2>
     <p style="color:#888;font-size:13px;margin-bottom:24px">Sep 2025 – Feb 2026 · 4 Campaigns</p>
@@ -2064,7 +2065,7 @@ initAuth();
     </div>
   </div>
 </div>
-<div id="view-kw-intel" class="view" style="display:none">
+<div id="view-kw-intel" class="view">
   <div style="padding:24px">
     <h2 style="font-size:18px;font-weight:700;color:#1A0A7A;margin-bottom:6px">🎯 Keywords Intelligence</h2>
     <p style="color:#888;font-size:13px;margin-bottom:8px">Organic rank + Ad spend + Traffic CVR — all in one view</p>
@@ -2646,7 +2647,7 @@ initAuth();
     </div>
   </div>
 </div>
-<div id="view-ads-report" class="view" style="display:none">
+<div id="view-ads-report" class="view">
   <div style="padding:24px">
     <h2 style="font-size:18px;font-weight:700;color:#1A0A7A;margin-bottom:6px">📋 Ads Report & Suggestions</h2>
     <p style="color:#888;font-size:13px;margin-bottom:24px">Based on 6-month historical data (Sep 2025 – Feb 2026)</p>
@@ -2783,12 +2784,6 @@ function initAdsCharts() {
   ], 'installs');
 }
 </script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.view').forEach(v => v.style.display = 'none');
-  const def = document.getElementById('view-content');
-  if (def) def.style.display = 'block';
-});
-</script>
+
 </body>
 </html>
