@@ -1881,21 +1881,28 @@ function optReset() {
 }
 
 function switchView(view) {
-  // new views added dynamically
-  ['ads','kw-intel','ads-report'].forEach(v => {
-    const el = document.getElementById('view-'+v);
-    if (el) el.style.display = 'none';
-  });
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  // Hide ALL views — both old class-based and new inline-style ones
+  document.querySelectorAll('.view').forEach(v => {
+    v.classList.remove('active');
+    v.style.display = 'none';
+  });
+  // Show target
   event.target.classList.add('active');
   const target = document.getElementById('view-' + view);
-  if (target) { target.style.display = 'block'; target.classList.add('active'); }
+  if (target) { target.style.display = 'block'; }
+  // Render callbacks for tabs that need dynamic content
   if (view === 'rankings')    renderRankings();
   if (view === 'reports')     renderReports();
   if (view === 'competitors') renderCompetitors();
-  if (view === 'aso')         renderAso();
-  if (view === 'optimizer')   renderOptimizer();
+  if (view === 'aso')         renderASO && renderASO();
+  if (view === 'growth')      renderGrowth && renderGrowth();
+  if (view === 'optimizer')   renderOptimizer && renderOptimizer();
+  // Init ads charts on first visit
+  if (view === 'ads' && !window._adsChartsInited) {
+    window._adsChartsInited = true;
+    setTimeout(initAdsCharts, 50);
+  }
 }
 
 // ─── Google Auth ─────────────────────────────────────────────
@@ -2775,6 +2782,13 @@ function initAdsCharts() {
     { label: 'Exact Other Countries', data: CAMPS.camp4.installs, backgroundColor: '#FFD20099', borderColor: '#b8960a', borderWidth: 2 },
   ], 'installs');
 }
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.view').forEach(v => v.style.display = 'none');
+  const def = document.getElementById('view-content');
+  if (def) def.style.display = 'block';
+});
 </script>
 </body>
 </html>
