@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-03-05T02:14:58.572Z",
+  "lastUpdated": "2026-03-16T01:44:34.408Z",
   "screenshots": {
     "chatty": {
       "name": "Chatty",
@@ -9,7 +9,7 @@
     "tidio-chat": {
       "name": "Tidio",
       "url": "https://raw.githubusercontent.com/ngnbthuy123131/chatty-listing-tracker/main/screenshots/tidio-chat.jpg",
-      "status": "error"
+      "status": "OK"
     },
     "rep-ai-sales-associate": {
       "name": "Rep AI",
