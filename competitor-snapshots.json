@@ -4,7 +4,7 @@
       "builtForShopify": false,
       "name": "Tidio ‑ Live Chat & AI Chatbot",
       "rating": 4.7,
-      "reviewCount": 1169,
+      "reviewCount": 1173,
       "description": "Engage customers with live chat, chatbot, and AI agent apps from one help desk. Manage tickets and offer recommendations in real time. Provide instant support.",
       "tagline": "Improve customer experience with a chatbot, AI agent, and live chat in one help desk for your store.",
       "features": [
@@ -33,7 +33,7 @@
         }
       ],
       "pricingNote": "Free plan available + Free trial available",
-      "checkedAt": "2026-03-16T01:43:00.412Z",
+      "checkedAt": "2026-03-23T02:04:40.637Z",
       "handle": "tidio-chat"
     },
     "rep-ai-sales-associate": {
@@ -69,14 +69,14 @@
         }
       ],
       "pricingNote": "Free plan available + Free trial available",
-      "checkedAt": "2026-03-16T01:43:00.412Z",
+      "checkedAt": "2026-03-23T02:04:40.637Z",
       "handle": "rep-ai-sales-associate"
     },
     "moosedesk": {
       "builtForShopify": true,
       "name": "Moose: AI Chatbot & Live Chat",
       "rating": 5,
-      "reviewCount": 483,
+      "reviewCount": 482,
       "description": "Centralize tickets from various channels into one easy-to-use helpdesk with essential features: Live chat, AI chatbot, Widget, Whatsapp, FAQ builder,...",
       "tagline": "Turn customer support into a growth engine with an AI chatbot that works while you sleep.",
       "features": [
@@ -105,14 +105,14 @@
         }
       ],
       "pricingNote": "Free plan available + Free trial available",
-      "checkedAt": "2026-03-16T01:43:00.412Z",
+      "checkedAt": "2026-03-23T02:04:40.637Z",
       "handle": "moosedesk"
     },
     "zipchat": {
       "builtForShopify": false,
       "name": "Zipchat AI Chatbot & Live Chat",
       "rating": 4.8,
-      "reviewCount": 146,
+      "reviewCount": 147,
       "description": "Zipchat, the AI Chatbot + AI Chat designed for your DTC store. Deploy it on your store, on socials and on emails. The AI sells more & automates your support.",
       "tagline": "Conversational AI Agent for Sales & Support deployable in AI Chat/Chatbot, Support Email & WhatsApp",
       "features": [
@@ -141,7 +141,7 @@
         }
       ],
       "pricingNote": "Free trial available",
-      "checkedAt": "2026-03-16T01:43:00.412Z",
+      "checkedAt": "2026-03-23T02:04:40.637Z",
       "handle": "zipchat"
     },
     "livechat": {
@@ -173,7 +173,7 @@
         }
       ],
       "pricingNote": "Free trial available",
-      "checkedAt": "2026-03-16T01:43:00.412Z",
+      "checkedAt": "2026-03-23T02:04:40.637Z",
       "handle": "livechat"
     },
     "tawk-to": {
@@ -192,7 +192,7 @@
       ],
       "pricing": [],
       "pricingNote": "Free plan available",
-      "checkedAt": "2026-03-16T01:43:00.412Z",
+      "checkedAt": "2026-03-23T02:04:40.637Z",
       "handle": "tawk-to"
     },
     "helpdesk": {
@@ -228,14 +228,14 @@
         }
       ],
       "pricingNote": "Free plan available + Free trial available",
-      "checkedAt": "2026-03-16T01:43:00.412Z",
+      "checkedAt": "2026-03-23T02:04:40.637Z",
       "handle": "helpdesk"
     },
     "vanchat": {
       "builtForShopify": true,
       "name": "VanChat AI Chatbot & Live Chat",
       "rating": 5,
-      "reviewCount": 116,
+      "reviewCount": 119,
       "description": "Turn visitors into buyers with an AI chatbot app for your store. VanChat provides live support, proactive sales, and automates customer service. Install today!",
       "tagline": "AI Chatbot & AI Chat that acts as Chat AI agent, provides live support & automates customer service",
       "features": [
@@ -264,7 +264,7 @@
         }
       ],
       "pricingNote": "Free plan available + Free trial available",
-      "checkedAt": "2026-03-16T01:43:00.412Z",
+      "checkedAt": "2026-03-23T02:04:40.637Z",
       "handle": "vanchat"
     },
     "reamaze": {
@@ -300,7 +300,7 @@
         }
       ],
       "pricingNote": "Free plan available + Free trial available",
-      "checkedAt": "2026-03-16T01:43:00.412Z",
+      "checkedAt": "2026-03-23T02:04:40.637Z",
       "handle": "reamaze"
     }
   },
@@ -446,7 +446,55 @@
           "after": 173
         }
       ]
+    },
+    {
+      "date": "2026-03-23",
+      "competitor": "Tidio",
+      "handle": "tidio-chat",
+      "changes": [
+        {
+          "field": "Review Count",
+          "before": 1169,
+          "after": 1173
+        }
+      ]
+    },
+    {
+      "date": "2026-03-23",
+      "competitor": "Moosedesk",
+      "handle": "moosedesk",
+      "changes": [
+        {
+          "field": "Review Count",
+          "before": 483,
+          "after": 482
+        }
+      ]
+    },
+    {
+      "date": "2026-03-23",
+      "competitor": "Zipchat",
+      "handle": "zipchat",
+      "changes": [
+        {
+          "field": "Review Count",
+          "before": 146,
+          "after": 147
+        }
+      ]
+    },
+    {
+      "date": "2026-03-23",
+      "competitor": "Vanchat",
+      "handle": "vanchat",
+      "changes": [
+        {
+          "field": "Review Count",
+          "before": 116,
+          "after": 119
+        }
+      ]
     }
   ],
-  "lastChecked": "2026-03-16T01:43:00.412Z"
+  "lastChecked": "2026-03-23T02:04:40.637Z"
 }
