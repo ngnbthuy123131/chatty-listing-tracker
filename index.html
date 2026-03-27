@@ -1918,6 +1918,7 @@ function switchView(view) {
   var layout = document.querySelector('.layout');
   if (layout) layout.style.display = ['ads','kw-intel','ads-report','kw-advisor'].includes(view) ? 'none' : '';
   // Render callbacks
+  if (view === 'content')     { renderCurrent && renderCurrent(); renderSidebar && renderSidebar(currentDateId); }
   if (view === 'rankings')    renderRankings && renderRankings();
   if (view === 'reports')     renderReports && renderReports();
   if (view === 'competitors') renderCompetitors && renderCompetitors();
@@ -1981,6 +1982,9 @@ function signOut() {
 
 // Init
 initAuth();
+// Render default tab (Content) on page load — no auth required
+renderCurrent && renderCurrent();
+renderSidebar && renderSidebar(currentDateId);
 </script>
 
 <div id="view-ads" class="view">
