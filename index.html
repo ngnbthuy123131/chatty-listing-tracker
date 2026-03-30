@@ -3132,5 +3132,79 @@ window.kwCleoMsg = function(enc) {
 })();
 </script>
 
+<!-- ═══ Live Supabase Ads Data Loader ═══ -->
+<script>
+(function() {
+  var SUPA_URL = 'https://pqelecofqzrlysvapomd.supabase.co';
+  var ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBxZWxlY29mcXpybHlzdmFwb21kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ4MTk0MzEsImV4cCI6MjA5MDM5NTQzMX0.BKRn9raFpHMbXlUHt1rce-IXkyiNIK3VEAsAtgeBY68';
+  var HEADS = { 'apikey': ANON_KEY, 'Authorization': 'Bearer ' + ANON_KEY };
+
+  // Campaign name → display name mapping
+  function campLabel(adName) {
+    if (!adName) return 'Other';
+    var n = adName.toLowerCase();
+    if (n.includes('vn')) return 'VN';
+    if (n.includes('competitor')) return 'Competitor';
+    if (n.includes('broad')) return 'Broad 4 Countries';
+    if (n.includes('exact')) return 'Exact Other Countries';
+    return adName;
+  }
+
+  // Fetch all keyword-level ads data from Supabase (paginated)
+  async function fetchAll() {
+    var all = [], offset = 0, limit = 1000;
+    while (true) {
+      var res = await fetch(
+        SUPA_URL + '/rest/v1/chatty_ads?select=keyword,ad_name,impressions,spend,installs,bid' +
+        '&keyword=not.is.null&limit=' + limit + '&offset=' + offset,
+        { headers: HEADS }
+      );
+      var rows = await res.json();
+      if (!Array.isArray(rows) || rows.length === 0) break;
+      all = all.concat(rows);
+      if (rows.length < limit) break;
+      offset += limit;
+    }
+    return all;
+  }
+
+  // Aggregate rows → KW_ADS format
+  function buildKwAds(rows) {
+    var out = {};
+    for (var i = 0; i < rows.length; i++) {
+      var r = rows[i];
+      if (!r.keyword) continue;
+      var kw = r.keyword.toLowerCase().trim();
+      if (!out[kw]) out[kw] = { impressions: 0, spend: 0, installs: 0, campaigns: [], bid: 0, _camps: {} };
+      out[kw].impressions += (r.impressions || 0);
+      out[kw].spend       += parseFloat(r.spend || 0);
+      out[kw].installs    += (r.installs || 0);
+      out[kw].bid          = Math.max(out[kw].bid, parseFloat(r.bid || 0));
+      var camp = campLabel(r.ad_name);
+      if (!out[kw]._camps[camp]) { out[kw]._camps[camp] = true; out[kw].campaigns.push(camp); }
+    }
+    // Round spend
+    for (var k in out) { out[k].spend = Math.round(out[k].spend * 100) / 100; delete out[k]._camps; }
+    return out;
+  }
+
+  fetchAll().then(function(rows) {
+    if (!rows || rows.length === 0) return;
+    var fresh = buildKwAds(rows);
+    // Override the hardcoded KW_ADS
+    window.KW_ADS = fresh;
+    console.log('[Supabase] KW_ADS live: ' + Object.keys(fresh).length + ' keywords, ' + rows.length + ' rows');
+    // Re-run KW advisor if user already typed a keyword
+    var inp = document.getElementById('kw-input');
+    if (inp && inp.value && typeof window.analyzeKw === 'function') window.analyzeKw();
+    // Show live badge
+    var badge = document.getElementById('supa-live-badge');
+    if (badge) badge.style.display = 'inline-flex';
+  }).catch(function(e) {
+    console.warn('[Supabase] Using cached ads data:', e.message);
+  });
+})();
+</script>
+
 </body>
 </html>
