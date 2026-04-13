@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pre-read: Chatty MKT Review — Apr 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: #f5f5f7;
+    color: #1a1a2e;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .page {
+    max-width: 780px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 40px rgba(0,0,0,0.08);
+  }
+
+  /* Header */
+  .header {
+    background: #06038d;
+    padding: 40px 48px 36px;
+    color: #fff;
+  }
+  .header-meta {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .meta-item {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .meta-item span {
+    color: #fbc80b;
+    font-weight: 600;
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .header-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+  }
+
+  /* TL;DR */
+  .tldr {
+    background: #fffbeb;
+    border-left: 4px solid #fbc80b;
+    margin: 32px 48px;
+    padding: 18px 22px;
+    border-radius: 0 8px 8px 0;
+  }
+  .tldr-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #b45309;
+    margin-bottom: 6px;
+  }
+  .tldr p {
+    font-size: 14px;
+    color: #78350f;
+    line-height: 1.6;
+  }
+
+  /* Section */
+  .section {
+    padding: 0 48px 32px;
+  }
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #06038d;
+    border-bottom: 2px solid #e8e8f0;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+
+  h2.section-title { margin-top: 32px; }
+
+  /* Sub-section */
+  .sub-section {
+    margin-bottom: 28px;
+  }
+  .sub-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #06038d;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 20px;
+  }
+  .badge-green { background: #d1fae5; color: #065f46; }
+  .badge-yellow { background: #fef3c7; color: #92400e; }
+  .badge-red { background: #fee2e2; color: #991b1b; }
+  .badge-blue { background: #dbeafe; color: #1e40af; }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 13.5px;
+  }
+  th {
+    background: #f0f0f8;
+    color: #06038d;
+    font-weight: 600;
+    text-align: left;
+    padding: 9px 14px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  td {
+    padding: 9px 14px;
+    border-bottom: 1px solid #f0f0f0;
+    color: #303050;
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #fafafa; }
+
+  /* Decision cards */
+  .decision-card {
+    border: 1.5px solid #e8e8f0;
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-bottom: 16px;
+  }
+  .decision-card.high { border-left: 4px solid #ef4444; }
+  .decision-card.med { border-left: 4px solid #f59e0b; }
+  .decision-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .decision-card.high .decision-label { color: #ef4444; }
+  .decision-card.med .decision-label { color: #f59e0b; }
+  .decision-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #06038d;
+    margin-bottom: 8px;
+  }
+  .decision-body {
+    font-size: 13.5px;
+    color: #444460;
+    line-height: 1.6;
+  }
+  .decision-body strong { color: #06038d; }
+  .options {
+    margin-top: 12px;
+    background: #f8f8fc;
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .option {
+    font-size: 13px;
+    color: #444460;
+    padding: 4px 0;
+  }
+  .option::before { content: "→ "; color: #6c5ce7; font-weight: 700; }
+  .ask {
+    margin-top: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #06038d;
+    background: #f0f0f8;
+    border-radius: 6px;
+    padding: 8px 12px;
+  }
+  .ask::before { content: "💬 Cần quyết định: "; }
+
+  /* Status table special */
+  .status-ok::before { content: "✅ "; }
+  .status-warn::before { content: "⚠️ "; }
+  .status-no::before { content: "❌ "; }
+  .status-block::before { content: "🔴 "; }
+  .status-live::before { content: "🟢 "; }
+
+  /* Insight box */
+  .insight {
+    background: #f0f0f8;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-top: 10px;
+    font-size: 13px;
+    color: #444460;
+    line-height: 1.6;
+  }
+  .insight strong { color: #06038d; }
+
+  /* Progress bar */
+  .progress-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    font-size: 13px;
+  }
+  .progress-label { width: 180px; color: #444460; flex-shrink: 0; }
+  .progress-bar-bg {
+    flex: 1;
+    height: 8px;
+    background: #e8e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-bar { height: 100%; border-radius: 4px; }
+  .progress-pct { width: 36px; text-align: right; font-weight: 600; color: #06038d; font-size: 12px; }
+
+  /* Footer */
+  .footer {
+    background: #f5f5f7;
+    padding: 20px 48px;
+    font-size: 12px;
+    color: #999;
+    text-align: center;
+    border-top: 1px solid #e8e8e8;
+  }
+
+  /* Divider */
+  hr { border: none; border-top: 1px solid #f0f0f0; margin: 8px 0; }
+
+  /* Link pill */
+  .link-pill {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 20px;
+    background: #e0e7ff;
+    color: #3730a3;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+  }
+  .link-pill:hover { background: #c7d2fe; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-meta">
+      <div class="meta-item">Period <span>23/03 – 13/04/2026</span></div>
+      <div class="meta-item">With <span>Sam (CEO)</span></div>
+      <div class="meta-item">Prepared by <span>Carla · MKT</span></div>
+    </div>
+    <h1>Pre-read: Chatty MKT Review</h1>
+    <div class="header-sub">3 tuần tiến độ · Infrastructure live · Blockers cần CEO unblock</div>
+  </div>
+
+  <!-- TL;DR -->
+  <div class="tldr">
+    <div class="tldr-label">TL;DR · đọc trong 60 giây</div>
+    <p>3 tuần qua MKT đã chuyển từ <strong>build</strong> sang <strong>live</strong> — email flow đang chạy thật, 2 dashboards live công khai, ASO + competitor intel tự động hoàn toàn. <strong>Foundation Q1 xong</strong>. Hiện có <strong>3 blockers</strong> cần Sam quyết định: Google Ads access + freelancer, workflow video AI hàng loạt (dễ ra AI slop, chưa có cách làm mượt), và định hướng Q2.</p>
+  </div>
+
+  <!-- SECTION 1: WHAT SHIPPED -->
+  <div class="section">
+    <div class="section-title">1 · What shipped — 23/03 – 13/04</div>
+
+    <!-- 1a ASO -->
+    <div class="sub-section">
+      <div class="sub-title">App Store Optimization <span class="badge badge-green">Live & Automated</span></div>
+      <table>
+        <tr><th>Deliverable</th><th>Detail</th><th>Link</th></tr>
+        <tr>
+          <td><strong>App title mới</strong></td>
+          <td>Chatty: AI Chat - Sales Agent (29 chars)<br>Positioning: AI Sales Agent for Shopify</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><strong>Listing Tracker Dashboard</strong></td>
+          <td>Rank tracking daily, competitor snapshots 10 apps, Slack alert khi có thay đổi</td>
+          <td><a class="link-pill" href="https://ngnbthuy123131.github.io/chatty-listing-tracker" target="_blank">Live ↗</a></td>
+        </tr>
+        <tr>
+          <td><strong>Baseline snapshot</strong></td>
+          <td>1,763 reviews · 4.9★ · captured 30/3</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><strong>Competitor Intel</strong></td>
+          <td>10 apps tracked: ZipChat, VanChat, Tidio, Rep AI, LiveChat, Reamaze, MooseDesk, Tawk.to, HelpDesk, Manifest</td>
+          <td>—</td>
+        </tr>
+      </table>
+      <div class="insight"><strong>Tình trạng:</strong> Chatty giữ #1 các keywords cốt lõi (ai chatbot, live chat, AI chat). Listing Tracker chạy daily GitHub Actions — không cần thao tác thủ công nữa.</div>
+    </div>
+
+    <!-- 1b Ads -->
+    <div class="sub-section">
+      <div class="sub-title">Paid Ads Infrastructure <span class="badge badge-green">Live</span></div>
+      <table>
+        <tr><th>Deliverable</th><th>Detail</th><th>Link</th></tr>
+        <tr>
+          <td><strong>Ads Intelligence Dashboard</strong></td>
+          <td>39,371 rows Shopify Ads data → Supabase (Tokyo)<br>KW Advisor, Ads Report, Competitor tab</td>
+          <td><a class="link-pill" href="https://ngnbthuy123131.github.io/chatty-ads-dashboard" target="_blank">Live ↗</a></td>
+        </tr>
+        <tr>
+          <td><strong>Weekly pipeline</strong></td>
+          <td>Upload CSV → Supabase → Dashboard → Slack · Tự động mỗi thứ 2</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><strong>Google Ads cấu trúc mới</strong></td>
+          <td>3 ad groups: AI Chatbot-Shopify · Live Chat-Shopify · Competitor<br>15 headlines + 4 descriptions viết xong, sẵn sàng upload</td>
+          <td>—</td>
+        </tr>
+      </table>
+      <div class="insight" style="border-left:3px solid #ef4444;background:#fff5f5;color:#991b1b"><strong>Blocker 3 tuần:</strong> Google Ads Editor — account owner chưa grant Standard role. Copy + cấu trúc campaign mới đã sẵn sàng 100% nhưng chưa upload được. <strong>Mỗi tuần delay = tiếp tục chạy campaign cũ kém hiệu quả.</strong></div>
+    </div>
+
+    <!-- 1c Email -->
+    <div class="sub-section">
+      <div class="sub-title">Email Marketing · Customer.io <span class="badge badge-green">Expanding</span></div>
+      <table>
+        <tr><th>Flow</th><th>Nội dung</th><th>Status</th></tr>
+        <tr>
+          <td><strong>Cold Lead Nurture</strong></td>
+          <td>8 emails / 14 ngày<br>Action IDs 225–239 · Campaign 24</td>
+          <td><span class="badge badge-green">✅ Đang chạy</span></td>
+        </tr>
+        <tr>
+          <td><strong>Demo booking flow</strong> <span class="badge badge-blue">Mới</span></td>
+          <td>Email trigger khi user có signal ICP cao (setup nhiều trong 1 ngày, đã chat CS, profile xịn) → invite book demo call với sales (Nolan)<br><small style="color:#888">Phối hợp với Tung + Nolan — đang test warm call trước, cold call pending</small></td>
+          <td><span class="badge badge-yellow">🔄 Đang build</span></td>
+        </tr>
+        <tr>
+          <td><strong>Onboarding cross-app flow</strong> <span class="badge badge-blue">Mới</span></td>
+          <td>Thêm Chatty email vào luồng onboarding của các app khác trong ecosystem</td>
+          <td><span class="badge badge-yellow">🔄 Đang build</span></td>
+        </tr>
+        <tr>
+          <td><strong>intent-charge flow</strong></td>
+          <td>Target user có intent charge nhưng chưa paid</td>
+          <td><span class="badge badge-red">Backlog</span></td>
+        </tr>
+        <tr>
+          <td><strong>Post-trial non-conversion</strong></td>
+          <td>User hết trial, chưa nâng cấp</td>
+          <td><span class="badge badge-red">Backlog</span></td>
+        </tr>
+      </table>
+      <div class="insight"><strong>Direction từ Tung (PM):</strong> Đẩy nhiều event vào data → validate ICP bằng 2 hooks chính: <strong>hỗ trợ setup</strong> và <strong>optimize app usage</strong>. Dùng email MKT thay vì gửi tay để scale và tránh spam. Demo booking email = lever trực tiếp tăng trial→paid conversion.</div>
+    </div>
+
+    <!-- 1d Website & SEO -->
+    <div class="sub-section">
+      <div class="sub-title">Website & SEO <span class="badge badge-yellow">Code ready, pending deploy</span></div>
+      <table>
+        <tr><th>Deliverable</th><th>Status</th><th>Action needed</th></tr>
+        <tr>
+          <td><strong>SEO audit (16 pages)</strong></td>
+          <td>2 critical · 20 warnings</td>
+          <td>Meta descriptions: Carla update qua Rank Math</td>
+        </tr>
+        <tr>
+          <td><strong>Compliance inquiry form</strong></td>
+          <td>HTML + Vercel serverless handler xong</td>
+          <td>Carla deploy lên Vercel</td>
+        </tr>
+        <tr>
+          <td><strong>AI Sales Agent page</strong></td>
+          <td>Copy mới với AI Sales Agent positioning ✅</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><strong>Competitor comparison table</strong></td>
+          <td>HTML built ✅</td>
+          <td>Review + deploy</td>
+        </tr>
+        <tr>
+          <td><strong>Content cluster "AI Sales Agent for Shopify"</strong></td>
+          <td>Backlog</td>
+          <td>Q2 SEO priority</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- 1e GitBook -->
+    <div class="sub-section">
+      <div class="sub-title">User Guide (GitBook) <span class="badge badge-green">Pushed</span></div>
+      <p style="font-size:13.5px;color:#444460;margin-bottom:10px">Các trang mới đã viết và push lên GitBook trong 3 tuần:</p>
+      <table>
+        <tr><th>Page</th><th>Nội dung</th></tr>
+        <tr><td>Klaviyo Integration</td><td>Setup, sync audience, trigger từ chat events</td></tr>
+        <tr><td>17TRACK Order Tracking</td><td>Connect 17TRACK → show real-time order status in chatbox</td></tr>
+        <tr><td>Proactive Chat</td><td>Quick question proactive, targeting by URL/country</td></tr>
+        <tr><td>Real-time Translation</td><td>Inbox translation, FAQ translation limits</td></tr>
+        <tr><td>Public API</td><td>Chatty Public API documentation</td></tr>
+        <tr><td>Product Roadmap (Apr 2026)</td><td>3 new features: Unassigned AI alert · 17TRACK · Real-time translation in Inbox</td></tr>
+        <tr><td>Release Notes</td><td>March + April 2026 updates</td></tr>
+      </table>
+    </div>
+
+    <!-- 1f Video -->
+    <div class="sub-section">
+      <div class="sub-title">Video Production <span class="badge badge-yellow">Testing workflow</span></div>
+      <div class="insight" style="border-left:3px solid #f59e0b;background:#fffbeb;color:#78350f;margin-bottom:14px"><strong>Challenge chưa giải quyết:</strong> Sản xuất video hàng loạt — AI có thể dựng được về mặt kỹ thuật, nhưng dễ ra "AI slop" không có giá trị thực. Vẫn đang tìm cách làm mượt để output đủ chất lượng brand trước khi scale.</div>
+      <table>
+        <tr><th>Asset</th><th>Approach</th><th>Status</th></tr>
+        <tr>
+          <td><strong>Main video kịch bản (65s)</strong><br>"The AI That Pays You Back"</td>
+          <td><strong>Kling AI</strong> — image-to-video<br>Cho ảnh đầu + đuôi, Kling generate motion<br><small style="color:#888">Giữ brand tốt, không cần train model riêng</small></td>
+          <td><span class="badge badge-yellow">🔄 Testing</span></td>
+        </tr>
+        <tr>
+          <td><strong>Feature videos</strong></td>
+          <td><strong>Kling AI</strong> — same approach</td>
+          <td><span class="badge badge-yellow">🔄 Testing</span></td>
+        </tr>
+        <tr>
+          <td><strong>Series "My New Hire: Chatty" (8 tập)</strong><br>How-to / in-app guides · motion đơn giản</td>
+          <td><strong>Remotion</strong> — programmatic animation<br>OpeningScene · DepthSceneV2 đã built</td>
+          <td><span class="badge badge-green">✅ Scenes ready</span></td>
+        </tr>
+        <tr>
+          <td><strong>Ref video analysis (Gemini 74s)</strong><br>"Brainstorm scatter" technique</td>
+          <td>—</td>
+          <td><span class="badge badge-green">✅ Done</span></td>
+        </tr>
+      </table>
+      <div class="insight"><strong>Tool split:</strong> <strong>Kling AI</strong> = brand video chính + feature videos (chất lượng motion cao, giữ visual identity từ ảnh Figma). <strong>Remotion</strong> = series how-to và in-app guide (motion đơn giản, lặp lại, dễ scale). Đang test Kling với ảnh thực — kết quả sẽ quyết định workflow production.</div>
+    </div>
+
+    <!-- 1g UX Reviews -->
+    <div class="sub-section">
+      <div class="sub-title">UX Reviews <span class="badge badge-blue">3 reviews done</span></div>
+      <table>
+        <tr><th>Màn hình</th><th>Output</th></tr>
+        <tr><td>Embed AI · Homepage</td><td>Heuristic report · <code>ux-review-embed-ai-homepage.html</code></td></tr>
+        <tr><td>Onboarding v7</td><td>Heuristic report · <code>onboarding-v7-ux-review.html</code></td></tr>
+        <tr><td>Subscription flow</td><td>Heuristic report · <code>subscription-ux-review.html</code></td></tr>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- SECTION 2: OVERALL PROGRESS -->
+  <div class="section">
+    <div class="section-title">2 · Q1 Foundation — % complete</div>
+
+    <div class="progress-row">
+      <div class="progress-label">ASO & Listing</div>
+      <div class="progress-bar-bg"><div class="progress-bar" style="width:95%;background:#10b981"></div></div>
+      <div class="progress-pct">95%</div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-label">Ads Infrastructure</div>
+      <div class="progress-bar-bg"><div class="progress-bar" style="width:75%;background:#f59e0b"></div></div>
+      <div class="progress-pct">75%</div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-label">Email Flows</div>
+      <div class="progress-bar-bg"><div class="progress-bar" style="width:60%;background:#f59e0b"></div></div>
+      <div class="progress-pct">60%</div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-label">Website & SEO</div>
+      <div class="progress-bar-bg"><div class="progress-bar" style="width:55%;background:#f59e0b"></div></div>
+      <div class="progress-pct">55%</div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-label">User Guide (GitBook)</div>
+      <div class="progress-bar-bg"><div class="progress-bar" style="width:80%;background:#10b981"></div></div>
+      <div class="progress-pct">80%</div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-label">Video Production</div>
+      <div class="progress-bar-bg"><div class="progress-bar" style="width:40%;background:#ef4444"></div></div>
+      <div class="progress-pct">40%</div>
+    </div>
+
+    <div class="insight" style="margin-top:16px"><strong>Điểm mạnh:</strong> Infrastructure đã live — dashboards, pipelines, email flows đều chạy tự động. <strong>Điểm yếu:</strong> Phần cần human action nhất (Google Ads access, freelancer, video quality bar) vẫn chưa unblock. Riêng video: AI dựng được nhưng chưa có workflow đảm bảo chất lượng — rủi ro scale ra "AI slop" không có brand value.</div>
+  </div>
+
+  <!-- SECTION 3: DECISIONS -->
+  <div class="section">
+    <div class="section-title">3 · Decisions cần Sam quyết định</div>
+
+    <div class="decision-card high">
+      <div class="decision-label">🔴 Blocker 1 · Urgent — 3 tuần không giải quyết được</div>
+      <div class="decision-title">Google Ads — Access + Freelancer</div>
+      <div class="decision-body">
+        Cấu trúc campaign mới (3 ad groups), 15 headlines + 4 descriptions đã sẵn sàng. Nhưng MKT chưa có quyền Google Ads Editor và chưa biết cách triển khai thuê freelancer để chạy.<br><br>
+        <strong>2 vấn đề song song:</strong><br>
+        — <strong>Access:</strong> Account owner chưa grant Standard role → không upload được<br>
+        — <strong>Freelancer:</strong> MKT có strategy + copy nhưng cần người run ads thực tế — chưa rõ nên tìm ở đâu, brief thế nào, pay model ra sao
+        <div class="options">
+          <div class="option">Sam grant hoặc chỉ ai là account owner để escalate</div>
+          <div class="option">Sam có network freelancer Google Ads (Shopify app) không? Hoặc recommend platform: Upwork / PPC agency nhỏ?</div>
+          <div class="option">MKT tự chạy nếu có access — copy + structure đã sẵn sàng, chỉ cần tay</div>
+        </div>
+        <div class="ask">Sam tư vấn: nên thuê freelancer hay tự chạy? Nếu thuê — tìm ở đâu và brief thế nào?</div>
+      </div>
+    </div>
+
+    <div class="decision-card med">
+      <div class="decision-label">🟡 Blocker 2</div>
+      <div class="decision-title">CIO Campaign 24 — UI Delays & Exit Condition</div>
+      <div class="decision-body">
+        8 emails Cold Lead Nurture đã live trong Customer.io Campaign 24. Tuy nhiên cần config thủ công trong CIO Workflow Builder:<br>
+        — Timing delays giữa các email (hiện không có gap, email sẽ fire liên tiếp)<br>
+        — Exit condition: dừng flow khi user install app (không có điều kiện này = spam user sau khi họ convert)
+        <div class="options">
+          <div class="option">Carla access CIO → Workflow Builder → set delays + exit condition (30 phút)</div>
+        </div>
+        <div class="ask">Cần Carla hoàn thành trước khi bật flow thật. Sam có muốn review email content trước không?</div>
+      </div>
+    </div>
+
+    <div class="decision-card med">
+      <div class="decision-label">🟡 Blocker 3 · Video</div>
+      <div class="decision-title">AI video hàng loạt — tránh "AI slop"</div>
+      <div class="decision-body">
+        AI có thể dựng video được về mặt kỹ thuật (Kling, Remotion), nhưng output dễ ra generic, không có brand value — "AI slop". MKT chưa có workflow chuẩn để đảm bảo chất lượng trước khi scale sản xuất hàng loạt.
+        <div class="options">
+          <div class="option">Tiếp tục test Kling với ảnh Figma thực → review từng output trước khi dùng</div>
+          <div class="option">Bổ sung human touch: copywriter/designer review script + frame trước khi AI generate</div>
+          <div class="option">Định nghĩa "quality bar" rõ ràng cho video Chatty — Sam có feedback gì về style không?</div>
+        </div>
+        <div class="ask">Sam đánh giá thế nào về AI video hiện tại? Có benchmark nào muốn Chatty nhắm đến không?</div>
+      </div>
+    </div>
+
+    <div class="decision-card med">
+      <div class="decision-label">🟡 Q2 Strategy</div>
+      <div class="decision-title">Ưu tiên Q2: Scale Ads hay Content/SEO?</div>
+      <div class="decision-body">
+        Q1 đã build xong foundation. Q2 MKT có thể đi theo 2 hướng — hoặc kết hợp cả 2 nếu có resource:
+        <div class="options">
+          <div class="option"><strong>Scale Paid Ads:</strong> Google Ads campaign mới live → optimize → tăng budget dần. Nhanh hơn về install nhưng cost/install cao hơn.</div>
+          <div class="option"><strong>Content + SEO:</strong> Viết content cluster "AI Sales Agent for Shopify" (10–15 bài), compare pages, pillar pages. Chậm hơn (3–6 tháng) nhưng compound về lâu dài.</div>
+          <div class="option"><strong>Video-first:</strong> Hoàn thiện Kling brand video → đưa lên homepage + YouTube. Direct impact lên CVR website.</div>
+        </div>
+        <div class="ask">Sam muốn MKT ưu tiên lever nào nhất cho Q2? Có budget headcount thêm không?</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SECTION 4: STATUS SNAPSHOT -->
+  <div class="section">
+    <div class="section-title">4 · Full Status Snapshot</div>
+    <table>
+      <tr><th>Hạng mục</th><th>Status</th><th>Next step</th></tr>
+      <tr>
+        <td>App title (AI Sales Agent positioning)</td>
+        <td class="status-live">Live</td>
+        <td>Monitor ranking shift</td>
+      </tr>
+      <tr>
+        <td>Listing Tracker Dashboard</td>
+        <td class="status-live">Live · ngnbthuy123131.github.io</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>Competitor Intel (10 apps, weekly)</td>
+        <td class="status-live">Automated</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>Ads Intelligence Dashboard</td>
+        <td class="status-live">Live · ngnbthuy123131.github.io</td>
+        <td>Upload data tuần mới</td>
+      </tr>
+      <tr>
+        <td>Google Ads campaign mới</td>
+        <td class="status-block">Blocked — access + freelancer unclear</td>
+        <td><strong>CEO tư vấn</strong></td>
+      </tr>
+      <tr>
+        <td>Cold Lead Nurture (8 emails)</td>
+        <td class="status-live">Đang chạy</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>intent-charge flow</td>
+        <td class="status-no">Backlog</td>
+        <td>Q2</td>
+      </tr>
+      <tr>
+        <td>Post-trial non-conversion flow</td>
+        <td class="status-no">Backlog</td>
+        <td>Q2</td>
+      </tr>
+      <tr>
+        <td>Compliance form</td>
+        <td class="status-warn">Code done · chưa deploy</td>
+        <td>Carla deploy Vercel</td>
+      </tr>
+      <tr>
+        <td>SEO meta descriptions (4 trang)</td>
+        <td class="status-warn">Pending</td>
+        <td>Carla update Rank Math</td>
+      </tr>
+      <tr>
+        <td>GitBook — 7 pages mới</td>
+        <td class="status-ok">Done & pushed</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>Product Roadmap (Apr 2026)</td>
+        <td class="status-ok">Updated</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>Video kịch bản 65s + series 8 tập</td>
+        <td class="status-ok">Done</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>Video · Kling AI (brand video)</td>
+        <td class="status-warn">Testing · chưa xác nhận workflow</td>
+        <td>Test thêm, quyết định production approach</td>
+      </tr>
+      <tr>
+        <td>Video · Remotion (how-to series)</td>
+        <td class="status-ok">4 scenes built · sẵn sàng</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>UX Reviews (3 flows)</td>
+        <td class="status-ok">Done</td>
+        <td>Share với product team</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    Prepared by Carla · Chatty MKT · 13/04/2026 · For internal use only
+  </div>
+
+</div>
+</body>
+</html>
