@@ -14368,8 +14368,8 @@
     ]
   },
   {
-    "date": "2026-05-25",
-    "time": "2026-05-25T15:50:49.681Z",
+    "date": "2026-05-26",
+    "time": "2026-05-26T01:49:17.260Z",
     "results": [
       {
         "keyword": "live chat",
@@ -14398,7 +14398,7 @@
           "rep-ai-sales-associate",
           "inbox"
         ],
-        "checkedAt": "2026-05-25T15:49:57.058Z"
+        "checkedAt": "2026-05-26T01:48:20.024Z"
       },
       {
         "keyword": "AI chatbot",
@@ -14427,7 +14427,7 @@
           "marvyn-ai",
           "shopping-assistant-by-shoplyai"
         ],
-        "checkedAt": "2026-05-25T15:50:01.713Z"
+        "checkedAt": "2026-05-26T01:48:24.877Z"
       },
       {
         "keyword": "chatbot",
@@ -14454,9 +14454,9 @@
           "jotform-ai-chatbot",
           "zipchat",
           "chatway",
-          "shopping-assistant-by-shoplyai"
+          "convi"
         ],
-        "checkedAt": "2026-05-25T15:50:06.394Z"
+        "checkedAt": "2026-05-26T01:48:30.073Z"
       },
       {
         "keyword": "inbox",
@@ -14485,7 +14485,7 @@
           "dondy-marketing-ai",
           "self-faq"
         ],
-        "checkedAt": "2026-05-25T15:50:11.014Z"
+        "checkedAt": "2026-05-26T01:48:35.003Z"
       },
       {
         "keyword": "chat",
@@ -14499,8 +14499,8 @@
           "LiveChat": null,
           "tawk.to": null,
           "Gorgias": null,
-          "Vanchat": 23,
-          "Reamaze": 18
+          "Vanchat": 22,
+          "Reamaze": 17
         },
         "top10organic": [
           "inbox",
@@ -14514,7 +14514,7 @@
           "flyweight-chatbot",
           "helpdesk"
         ],
-        "checkedAt": "2026-05-25T15:50:15.631Z"
+        "checkedAt": "2026-05-26T01:48:39.889Z"
       },
       {
         "keyword": "help center",
@@ -14543,7 +14543,7 @@
           "pagefly",
           "powr-faq"
         ],
-        "checkedAt": "2026-05-25T15:50:20.255Z"
+        "checkedAt": "2026-05-26T01:48:44.983Z"
       },
       {
         "keyword": "FAQ",
@@ -14572,7 +14572,7 @@
           "faq-page-smart",
           "easyfaq-product-faq-builder"
         ],
-        "checkedAt": "2026-05-25T15:50:24.849Z"
+        "checkedAt": "2026-05-26T01:48:49.986Z"
       },
       {
         "keyword": "livechat",
@@ -14601,7 +14601,7 @@
           "zipchat",
           "whatsapp-marketing-support"
         ],
-        "checkedAt": "2026-05-25T15:50:29.523Z"
+        "checkedAt": "2026-05-26T01:48:55.298Z"
       },
       {
         "keyword": "WhatsApp",
@@ -14628,9 +14628,9 @@
           "moose-whatsapp-chat-button",
           "kwikengage",
           "whatsapp-button-chat",
-          "interakt-sales"
+          "whapi-whatsapp"
         ],
-        "checkedAt": "2026-05-25T15:50:34.214Z"
+        "checkedAt": "2026-05-26T01:49:00.330Z"
       },
       {
         "keyword": "helpdesk",
@@ -14655,20 +14655,20 @@
           "helpcenter",
           "helpdesk-app",
           "botspace-ai-chat",
-          "intercom",
           "helpdesk-mx",
+          "intercom",
           "self-faq"
         ],
-        "checkedAt": "2026-05-25T15:50:38.904Z"
+        "checkedAt": "2026-05-26T01:49:05.667Z"
       },
       {
         "keyword": "customer support",
-        "position": 25,
-        "organicPosition": 21,
+        "position": 26,
+        "organicPosition": 22,
         "competitors": {
-          "Tidio": 3,
+          "Tidio": 2,
           "Rep AI": null,
-          "Moosedesk": 2,
+          "Moosedesk": 3,
           "Zipchat": null,
           "LiveChat": null,
           "tawk.to": null,
@@ -14678,17 +14678,17 @@
         },
         "top10organic": [
           "customer-support",
-          "moosedesk",
           "tidio-chat",
+          "moosedesk",
           "login-as-customer",
           "gladly",
-          "asktimmy-ai",
           "helpdesk-app",
+          "asktimmy-ai",
           "jotform-ai-chatbot",
           "shopping-assistant-by-shoplyai",
-          "app10199"
+          "bundle-deals"
         ],
-        "checkedAt": "2026-05-25T15:50:43.518Z"
+        "checkedAt": "2026-05-26T01:49:10.642Z"
       },
       {
         "keyword": "ai chat",
@@ -14717,7 +14717,7 @@
           "channelwill-chat",
           "zipchat"
         ],
-        "checkedAt": "2026-05-25T15:50:48.150Z"
+        "checkedAt": "2026-05-26T01:49:15.647Z"
       }
     ]
   }
